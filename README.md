@@ -16,7 +16,7 @@ The content provider is implemented and used by the application "facts."
 
 ## Contract
 
-![Contract](https://cloud.githubusercontent.com/assets/6483001/10974535/eecd173e-83e2-11e5-9dd9-f34d1b5154f2.JPG)
+![Contract](https://cloud.githubusercontent.com/assets/6483001/10975080/6aad3db4-83e5-11e5-8bd8-d41a11daa3eb.JPG)
 
 
 ## MOC
