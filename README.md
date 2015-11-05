@@ -4,16 +4,22 @@ Practice "Android Studio" with support from GitHub.
 
 ## Introduction
 The goal of this project is to prepare a Andoid Content Provider. 
-Additionally it was used the library CommonSDK
-
+Additionally it was used the library CommonSDK.
+The content provider is implemented and used by the application "facts."
 
 ![Content Provider](https://cloud.githubusercontent.com/assets/6483001/10971968/5fb4a8ec-83d7-11e5-8d81-08581f62d67f.JPG)
 
+## App Facts
+
+
+## DB
+
+## Contract
+
+![Contract](https://cloud.githubusercontent.com/assets/6483001/10974535/eecd173e-83e2-11e5-9dd9-f34d1b5154f2.JPG)
 
 
 ## MOC
-
-
 
 ## Acknowledgements
 
