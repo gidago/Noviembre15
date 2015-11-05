@@ -11,8 +11,9 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.common.utils.Common;
-import com.common.utils.R;
+import lab.acme.noviembre15.R;
+import lab.acme.noviembre15.common.Common;
+
 
 public class AppIconAct extends Activity {
     Context mContext;

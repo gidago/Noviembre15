@@ -1,3 +1,8 @@
+package lab.acme.noviembre15.provider;
+
+import android.net.Uri;
+import android.provider.BaseColumns;
+
 public final class FactsContract {
 
         private FactsContract() {}
@@ -21,27 +26,34 @@ public final class FactsContract {
                 private Columns() {}
 
                 /**
-         * The name of the user who posted the status message
-         * <P>Type: TEXT</P>
+                 * The name of the user who posted the status message
+                 * <P>Type: TEXT</P>
                  */
-                public static final String USER = "user";
+                public static final String COLUMN_DATE = "date";
 
                 /**
-         * The status message content
-         * <P>Type: TEXT</P>
+                 * The status message content
+                 * <P>Type: TEXT</P>
                  */
-                public static final String MESSAGE = "message";
+                public static final String COLUMN_TITLE = "title";
+
+                public static final String COLUMN_CATEGORY = "category";
+
+                public static final String COLUMN_CATEGORY_ID = "category_id";
+
+                public static final String COLUMN_FACT = "fact";
+
+                public static final String COLUMN_VALUE = "value";
 
                 /**
-         * The date the message was posted, in milliseconds since the epoch
-         * <P>Type: INTEGER (long)</P>
+                 * The date the message was posted, in milliseconds since the epoch
+                 * <P>Type: INTEGER (long)</P>
                  */
                 public static final String CREATED_AT = "createdAt";
 
-        /**
-         * The default sort order for this table
-         */
-        public static final String DEFAULT_SORT_ORDER = CREATED_AT + " DESC";
-
+                /**
+                 * The default sort order for this table
+                 */
+                public static final String DEFAULT_SORT_ORDER = CREATED_AT + " DESC";
         }
 }

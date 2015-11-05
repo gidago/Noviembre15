@@ -1,21 +1,31 @@
 package lab.acme.noviembre15;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-// TODO - Añadir clase App
+import android.view.View;
+import android.widget.TextView;
+
+import lab.acme.noviembre15.common.Common;
+
+
 public class MainActivity extends AppCompatActivity {
 
-	private TextView versionCodeLabel;
+
+	//private TextView versionCodeLabel;
+    Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mContext = MainActivity.this;
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -29,11 +39,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         
-        int intVersionCode = Common.getApplicationVersionCode(mContext);
+        //int intVersionCode = Common.getDeviceId(mContext);
+
         //--- text view---
       	TextView versionCodeLabel = (TextView) findViewById(R.id.text_id);
-      	
-      	String msg = "Version Code: " + intVersionCode;
+
+      	String msg = "Device ID: " + Common.getDeviceId(mContext);
       
       	// Display the Version Code in the UI	
     	versionCodeLabel.setText(msg);
@@ -56,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Common.showAlertDialog(this, getString(R.string.app_name), "Your application version is: " + Common.getAppVersionCode(mContext) + ".", false);
             return true;
         }
 
