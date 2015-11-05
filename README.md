@@ -21,5 +21,6 @@ This project is inspired by:
 
 * [Udacity - SunShine App](https://github.com/udacity/Sunshine-Version-2)
 * [CommonSDK](https://github.com/CommonUtils/android)
+* [NewCircle's - Android Content Provider Tutorial](https://newcircle.com/s/post/1375/android_content_provider_tutorial)
 
 
