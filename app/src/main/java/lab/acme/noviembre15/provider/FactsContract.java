@@ -1,6 +1,6 @@
-public final class StatusContract {
+public final class FactsContract {
 
-        private StatusContract() {}
+        private FactsContract() {}
 
     /** The authority for the contacts provider */
         public static final String AUTHORITY = "com.marakana.android.yamba.provider";
