@@ -11,6 +11,8 @@ import android.view.MenuItem;
 // TODO - Añadir clase App
 public class MainActivity extends AppCompatActivity {
 
+	private TextView versionCodeLabel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +28,16 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+        
+        int intVersionCode = Common.getApplicationVersionCode(mContext);
+        //--- text view---
+      	TextView versionCodeLabel = (TextView) findViewById(R.id.text_id);
+      	
+      	String msg = "Version Code: " + intVersionCode;
+      
+      	// Display the Version Code in the UI	
+    	versionCodeLabel.setText(msg);
+      	
     }
 
     @Override
