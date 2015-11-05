@@ -1,15 +1,13 @@
 # Noviembre15
-Ejercicio Android Studio + GitHub
+Practice "Android Studio" with support from GitHub.
 
 
 ## Introduction
-The goal of this project is to prepare a tidy data that can be used for later analysis. 
-The work was done by a R scritp (run_analysis.R) to convert raw data into Tidy data set.
-
+The goal of this project is to prepare a Andoid Content Provider. 
+Additionally it was used the library CommonSDK
 
 
 ![Content Provider](https://cloud.githubusercontent.com/assets/6483001/10971968/5fb4a8ec-83d7-11e5-8d81-08581f62d67f.JPG)
-
 
 
 
@@ -20,7 +18,7 @@ TODO: Desarrollar incluyendo URLs de fuentes consultadas etc.
 Linea Editada con Orion
 
 Utilización de la libreria:
-https://github.com/CommonUtils/android
+
 
 # GitHub Android App  [![Google Play](http://developer.android.com/images/brand/en_generic_rgb_wo_45.png)](https://play.google.com/store/apps/details?id=com.github.mobile) [![Build Status](https://travis-ci.org/github/android.png)](https://travis-ci.org/github/android)
 
@@ -71,20 +69,10 @@ built on top of [API v3](http://developer.github.com/).
 
 It also uses many other open source libraries such as:
 
-* [ActionBarSherlock](https://github.com/JakeWharton/ActionBarSherlock)
-* [android-maven-plugin](https://github.com/jayway/maven-android-plugin)
-* [CodeMirror](https://github.com/marijnh/CodeMirror)
-* [RoboGuice](https://github.com/roboguice/roboguice)
-* [ViewPagerIndicator](https://github.com/JakeWharton/Android-ViewPagerIndicator)
+* [Udacity - SunShine App](https://github.com/udacity/Sunshine-Version-2)
+* [CommonSDK](https://github.com/CommonUtils/android)
+
+
 
 These are just a few of the major dependencies, the entire list of dependencies
 is listed in the [app's POM file](https://github.com/github/android/blob/master/app/pom.xml).
-
-## Contributing
-
-Please fork this repository and contribute back using
-[pull requests](https://github.com/github/android/pulls).
-
-Any contributions, large or small, major features, bug fixes, additional
-language translations, unit/integration tests are welcomed and appreciated
-but will be thoroughly reviewed and discussed.
