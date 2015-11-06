@@ -8,7 +8,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public DbHelper(Context context) {
     	super(context, DB_NAME, null, DB_VERSION);
     }
-
+//TODO: Set real columns from FACTS
     @Override
     public void onCreate(SQLiteDatabase db) {
         String sql = String.format("create table %s ( %s INT PRIMARY KEY,"
