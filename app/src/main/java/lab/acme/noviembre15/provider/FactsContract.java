@@ -63,6 +63,13 @@ public final class FactsContract {
          * <P>Type: INT</P>
          */
         public static final String COLUMN_VALUE = "value";
+        
+        //TODO: Decide whether a field with LAT LONG + or two fields
+        /**
+         * Geografic location of FACT
+         * <P>Type: INT</P>
+         */
+        public static final String COLUMN_LOCATION = "location";
 
         /**
          * The default sort order for this table
