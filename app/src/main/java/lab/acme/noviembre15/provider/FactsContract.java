@@ -5,7 +5,7 @@ import android.provider.BaseColumns;
 
 public final class FactsContract {
 
-	private FactsContract() {}
+    private FactsContract() {}
 
     /** The authority for the contacts provider */
     public static final String AUTHORITY = "com.marakana.android.yamba.provider";
@@ -23,10 +23,10 @@ public final class FactsContract {
      * Column definitions for facts information.
      */
     public final static class Columns implements BaseColumns {
-		private Columns() {}
+	private Columns() {}
 
- 		// Table name
-		public static final String TABLE_NAME = "myFacts";
+ 	// Table name
+	public static final String TABLE_NAME = "myFacts";
 
         /**
          * The date of fact
@@ -69,8 +69,11 @@ public final class FactsContract {
          * Geografic location of FACT
          * <P>Type: INT</P>
          */
-        public static final String COLUMN_LOCATION = "location";
-
+        //public static final String COLUMN_LOCATION = "location";
+ 	// In order to uniquely pinpoint the location on the map when we launch the
+	// map intent, we store the latitude and longitude as returned by openweathermap.
+	public static final String COLUMN_COORD_LAT = "coord_lat";
+	public static final String COLUMN_COORD_LONG = "coord_long";
         /**
          * The default sort order for this table
          */
