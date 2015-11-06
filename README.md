@@ -10,19 +10,20 @@ The content provider is implemented and used by the application "facts."
 ![Content Provider](https://cloud.githubusercontent.com/assets/6483001/10971968/5fb4a8ec-83d7-11e5-8d81-08581f62d67f.JPG)
 
 ## App Facts
-
+The facts application works like a diary, in which the relevant facts are collected, and optionally the fact geographical location and its economic value.
 
 ## DB
 
 |  | Field  | Type | Comment |
 |:-:|:--------       | -----:   |-----:   |
 | 1 | _id      |key ||
-| 2 |date |date?   | |
+| 2 |date |date?   | the date of fact |
 | 3 |title |character |short description|
-| 4 | category   |character ||
-| 5 | category_id   |int | redundant|
-| 6 | fact   |character | details |
-| 7 | value   |numeric | money |
+| 4 | category   |character | indeed categorization |
+| 5 | category_id   |int | Numerical identification of the categories |
+| 6 | fact   |character | detailed description of the fact |
+| 7 | value   |numeric |  quantifying the economic fact |
+| 8 | coords   |numeric | geographical location |
 
 ## Contract
 
@@ -30,6 +31,8 @@ The content provider is implemented and used by the application "facts."
 
 
 ## MOC
+
+
 
 ## Acknowledgements
 
