@@ -28,7 +28,7 @@ The facts application works like a diary, in which the relevant facts are collec
 
 ## Contract
 
-![Contract](https://cloud.githubusercontent.com/assets/6483001/10975162/d8fbe004-83e5-11e5-9f76-9627cb1dee00.JPG)
+![Contract](https://cloud.githubusercontent.com/assets/6483001/10997181/42f8904c-848b-11e5-9c93-0fbaa4033471.JPG)
 
 
 ## MOC
