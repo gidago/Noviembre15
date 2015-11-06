@@ -23,7 +23,8 @@ The facts application works like a diary, in which the relevant facts are collec
 | 5 | category_id   |int | Numerical identification of the categories |
 | 6 | fact   |character | detailed description of the fact |
 | 7 | value   |numeric |  quantifying the economic fact |
-| 8 | coords   |numeric | geographical location |
+| 8 | coord_lat   |numeric | geographical location |
+| 8 | coord_long   |numeric | geographical location |
 
 ## Contract
 
