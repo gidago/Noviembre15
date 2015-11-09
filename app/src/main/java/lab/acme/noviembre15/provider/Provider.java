@@ -10,7 +10,7 @@ import android.provider.Settings.System;
 public class Provider extends ContentProvider {
   static final String TAG = "Provider";
 
-  static final String AUTHORITY = "content://lab.acme.noviembre15.provider";
+  static final String AUTHORITY = "content://lab.acme.noviembre15";
   public static final Uri CONTENT_URI = Uri.parse(AUTHORITY);
   static final String SINGLE_RECORD_MIME_TYPE = "vnd.android.cursor.item/vnd.lab.acme.noviembre15.provider.status";
   static final String MULTIPLE_RECORDS_MIME_TYPE = "vnd.android.cursor.dir/vnd.lab.acme.noviembre15.provider.status";

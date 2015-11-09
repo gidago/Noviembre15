@@ -11,7 +11,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:text="Application Icon"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:textColor="@color/material_blue_500" />
 
     <ImageView
         android:id="@+id/ivAppIcon"

@@ -41,6 +41,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".AppIconAct"
+            android:theme="@style/AppTheme"
+            android:parentActivityName=".MainActivity" >
+        </activity>
+        <activity
+            android:name=".AddAttendantActivity"
+            android:theme="@style/AppTheme"
+            android:parentActivityName=".MainActivity" >
+        </activity>
     </application>
 
 </manifest>

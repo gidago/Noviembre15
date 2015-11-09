@@ -1,7 +1,4 @@
-/**
- * @author Y@$!n
- *
- */
+package lab.acme.noviembre15;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,7 +8,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import lab.acme.noviembre15.R;
 import lab.acme.noviembre15.common.Common;
 
 
