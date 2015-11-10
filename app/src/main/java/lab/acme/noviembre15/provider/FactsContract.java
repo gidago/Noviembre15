@@ -19,6 +19,7 @@ public final class FactsContract {
     /** The MIME type of a {@link #CONTENT_URI} a single status message. */
     public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/vnd.marakana.status";
 
+	// TODO - Cambiar Columns por factsEntry
     /**
      * Column definitions for facts information.
      */
