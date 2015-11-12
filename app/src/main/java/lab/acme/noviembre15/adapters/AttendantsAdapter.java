@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.squareup.picasso.Picasso;
@@ -65,7 +64,7 @@ public class AttendantsAdapter extends RecyclerView.Adapter<AttendantsAdapter.Vi
             rowView.setBackgroundColor(mContext.getResources().getColor(R.color.activated_color));
         }
 
-        holder.checkInCheckOutButton.setOnClickListener(new View.OnClickListener() {
+ /*       holder.checkInCheckOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Is the toggle on?
@@ -79,7 +78,7 @@ public class AttendantsAdapter extends RecyclerView.Adapter<AttendantsAdapter.Vi
                     Toast.makeText(mContext, selectedAttendant.getName() + " checked out ", Toast.LENGTH_SHORT).show();
                 }
             }
-        });
+        }); */
 
     }
 

@@ -3,7 +3,6 @@ package lab.acme.noviembre15;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -140,7 +139,8 @@ public class MainActivity extends AppCompatActivity {
                 if (child != null && mGestureDetector.onTouchEvent(motionEvent)) {
                     //Drawer.closeDrawers();
                    // onTouchDrawer(recyclerView.getChildLayoutPosition(child));
-                    Snackbar.make(recyclerView, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                   // Snackbar.make(recyclerView, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                    startActivity(new Intent(mContext , DetailActivity.class));
                     return true;
                 }
                 return false;
@@ -165,14 +165,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void addTestGuessList() {
         Attendant guest1 = new Attendant();
-        guest1.setName("Debbie Sam");
-        guest1.setEmail("deb@email.net");
+        guest1.setName("12 noviembre 2015");
+        guest1.setEmail("Informes parcial");
         guest1.setProfileImageId(R.drawable.category_3);
         mAttendantsList.add(guest1);
 
         Attendant guest2 = new Attendant();
-        guest2.setName("Keisha Williams");
-        guest2.setEmail("diva@comcast.com");
+        guest2.setName("24 diciembre 2015");
+        guest2.setEmail("Navidad");
         guest2.setProfileImageId(R.drawable.headshot_2);
         mAttendantsList.add(guest2);
 
