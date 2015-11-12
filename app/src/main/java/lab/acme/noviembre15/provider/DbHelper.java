@@ -23,44 +23,23 @@ public static final String TABLE = "myfacts";
 //TODO: Set real columns from FACTS
     @Override
     public void onCreate(SQLiteDatabase db) {
+    	
     	// Create a table to hold facts. 
     	final String SQL_CREATE_FACTS_TABLE = "CREATE TABLE " + Columns.TABLE_NAME + " (" +
-				Columns._ID + " INTEGER PRIMARY KEY," +
-				Columns.COLUMN_DATE + " TEXT UNIQUE NOT NULL, " +
-				Columns.COLUMN_CITY_NAME + " TEXT NOT NULL, " +
+				Columns._ID + " INTEGER UNIQUE PRIMARY KEY," +
+				Columns.COLUMN_DATE + " TEXT NOT NULL, " +
+				Columns.COLUMN_TITLE + " TEXT NOT NULL, " +
+				Columns.COLUMN_CATEGORY + " TEXT NOT NULL, " +
+				Columns.COLUMN_CATEGORY_ID + " INTEGER NOT NULL, " +
+				Columns.COLUMN_FACT + " TEXT NOT NULL, " +
+				Columns.COLUMN_VALUE + " REAL NOT NULL, " +
 				Columns.COLUMN_COORD_LAT + " REAL NOT NULL, " +
 				Columns.COLUMN_COORD_LONG + " REAL NOT NULL " +
 		" );";
-    	
-    	
-// TODO: Continuar aqui ----------------------------->>
-
-    	
- 		//String sql = String.format("create table %s ( %s INT PRIMARY KEY,"
-            //            + "%s INT, %s TEXT, %s TEXT);", TABLE,
-           //             StatusContract.Columns._ID, StatusContract.Columns.CREATED_AT,
-           //             StatusContract.Columns.USER, StatusContract.Columns.MESSAGE);
-      //  Log.d("DbHelper", "sql: " + sql);
-      //  db.execSQL(sql);
-      
+    	    	
+// TODO: Continuar aqui ----------------------------->>      
       sqLiteDatabase.execSQL(SQL_CREATE_FACTS_TABLE);
     }
-
-
- @Override
-public void onCreate(SQLiteDatabase sqLiteDatabase) {
-// Create a table to hold locations. A location consists of the string supplied in the
-// location setting, the city name, and the latitude and longitude
-final String SQL_CREATE_LOCATION_TABLE = "CREATE TABLE " + LocationEntry.TABLE_NAME + " (" +
-LocationEntry._ID + " INTEGER PRIMARY KEY," +
-LocationEntry.COLUMN_LOCATION_SETTING + " TEXT UNIQUE NOT NULL, " +
-LocationEntry.COLUMN_CITY_NAME + " TEXT NOT NULL, " +
-LocationEntry.COLUMN_COORD_LAT + " REAL NOT NULL, " +
-LocationEntry.COLUMN_COORD_LONG + " REAL NOT NULL " +
-" );";
-
-
-
 
 
     @Override
