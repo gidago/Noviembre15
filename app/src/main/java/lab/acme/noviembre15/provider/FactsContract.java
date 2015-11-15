@@ -10,7 +10,11 @@ public final class FactsContract {
     // Todo: Elegir AUTHORITY vs. CONTENT_AUTHORITY
     /** The authority for the contacts provider */
     public static final String AUTHORITY = "lab.acme.noviembre15";
-   // static final String AUTHORITY = "content://lab.acme.noviembre15";
+    /**atanarro*/
+    public static final String PROVIDER_NAME = "net.atanarro.provider.Songs";
+//    public static final Uri CONTENT_URI = Uri.parse("content://" + PROVIDER_NAME + "/songs");
+
+    // static final String AUTHORITY = "content://lab.acme.noviembre15";
 
     // The "Content authority" is a name for the entire content provider, similar to the
     // relationship between a domain name and its website.  A convenient string to use for the
@@ -34,11 +38,7 @@ public final class FactsContract {
     /** A content:// style uri to the authority for this table */
     public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY );
 
-    /** The MIME type of {@link #CONTENT_URI} providing a directory of status messages. */
-    public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.marakana.status";
 
-    /** The MIME type of a {@link #CONTENT_URI} a single status message. */
-    public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/vnd.marakana.status";
 
 	// TODO - Cambiar ColumnsEntry por factsEntry
     /**
@@ -60,6 +60,7 @@ public final class FactsContract {
  	// Table name
 	public static final String TABLE_NAME = "myfacts";
 
+    public static final String COLUMN_ID = "_ID";
     /**
      * The date of fact
      * <P>Type: TEXT</P>

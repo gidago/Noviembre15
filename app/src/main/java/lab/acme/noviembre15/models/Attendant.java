@@ -1,14 +1,12 @@
 package lab.acme.noviembre15.models;
 
-import java.util.List;
-
 /**
  * Created by Valentine on 6/16/2015.
  */
 public class Attendant {
-        private String Name;
-        private String Email;
-        private String Phone;
+        private String Date; //**
+        private String Title; //**
+        private String Fact; //**
         private String StreetAddress;
         private String City;
         private String State;
@@ -19,7 +17,7 @@ public class Attendant {
         private String SerializedAttendances;
 
 
-        private List<Attendance> Attendances;
+        //private List<Attendance> Attendances;
 
         public Attendant(){}
 
@@ -32,28 +30,28 @@ public class Attendant {
                 IsCheckedIn = isCheckedIn;
         }
 
-        public String getName() {
-                return Name;
+        public String getDate() {
+                return Date;
         }
 
-        public void setName(String name) {
-                Name = name;
+        public void setDate(String name) {
+                Date = name;
         }
 
-        public String getEmail() {
-                return Email;
+        public String getTitle() {
+                return Title;
         }
 
-        public void setEmail(String email) {
-                Email = email;
+        public void setTitle(String title) {
+                Title = title;
         }
 
-        public String getPhone() {
-                return Phone;
+        public String getFact() {
+                return Fact;
         }
 
-        public void setPhone(String phone) {
-                Phone = phone;
+        public void setFact(String fact) {
+                Fact = fact;
         }
 
         public String getStreetAddress() {
@@ -104,13 +102,15 @@ public class Attendant {
                 ProfileImageId = profileImageId;
         }
 
-        public String getSerializedAttendances() {
+       /* public String getSerializedAttendances() {
                 return SerializedAttendances;
-        }
+        }*/
 
-        public void setSerializedAttendances(String serializedAttendances) {
+       /* public void setSerializedAttendances(String serializedAttendances) {
                 SerializedAttendances = serializedAttendances;
-        }
+        } */
 
 
 }
+
+

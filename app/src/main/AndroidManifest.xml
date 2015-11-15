@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
     package="lab.acme.noviembre15" >
-
     <!-- device id -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
@@ -23,6 +23,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
+
 
     <application
         android:name=".MyApplication"
@@ -47,7 +48,7 @@
             android:parentActivityName=".MainActivity" >
         </activity>
         <activity
-            android:name=".AddAttendantActivity"
+            android:name=".AddFactActivity"
             android:theme="@style/AppTheme"
             android:parentActivityName=".MainActivity" >
         </activity>
@@ -59,6 +60,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="lab.acme.noviembre15.MainActivity" />
         </activity>
+        <!-- Content Provider -->
+        <!--provider android:name="SongsProvider" android:authorities="net.atanarro.provider.Songs" /-->
+        <provider
+            android:authorities="@string/content_authority"
+            android:name=".provider.Provider"
+            android:exported="false"
+            android:syncable="true" />
     </application>
-
 </manifest>

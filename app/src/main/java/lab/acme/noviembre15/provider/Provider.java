@@ -6,6 +6,7 @@
  *  http://www.mysamplecode.com/2012/11/android-database-content-provider.html
  *  http://www.grokkingandroid.com/android-tutorial-writing-your-own-content-provider/
  *  http://developer.android.com/intl/es/guide/topics/providers/content-provider-creating.html
+ *  https://threeheadedmonkeydev.wordpress.com/2011/10/20/introduccion-al-manejo-de-content-providers-en-android/
  *
  *  Implementing a content provider involves always the following steps:
  *
@@ -21,146 +22,235 @@
 package lab.acme.noviembre15.provider;
 
 import android.content.ContentProvider;
+import android.content.ContentUris;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.UriMatcher;
 import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
-import android.provider.Settings.System;
+import android.text.TextUtils;
 import android.util.Log;
 
 public class Provider extends ContentProvider {
 
   static final String TAG = "Provider";
 
-    // The URI Matcher used by this content provider.
-    private static final UriMatcher sUriMatcher = buildUriMatcher();
-    private DbHelper mOpenHelper;
+    //private DbHelper mOpenHelper;
+    public static final String PROVIDER_NAME = "lab.acme.noviembre15";
+    public static final Uri CONTENT_URI = Uri.parse("content://" + PROVIDER_NAME + "/facts");
+    private static final int FACTS = 1;
+    private static final int FACTS_ID = 2;
 
+    /** The MIME type of {@link #CONTENT_URI} providing a directory of status messages. */
+    //public static final String CONTENT_TYPE = "vnd.android.cursor.dir/lab.acme.noviembre15";
 
-    static final int WEATHER = 100;
-    static final int WEATHER_WITH_LOCATION = 101;
-    static final int WEATHER_WITH_LOCATION_AND_DATE = 102;
+    /** The MIME type of a {@link #CONTENT_URI} a single status message. */
+    //public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/lab.acme.noviembre15";
+    private static final UriMatcher uriMatcher;
+    static {
+        uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+        uriMatcher.addURI(FactsContract.AUTHORITY, "facts", FACTS);
+        uriMatcher.addURI(FactsContract.AUTHORITY, "facts/#", FACTS_ID);
+    }
+    // database stuff
+    private SQLiteDatabase factsDB;
+    // CONTRACT
+    private static final String DATABASE_NAME = "facts";
+    private static final String DATABASE_TABLE = "myfacts";
+    private static final int DATABASE_VERSION = 1;
 
+    public static final String COLUMN_ID = "_ID";
+    public static final String COLUMN_DATE = "date";
+    public static final String COLUMN_TITLE = "title";
+    public static final String COLUMN_CATEGORY = "category";
+    public static final String COLUMN_CATEGORY_ID = "category_id";
+    public static final String COLUMN_FACT = "fact";
+    public static final String COLUMN_VALUE = "value";
+    public static final String COLUMN_COORD_LAT = "coord_lat";
+    public static final String COLUMN_COORD_LONG = "coord_long";
 
+    // Create a table to hold facts.
+    private static final String DATABASE_CREATE = "CREATE TABLE " +
+            DATABASE_TABLE  + " (" +
+            COLUMN_ID + " INTEGER UNIQUE PRIMARY KEY," +
+            COLUMN_DATE + " TEXT , " +
+            COLUMN_TITLE + " TEXT NOT NULL, " +
+            COLUMN_CATEGORY + " TEXT NOT NULL, " +
+            COLUMN_CATEGORY_ID + " INTEGER , " +
+            COLUMN_FACT + " TEXT NOT NULL, " +
+            COLUMN_VALUE + " REAL , " +
+            COLUMN_COORD_LAT + " REAL , " +
+            COLUMN_COORD_LONG + " REAL  " +
+            " );";
 
-  static final String SINGLE_RECORD_MIME_TYPE = "vnd.android.cursor.item/vnd.lab.acme.noviembre15.provider.status";
-  static final String MULTIPLE_RECORDS_MIME_TYPE = "vnd.android.cursor.dir/vnd.lab.acme.noviembre15.provider.status";
+    private static class DatabaseHelper extends SQLiteOpenHelper {
+        DatabaseHelper(Context context) {
+            super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        }
+
+        @Override
+        public void onCreate(SQLiteDatabase db) {
+            db.execSQL(DATABASE_CREATE);
+        }
+
+        @Override
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+            Log.d("CP db ", "Upgrading db from version: " );
+            Log.d("  ....    " , oldVersion + newVersion + ", which will destroy all old data");
+
+            db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE);
+            onCreate(db);
+        }
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see android.content.ContentProvider#onCreate()
+     */
+    @Override
+    public boolean onCreate() {
+
+        Log.d(TAG, "onCreate");
+
+        Context context = getContext();
+        DatabaseHelper dbHelper = new DatabaseHelper(context);
+        factsDB = dbHelper.getWritableDatabase();
+        return (factsDB  == null) ? false : true;
+      }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see android.content.ContentProvider#getType(android.net.Uri)
+     */
+      @Override
+      public String getType(Uri uri) {
+
+          String ret = getContext().getContentResolver().getType(CONTENT_URI);
+          Log.d(TAG, " ------ ----- ------ getType returning: " + ret);
+
+          switch (uriMatcher.match(uri)) {
+              // get all facts
+              case FACTS:
+                  return "vnd.android.cursor.dir/lab.acme.noviembre15.facts";
+              // get a particular fact
+              case FACTS_ID:
+                  return "vnd.android.cursor.item/lab.acme.noviembre15.facts";
+              default:
+                  throw new IllegalArgumentException("Unsupported URI: " + uri);
+          }
+        //return ret;
+      }
+
+    /*
+	 * (non-Javadoc)
+	 *
+	 * @see android.content.ContentProvider#insert(android.net.Uri,
+	 * android.content.ContentValues)
+	 */
+      @Override
+      public Uri insert(Uri uri, ContentValues values) {
+        Log.d(TAG, "insert uri: " + uri.toString());
+
+          // add a new row
+          long rowID = factsDB.insert(DATABASE_TABLE, "", values);
+
+          // if added successfully
+          if (rowID > 0) {
+              Uri _uri = ContentUris.withAppendedId(CONTENT_URI, rowID);
+              getContext().getContentResolver().notifyChange(_uri, null);
+              return _uri;
+          }
+          throw new SQLException("Failed to insert row into " + uri);
+      }
 
 
     /*
-        Students: Here is where you need to create the UriMatcher. This UriMatcher will
-        match each URI to the WEATHER, WEATHER_WITH_LOCATION, WEATHER_WITH_LOCATION_AND_DATE,
-        and LOCATION integer constants defined above.  You can test this by uncommenting the
-        testUriMatcher test within TestUriMatcher.
+     * (non-Javadoc)
+     *
+     * @see android.content.ContentProvider#update(android.net.Uri,
+     * android.content.ContentValues, java.lang.String, java.lang.String[])
      */
-    static UriMatcher buildUriMatcher() {
-        // I know what you're thinking.  Why create a UriMatcher when you can use regular
-        // expressions instead?  Because you're not crazy, that's why.
+      @Override
+      public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+          Log.d(TAG, "update uri: " + uri.toString());
+          int count = 0;
+          switch (uriMatcher.match(uri)) {
+              case FACTS:
+                  count = factsDB.update(DATABASE_TABLE, values, selection,
+                          selectionArgs);
+                  break;
+              case FACTS_ID:
+                  count = factsDB.update(DATABASE_TABLE, values, COLUMN_ID
+                          + " = "
+                          + uri.getPathSegments().get(1)
+                          + (!TextUtils.isEmpty(selection) ? " AND (" + selection
+                          + ')' : ""), selectionArgs);
+                  break;
+              default:
+                  throw new IllegalArgumentException("Unknown URI " + uri);
+          }
+          getContext().getContentResolver().notifyChange(uri, null);
+          return count;
+      }
 
-        // All paths added to the UriMatcher have a corresponding code to return when a match is
-        // found.  The code passed into the constructor represents the code to return for the root
-        // URI.  It's common to use NO_MATCH as the code for this case.
-        final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
-        final String authority = FactsContract.CONTENT_AUTHORITY;
+    /**
+      * (non-Javadoc)
+      *
+      * @see android.content.ContentProvider#delete(android.net.Uri,
+      * java.lang.String, java.lang.String[])
+      */
+      @Override
+      public int delete(Uri uri, String selection, String[] selectionArgs) {
+        Log.d(TAG, "**** Prueba: delete uri: " + uri.toString());
+          int count = 0;
+          switch (uriMatcher.match(uri)) {
+              case FACTS:
+                  count = factsDB.delete(DATABASE_TABLE, selection, selectionArgs);
+                  break;
+              case FACTS_ID:
+                  String id = uri.getPathSegments().get(1);
+                  count = factsDB.delete(DATABASE_TABLE, COLUMN_ID
+                          + " = "
+                          + id
+                          + (!TextUtils.isEmpty(selection) ? " AND (" + selection
+                          + ')' : ""), selectionArgs);
+                  break;
+              default:
+                  throw new IllegalArgumentException("Unknown URI " + uri);
+          }
+          getContext().getContentResolver().notifyChange(uri, null);
+          return count;
+      }
 
-        // For each type of URI you want to add, create a corresponding code.
-        matcher.addURI(authority, FactsContract.PATH_FACTS, WEATHER);
-        matcher.addURI(authority, FactsContract.PATH_FACTS + "/*", WEATHER_WITH_LOCATION);
-        matcher.addURI(authority, FactsContract.PATH_FACTS + "/*/#", WEATHER_WITH_LOCATION_AND_DATE);
-
-        return matcher;
+    /**
+     * (non-Javadoc)
+     *
+     * @see android.content.ContentProvider#query(android.net.Uri,
+     * java.lang.String[], java.lang.String, java.lang.String[],
+     * java.lang.String)
+     */
+    @Override
+    public Cursor query(Uri uri, String[] projection, String selection,
+                      String[] selectionArgs, String sortOrder) {
+        Log.d(TAG, "**** Prueba: query with uri: " + uri.toString());
+        SQLiteQueryBuilder sqlBuilder = new SQLiteQueryBuilder();
+        sqlBuilder.setTables(DATABASE_TABLE);
+        if (uriMatcher.match(uri) == FACTS_ID)
+            // if getting a particular row
+            sqlBuilder.appendWhere(COLUMN_ID + " = " + uri.getPathSegments().get(1));
+        if (sortOrder == null || sortOrder == "")
+            sortOrder = COLUMN_DATE;
+        Cursor cursor = sqlBuilder.query(factsDB, projection, selection,
+                selectionArgs, null, null, sortOrder);
+        // register to watch a content URI for changes
+        cursor.setNotificationUri(getContext().getContentResolver(), uri);
+        return cursor;
     }
 
-
-
-  @Override
-  public boolean onCreate() {
-    Log.d(TAG, "onCreate");
-  mOpenHelper = new DbHelper(getContext());
-  return true;
-  }
-
-  @Override
-  public String getType(Uri uri) {
-    String ret = getContext().getContentResolver().getType(System.CONTENT_URI);
-    Log.d(TAG, "getType returning: " + ret);
-    return ret;
-  }
-
-  @Override
-  public Uri insert(Uri uri, ContentValues values) {
-    Log.d(TAG, "insert uri: " + uri.toString());
-    return null;
-  }
-
-  @Override
-  public int update(Uri uri, ContentValues values, String selection,
-      String[] selectionArgs) {
-    Log.d(TAG, "update uri: " + uri.toString());
-    return 0;
-  }
-
-  @Override
-  public int delete(Uri uri, String selection, String[] selectionArgs) {
-    Log.d(TAG, "delete uri: " + uri.toString());
-    return 0;
-  }
-/**
-  @Override
-  public Cursor query(Uri uri, String[] projection, String selection,
-      String[] selectionArgs, String sortOrder) {
-    Log.d(TAG, "query with uri: " + uri.toString());
-    return null;
-  }*/
-@Override
-public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs,
-                    String sortOrder) {
-    // Here's the switch statement that, given a URI, will determine what kind of request it is,
-    // and query the database accordingly.
-    Cursor retCursor;
-    switch (sUriMatcher.match(uri)) {
-        // "weather/*/*"
-       /* case WEATHER_WITH_LOCATION_AND_DATE:
-        {
-            retCursor = getWeatherByLocationSettingAndDate(uri, projection, sortOrder);
-            break;
-        }
-        // "weather/*"
-        case WEATHER_WITH_LOCATION: {
-            retCursor = getWeatherByLocationSetting(uri, projection, sortOrder);
-            break;
-        }*/
-        // "weather"
-        case WEATHER: {
-            retCursor = mOpenHelper.getReadableDatabase().query(
-                    FactsContract.ColumnsEntry.TABLE_NAME,
-                    projection,
-                    selection,
-                    selectionArgs,
-                    null,
-                    null,
-                    sortOrder
-            );
-            break;
-        }
-        // "location"
-    /*    case LOCATION: {
-            retCursor = mOpenHelper.getReadableDatabase().query(
-                    FactsContract.ColumnsEntry.TABLE_NAME,
-                    projection,
-                    selection,
-                    selectionArgs,
-                    null,
-                    null,
-                    sortOrder
-            );
-            break;
-        }
-*/
-        default:
-            throw new UnsupportedOperationException("Unknown uri: " + uri);
-    }
-    retCursor.setNotificationUri(getContext().getContentResolver(), uri);
-    return retCursor;
-}
 }

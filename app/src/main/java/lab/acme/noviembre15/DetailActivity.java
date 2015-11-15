@@ -15,13 +15,27 @@
  */
 package lab.acme.noviembre15;
 
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+import lab.acme.noviembre15.provider.Provider;
 
 
 public class DetailActivity extends AppCompatActivity {
+
+    Button mListButton;
+    private TextView mInfo;
+    private TextView mTitle;
+
+    private final String LOG_TAG = DetailActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +56,66 @@ public class DetailActivity extends AppCompatActivity {
 //                    .add(R.id.weather_detail_container, fragment)
 //                    .commit();
         }
+        initView();
+
+        mTitle = (TextView) findViewById(R.id.info_txt_title);
+        // test
+        Uri oneTitle = Uri.parse("content://lab.acme.noviembre15/facts/2");
+        Cursor c = managedQuery(oneTitle, null, null, null, null);
+        if (c.moveToFirst()) {
+        mTitle.setText(c.getString(c.getColumnIndex(Provider.COLUMN_TITLE)));
+        }
+      /*  if (c.moveToFirst()) {
+            do {
+                Toast.makeText(
+                        this,
+                        c.getString(c.getColumnIndex(Provider.COLUMN_DATE))
+                                + ", \""
+                                + c.getString(c.getColumnIndex(Provider.COLUMN_FACT))
+                                + "\"",
+                        Toast.LENGTH_LONG).show();
+                String mReg = c.getString(c.getColumnIndex(Provider.COLUMN_DATE))
+                        + ", \""
+                        + c.getString(c.getColumnIndex(Provider.COLUMN_FACT))
+                        + "\" " ;
+                Log.i(LOG_TAG, mReg);
+            } while (c.moveToNext());
+        }*/
+
     }
+
+    private void initView() {
+        mInfo = (TextView) findViewById(R.id.info_txt);
+
+        mListButton = (Button) findViewById(R.id.save_button);
+        mListButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listaTest() ;
+            }
+        });
+
+    }
+
+    private void listaTest() {
+
+        // test
+        Uri allTitles = Uri.parse("content://lab.acme.noviembre15/facts");
+        Cursor c = managedQuery(allTitles, null, null, null, "date desc");
+
+        if (c.moveToFirst()) {
+            do {
+                String mReg = c.getString(c.getColumnIndex(Provider.COLUMN_DATE))
+                        + ", \""
+                        + c.getString(c.getColumnIndex(Provider.COLUMN_FACT))
+                        + "\"";
+                Log.d(LOG_TAG, mReg);
+                mInfo.append(mReg);
+            } while (c.moveToNext());
+        }
+    }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

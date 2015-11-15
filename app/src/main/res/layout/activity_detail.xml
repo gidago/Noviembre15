@@ -3,5 +3,47 @@
     android:id="@+id/weather_detail_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.android.sunshine.app.DetailActivity"
-    tools:ignore="MergeRootFrame" />
+    tools:context="lab.acme.noviembre15.DetailActivity"
+    tools:ignore="MergeRootFrame">
+
+          <!-- Header: Day, Date -->
+        <TextView
+        android:fontFamily="sans-serif-condensed"
+        android:id="@+id/detail_day_textview"
+        android:layout_height="wrap_content"
+        android:minWidth="120dp"
+        android:layout_width="wrap_content"
+        android:textSize="24sp"
+        android:text="Ficha con detalles" />
+
+    <TextView
+        android:fontFamily="sans-serif-condensed"
+        android:id="@+id/info_txt_title"
+        android:layout_height="wrap_content"
+        android:minWidth="120dp"
+        android:layout_width="wrap_content"
+        android:textSize="20sp"
+        android:text="Ficha con detalles"
+        android:layout_gravity="left|bottom" />
+
+    <TextView
+        android:fontFamily="sans-serif-condensed"
+        android:id="@+id/info_txt"
+        android:layout_height="wrap_content"
+        android:minWidth="120dp"
+        android:layout_width="wrap_content"
+        android:textSize="12sp"
+        android:text="Ficha con detalles"
+        android:layout_gravity="left|center_vertical"
+        android:scrollIndicators="bottom|top" />
+
+    <Button
+        android:id="@+id/save_button"
+        android:textColor="#ffffff"
+        android:layout_width="150dp"
+        android:background="@color/primary"
+        android:text="Listar"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|top" />
+</FrameLayout>

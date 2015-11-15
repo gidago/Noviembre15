@@ -40,47 +40,48 @@
 
         </RelativeLayout>
         <EditText
-            android:id="@+id/edit_text_client_name"
+            android:id="@+id/edit_text_date"
             android:layout_below="@+id/relative_layout_attendant_image"
             style="@style/AddAttendantForm"
             android:hint="@string/hint_guest_name"
             android:imeOptions="actionNext" />
         <EditText
-            android:id="@+id/edit_text_client_email"
+            android:id="@+id/edit_text_title"
             style="@style/AddAttendantForm"
-            android:layout_below="@+id/edit_text_client_name"
+            android:layout_below="@+id/edit_text_date"
             android:hint="@string/hint_guest_email"
             android:imeOptions="actionNext"
-            android:inputType="textEmailAddress"/>
+            />
         <EditText
-            android:id="@+id/edit_text_client_phone"
+            android:id="@+id/edit_text_category"
             style="@style/AddAttendantForm"
-            android:layout_below="@+id/edit_text_client_email"
+            android:layout_below="@+id/edit_text_title"
             android:hint="@string/hint_guest_phone"
             android:imeOptions="actionNext"
-            android:inputType="phone"/>
+             />
         <EditText
-            android:id="@+id/edit_text_client_street_address"
+            android:id="@+id/edit_text_fact"
             style="@style/AddAttendantForm"
             android:hint="@string/hint_guest_street_address"
-            android:layout_below="@+id/edit_text_client_phone"
-            android:imeOptions="actionNext" />
+            android:layout_below="@+id/edit_text_category"
+            android:imeOptions="actionNext"
+            android:inputType="textMultiLine"/>
         <EditText
-            android:id="@+id/edit_text_client_city"
+            android:id="@+id/edit_text_value"
             style="@style/AddAttendantForm"
-            android:layout_below="@+id/edit_text_client_street_address"
+            android:layout_below="@+id/edit_text_fact"
             android:hint="@string/hint_guest_city"
             android:imeOptions="actionNext" />
         <EditText
-            android:id="@+id/edit_text_client_state"
+            android:id="@+id/edit_text_latitude"
             style="@style/AddAttendantForm"
-            android:layout_below="@+id/edit_text_client_city"
-            android:hint="@string/state"
+            android:layout_below="@+id/edit_text_value"
+            android:hint="@string/coord_lat"
             android:imeOptions="actionNext" />
         <EditText
-            android:id="@+id/edit_text_client_zip_code"
+            android:id="@+id/edit_text_longitude"
             style="@style/AddAttendantForm"
-            android:layout_below="@+id/edit_text_client_state"
+            android:layout_below="@+id/edit_text_latitude"
             android:hint="@string/hint_zip_code"
             android:imeOptions="actionNext" />
 
@@ -92,7 +93,7 @@
             android:text="@string/save"
             android:layout_centerInParent="true"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/edit_text_client_zip_code"/>
+            android:layout_below="@+id/edit_text_longitude"/>
     </RelativeLayout>
 </ScrollView>
 

@@ -14,13 +14,13 @@
     <string name="hint_event_city">City</string>
     <string name="hint_event_image">Event Venue Image Url</string>
     <string name="set_as_active_event">Set As Active Event?</string>
-    <string name="hint_guest_name">Name</string>
-    <string name="hint_guest_email">Email</string>
-    <string name="hint_guest_phone">Phone</string>
-    <string name="hint_guest_street_address">Street Address</string>
-    <string name="hint_guest_city">City</string>
-    <string name="state">State</string>
-    <string name="hint_zip_code">Zip Code</string>
+    <string name="hint_guest_name">Date</string>
+    <string name="hint_guest_email">Title</string>
+    <string name="hint_guest_phone">Category</string>
+    <string name="hint_guest_street_address">Fact</string>
+    <string name="hint_guest_city">Value (€)</string>
+    <string name="coord_lat">Long.</string>
+    <string name="hint_zip_code">Lat.</string>
     <string name="save">Save</string>
     <string name="hint_event_organizer">Organizer</string>
     <string name="title_create_event">Create Event</string>
@@ -28,4 +28,8 @@
     <string name="button_profile">Profile</string>
     <string name="description_attendant_image">Attendant Image</string>
     <string name="required_fields_empty">Required Field Empty</string>
+
+    <!-- Provider related -->
+    <string name="content_authority">lab.acme.noviembre15</string>
+
 </resources>

@@ -18,7 +18,7 @@ The facts application works like a diary, in which the relevant facts are collec
 |:-:|:--------       | -----:   |-----:   |
 | 1 | _id      |key ||
 | 2 |date |date?   | the date of fact |
-| 3 |title |character |short description|
+| 3 |name |character |short description|
 | 4 | category   |character | indeed categorization |
 | 5 | category_id   |int | Numerical identification of the categories |
 | 6 | fact   |character | detailed description of the fact |
