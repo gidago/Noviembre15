@@ -33,19 +33,7 @@ public class AddFactActivity extends AppCompatActivity {
         //init();
         initView();
     }
-    //public AddAttendantFragment() {
-        // Required empty public constructor
-   // }
 
-
-  /*  @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        mRootView = inflater.inflate(R.layout.fragment_attendant, container, false);
-        initView();
-        return mRootView;
-    }*/
 
     private void initView() {
         mDate = (EditText) findViewById(R.id.edit_text_date);

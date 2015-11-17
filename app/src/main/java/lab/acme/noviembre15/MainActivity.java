@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         mFactItemList  = new ArrayList<>();
 
         addTestGuessList();
-        //addTestBD();
+        addTestBD();
         populateList();   // Carga datos en la lista a mostrar, desde la bd
 
         FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);

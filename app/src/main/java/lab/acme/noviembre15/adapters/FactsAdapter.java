@@ -7,9 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.ToggleButton;
+
 import com.squareup.picasso.Picasso;
+
 import java.util.List;
+
 import lab.acme.noviembre15.R;
 import lab.acme.noviembre15.models.FactItem;
 
@@ -117,14 +119,14 @@ public class FactsAdapter extends RecyclerView.Adapter<FactsAdapter.ViewHolder>{
    public static class ViewHolder extends RecyclerView.ViewHolder{
        ImageView factImage;
        TextView factDate, factTitle;
-       ToggleButton checkInCheckOutButton;
+       //ToggleButton checkInCheckOutButton;
 
        public ViewHolder(View itemView) {
            super(itemView);
-           factImage = (ImageView) itemView.findViewById(R.id.image_view_attendant_head_shot);
-           factDate = (TextView)itemView.findViewById(R.id.text_view_attendants_name);
-           factTitle = (TextView)itemView.findViewById(R.id.text_view_attendants_email);
-           checkInCheckOutButton = (ToggleButton)itemView.findViewById(R.id.togglebutton);
+           factImage = (ImageView) itemView.findViewById(R.id.image_view_fact_image);
+           factDate = (TextView)itemView.findViewById(R.id.text_view_fact_date);
+           factTitle = (TextView)itemView.findViewById(R.id.text_view_fact_title);
+           //checkInCheckOutButton = (ToggleButton)itemView.findViewById(R.id.togglebutton);
        }
    }
 
@@ -133,18 +135,11 @@ public class FactsAdapter extends RecyclerView.Adapter<FactsAdapter.ViewHolder>{
        mContext = context;
    }
 
-   /**
-    public AdapterNICList(Context context, Cursor cursor) {
-    super(context, cursor, 0);
-
-    }
-    * */
-
    // Create new views (invoked by the layout manager)
    @Override
    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 	   //TODO cambiar attendants_list_row por facts_list_row	   	
-       rowView = LayoutInflater.from(parent.getContext()).inflate(R.layout.attendants_list_row, parent, false);
+       rowView = LayoutInflater.from(parent.getContext()).inflate(R.layout.facts_list_row, parent, false);
        ViewHolder viewHolder = new ViewHolder(rowView);
        return viewHolder;
    }

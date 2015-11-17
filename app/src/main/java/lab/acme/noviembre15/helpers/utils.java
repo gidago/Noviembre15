@@ -1,3 +1,13 @@
+import android.os.Environment;
+import android.util.Log;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+
+import lab.acme.noviembre15.DetailActivity;
+
 class utils {
 	
 //
@@ -38,7 +48,7 @@ public static boolean copyFile(String from, String to) {
 //
 //To copy files from internal memory to SD card and vice-versa using following piece of code:
 //
-public static void copyFile(File src, File dst) throws IOException
+/**public static void copyFile(File src, File dst) throws IOException
 {
     FileChannel inChannel = new FileInputStream(src).getChannel();
     FileChannel outChannel = new FileOutputStream(dst).getChannel();
@@ -53,11 +63,11 @@ public static void copyFile(File src, File dst) throws IOException
         if (outChannel != null)
             outChannel.close();
     }
-}
+}*/
 //
 //
 //
-public boolean copyFile(File src, File dst) {
+/**public boolean copyFile(File src, File dst) {
     boolean returnValue = true;
 
    FileChannel inChannel = null, outChannel = null;
@@ -141,7 +151,7 @@ public boolean copyFile(File src, File dst) {
         }
 
        return returnValue;
-}
+}*/
 
 
 
@@ -153,6 +163,8 @@ public boolean isExternalStorageWritable() {
     }
     return false;
 }
+
+    private final String LOG_TAG = utils.class.getSimpleName();
 
 public File getAlbumStorageDir(String albumName) {
     // Get the directory for the user's public pictures directory. 

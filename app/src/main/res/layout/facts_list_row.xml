@@ -7,11 +7,11 @@
         android:layout_height="70dp"
         android:layout_margin="10dp"
         android:layout_centerVertical="true"
-        android:id="@+id/image_view_attendant_head_shot" />
+        android:id="@+id/image_view_fact_image" />
 
     <LinearLayout
         android:id="@+id/linear_layout_name_and_buttons"
-        android:layout_toRightOf="@+id/image_view_attendant_head_shot"
+        android:layout_toRightOf="@+id/image_view_fact_image"
         android:paddingLeft="@dimen/margin_padding_normal"
         android:layout_alignParentRight="true"
         android:layout_width="match_parent"
@@ -27,12 +27,12 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/text_view_attendants_name"
+                android:id="@+id/text_view_fact_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                />
+                android:textColor="@color/colorPrimary" />
             <TextView
-                android:id="@+id/text_view_attendants_email"
+                android:id="@+id/text_view_fact_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"  />
         </LinearLayout>
@@ -44,16 +44,18 @@
             android:paddingTop="@dimen/margin_padding_normal"
             android:orientation="horizontal">
 
-            <ToggleButton
-                android:id="@+id/togglebutton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:textOn="Check in"
-                android:textOff="Check out"
-                style="@style/UIButton"
-                />
+
 
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
+
+<!---ToggleButton
+android:id="@+id/togglebutton"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_gravity="center_vertical"
+android:textOn="Check in"
+android:textOff="Check out"
+style="@style/UIButton"
+    /-->

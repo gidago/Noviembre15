@@ -46,4 +46,14 @@
         android:layout_centerInParent="true"
         android:layout_height="wrap_content"
         android:layout_gravity="right|top" />
+
+    <Button
+        android:id="@+id/button_copy"
+        android:textColor="#ffffff"
+        android:layout_width="150dp"
+        android:background="@color/primary"
+        android:text="Copia BD"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|center_vertical" />
 </FrameLayout>
