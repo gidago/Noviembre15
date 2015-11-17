@@ -17,12 +17,9 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
-
 import com.melnykov.fab.FloatingActionButton;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import lab.acme.noviembre15.adapters.FactsAdapter;
 import lab.acme.noviembre15.common.Common;
 import lab.acme.noviembre15.models.FactItem;
@@ -57,14 +54,14 @@ public class MainActivity extends AppCompatActivity {
 
         addTestGuessList();
         //addTestBD();
-        populateList();
+        populateList();   // Carga datos en la lista a mostrar, desde la bd
 
         FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
         fab.attachToRecyclerView(mRecyclerView);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //promptForAdd();
+                //promptForAdd();  TODO - ¿Pedir confirmación?
                 Intent activityAdd;
                 activityAdd = new Intent(mContext, AddFactActivity.class);
                 startActivity(activityAdd);
@@ -91,14 +88,11 @@ public class MainActivity extends AppCompatActivity {
                 if (child != null && mGestureDetector.onTouchEvent(motionEvent)) {
                     // onTouchDrawer(recyclerView.getChildLayoutPosition(child));
                     // Snackbar.make(recyclerView, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-
-
                     startActivity(new Intent(mContext, DetailActivity.class));
-
                     /**
-                 Intent intentGrid = new Intent(ctxt, GridActivity.class);
-                intentGrid.putExtra("ID", position); // Pasamos la posición del elemento de la lista
-                startActivity(intentGrid);
+                 	Intent intentGrid = new Intent(ctxt, GridActivity.class);
+                	intentGrid.putExtra("ID", position); // Pasamos la posición del elemento de la lista
+                	startActivity(intentGrid);
                     * */
                     return true;
                 }
@@ -161,13 +155,14 @@ public class MainActivity extends AppCompatActivity {
         uri = getContentResolver().insert(Provider.CONTENT_URI, values);
 
         // from external packages
-/**        values.clear();
- values.put("title", "Baby");
- values.put("author", "Alice Smith & Aloe Blacc");
- uri = getContentResolver().insert(
- Uri.parse("content://net.atanarro.provider.Songs/songs"),
- values);+
- */
+		/**        values.clear();
+		 values.put("title", "Baby");
+		 values.put("author", "Alice Smith & Aloe Blacc");
+		 uri = getContentResolver().insert(
+		 Uri.parse("content://net.atanarro.provider.Songs/songs"),
+		 values);+
+		 */
+		
         // test
         Uri allTitles = Uri.parse("content://lab.acme.noviembre15/facts");
 
@@ -213,10 +208,10 @@ public class MainActivity extends AppCompatActivity {
         FactItem  guest1 = new FactItem();
         guest1.setDate("12 noviembre 2015");
         guest1.setTitle("Informes parcial");
-
+	    guest1.setFact("Texto largo de Informes parcial");
+	    guest1.setCategory("Test");
         guest1.setProfileImageId(R.drawable.category_3);
         mFactItemList.add(guest1);
-
 
         /**
         values.put(Provider.COLUMN_DATE, "25 enero 2015");
@@ -233,19 +228,22 @@ public class MainActivity extends AppCompatActivity {
         FactItem  guest2 = new FactItem();
         guest2.setDate("24 diciembre 2015");
         guest2.setTitle("Navidad");
-
+	    guest2.setCategory("Test");
+	    
         guest2.setProfileImageId(R.drawable.headshot_2);
         mFactItemList.add(guest2);
 
         FactItem  guest3 = new FactItem();
         guest3.setDate("28 octubre 2015");
         guest3.setTitle("Viaje a Venecia");
+        guest3.setCategory("Test");
         guest3.setProfileImageId(R.drawable.category_1);
         mFactItemList.add(guest3);
 
         FactItem  guest4 = new FactItem();
         guest4.setDate("01 enero 2016");
         guest4.setTitle("La gran decisión");
+        guest4.setCategory("Test");
         guest4.setProfileImageId(R.drawable.no_category);
         mFactItemList.add(guest4);
 

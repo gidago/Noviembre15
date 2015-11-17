@@ -8,13 +8,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
-
 import com.squareup.picasso.Picasso;
-
 import java.util.List;
-
 import lab.acme.noviembre15.R;
 import lab.acme.noviembre15.models.FactItem;
+
+// Refs:
+// http://code.tutsplus.com/es/tutorials/getting-started-with-recyclerview-and-cardview-on-android--cms-23465
+// http://javatechig.com/android/android-recyclerview-example
+// http://www.hermosaprogramacion.com/2015/02/android-recyclerview-cardview/
 
 /**
 class AdapterNICList extends CursorAdapter {
@@ -108,27 +110,26 @@ class AdapterNICList extends CursorAdapter {
 
 public class FactsAdapter extends RecyclerView.Adapter<FactsAdapter.ViewHolder>{
 
-   private List<FactItem> mAttendants;
+   private List<FactItem> mFacItems;
    private Context mContext;
    View rowView;
 
    public static class ViewHolder extends RecyclerView.ViewHolder{
-       ImageView attendantHeadshot;
-       TextView attendantName, attendantEmail;
+       ImageView factImage;
+       TextView factDate, factTitle;
        ToggleButton checkInCheckOutButton;
 
        public ViewHolder(View itemView) {
            super(itemView);
-           attendantHeadshot = (ImageView) itemView.findViewById(R.id.image_view_attendant_head_shot);
-           attendantName = (TextView)itemView.findViewById(R.id.text_view_attendants_name);
-           attendantEmail = (TextView)itemView.findViewById(R.id.text_view_attendants_email);
+           factImage = (ImageView) itemView.findViewById(R.id.image_view_attendant_head_shot);
+           factDate = (TextView)itemView.findViewById(R.id.text_view_attendants_name);
+           factTitle = (TextView)itemView.findViewById(R.id.text_view_attendants_email);
            checkInCheckOutButton = (ToggleButton)itemView.findViewById(R.id.togglebutton);
        }
    }
 
-   public FactsAdapter(List<FactItem> attendantsList, Context context){
-
-       mAttendants = attendantsList;
+   public FactsAdapter(List<FactItem> factsList, Context context){
+       mFacItems = factsList;
        mContext = context;
    }
 
@@ -139,12 +140,11 @@ public class FactsAdapter extends RecyclerView.Adapter<FactsAdapter.ViewHolder>{
     }
     * */
 
-
    // Create new views (invoked by the layout manager)
    @Override
    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+	   //TODO cambiar attendants_list_row por facts_list_row	   	
        rowView = LayoutInflater.from(parent.getContext()).inflate(R.layout.attendants_list_row, parent, false);
-
        ViewHolder viewHolder = new ViewHolder(rowView);
        return viewHolder;
    }
@@ -152,15 +152,73 @@ public class FactsAdapter extends RecyclerView.Adapter<FactsAdapter.ViewHolder>{
    // Replace the contents of a view (invoked by the layout manager)
    @Override
    public void onBindViewHolder(ViewHolder holder, int position) {
-       final FactItem selectedAttendant = mAttendants.get(position);
+   	   // TODO - position coincide con el _ID de la bd ??
+       final FactItem selectedFact = mFacItems.get(position);
 
-       holder.attendantName.setText(selectedAttendant.getDate());
-       holder.attendantEmail.setText(selectedAttendant.getTitle());
-       Picasso.with(mContext).load(selectedAttendant.getProfileImageId()).into(holder.attendantHeadshot);
+       holder.factDate.setText(selectedFact.getDate());
+       holder.factTitle.setText(selectedFact.getTitle());
+       Picasso.with(mContext).load(selectedFact.getProfileImageId()).into(holder.factImage);
 
        if (position % 2 == 0){
            rowView.setBackgroundColor(mContext.getResources().getColor(R.color.activated_color));
        }
+       
+/**       Handle RecyclerView Click Event
+
+//Handle click event on both title and image click
+customViewHolder.textView.setOnClickListener(clickListener);
+customViewHolder.imageView.setOnClickListener(clickListener);
+
+customViewHolder.textView.setTag(customViewHolder);
+customViewHolder.imageView.setTag(customViewHolder);    
+
+View.OnClickListener clickListener = new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        CustomViewHolder holder = (CustomViewHolder) view.getTag();
+        int position = holder.getPosition();
+
+        FeedItem feedItem = feedItemList.get(position);
+        Toast.makeText(mContext, feedItem.getTitle(), Toast.LENGTH_SHORT).show();
+    }
+};   
+    
+    
+    
+http://stackoverflow.com/questions/28912253/recyclerview-onitemclick-listener
+	
+
+first store whole view in your viewHolder:
+
+  public class FeedListRowHolder extends RecyclerView.ViewHolder {
+     protected TextView title;
+     protected View mRootView;
+
+    public FeedListRowHolder(View view) {
+        super(view);
+        this.title = (TextView) view.findViewById(R.id.title);
+        mRootView = view;
+    }    
+    
+    
+ then set click listener at onBindViewHolder:
+
+@Override
+public void onBindViewHolder(FeedListRowHolder feedListRowHolder, int i) {
+    FeedItem feedItem = feedItemList.get(i);        
+    feedListRowHolder.title.setText(Html.fromHtml(feedItem.getTitle()));
+    feedListRowHolder.mRootView.setOnClickListener(new OnClickListener(){
+
+        @Override
+        public void onClick(View v) {
+
+        }
+   });
+}   
+    
+    
+*/       
+
 
 /*       holder.checkInCheckOutButton.setOnClickListener(new View.OnClickListener() {
            @Override
@@ -177,18 +235,15 @@ public class FactsAdapter extends RecyclerView.Adapter<FactsAdapter.ViewHolder>{
                }
            }
        }); */
-
    }
 
    @Override
    public int getItemCount() {
-       return mAttendants.size();
+       return mFacItems.size();
    }
 
    public void Add(FactItem factItem){
-       mAttendants.add(factItem);
+       mFacItems.add(factItem);
        notifyDataSetChanged();
    }
-
-
 }
