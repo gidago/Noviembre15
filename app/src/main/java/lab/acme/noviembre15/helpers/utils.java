@@ -39,6 +39,91 @@ public static boolean copyFile(String from, String to) {
 }
 
 
+    public boolean copyFile(File src, File dst) {
+     boolean returnValue = true;
+
+     FileChannel inChannel = null, outChannel = null;
+
+     try {
+
+     inChannel = new FileInputStream(src).getChannel();
+     outChannel = new FileOutputStream(dst).getChannel();
+
+     } catch (FileNotFoundException fnfe) {
+
+     Log.d(LOG_TAG, "inChannel/outChannel FileNotFoundException");
+     fnfe.printStackTrace();
+     return false;
+     }
+
+     try {
+     inChannel.transferTo(0, inChannel.size(), outChannel);
+
+     } catch (IllegalArgumentException iae) {
+
+     Log.d(LOG_TAG, "TransferTo IllegalArgumentException");
+     iae.printStackTrace();
+     returnValue = false;
+
+     } catch (NonReadableChannelException nrce) {
+
+     Log.d(LOG_TAG, "TransferTo NonReadableChannelException");
+     nrce.printStackTrace();
+     returnValue = false;
+
+     } catch (NonWritableChannelException nwce) {
+
+     Log.d(LOG_TAG, "TransferTo NonWritableChannelException");
+     nwce.printStackTrace();
+     returnValue = false;
+
+     } catch (ClosedByInterruptException cie) {
+
+     Log.d(LOG_TAG, "TransferTo ClosedByInterruptException");
+     cie.printStackTrace();
+     returnValue = false;
+
+     } catch (AsynchronousCloseException ace) {
+
+     Log.d(LOG_TAG, "TransferTo AsynchronousCloseException");
+     ace.printStackTrace();
+     returnValue = false;
+
+     } catch (ClosedChannelException cce) {
+
+     Log.d(LOG_TAG, "TransferTo ClosedChannelException");
+     cce.printStackTrace();
+     returnValue = false;
+
+     } catch (IOException ioe) {
+
+     Log.d(LOG_TAG, "TransferTo IOException");
+     ioe.printStackTrace();
+     returnValue = false;
+
+
+     } finally {
+
+     if (inChannel != null)
+
+     try {
+
+     inChannel.close();
+     } catch (IOException e) {
+     e.printStackTrace();
+     }
+
+     if (outChannel != null)
+     try {
+     outChannel.close();
+     } catch (IOException e) {
+     e.printStackTrace();
+     }
+
+     }
+
+     return returnValue;
+     }
 //
 //http://stackoverflow.com/questions/4770004/how-to-move-rename-file-from-internal-app-storage-to-external-storage-on-android
 //
@@ -181,6 +266,58 @@ public File getAlbumStorageDir(String albumName) {
 //
 
 
+    /**
+     * Copies the database from assets to the application's data directory
+     *
+     * @param dbName Name of the database to be copied
+     */
+    private void copyDatabase(String dbName) {
+        String DATA_PATH =  Environment.getExternalStorageDirectory().toString() + "/Nov 2015/";
+
+        AssetManager assetManager = mContext.getAssets();
+        try {
+            InputStream in = assetManager.open("data/facts.db");
+
+            OutputStream out = new FileOutputStream(DATA_PATH + "facts.db");
+
+            // Transfer bytes from in to out
+            byte[] buf = new byte[1024];
+            int len;
+
+            while ((len = in.read(buf)) > 0) {
+                out.write(buf, 0, len);
+            }
+            in.close();
+            out.close();
+        }
+      catch (FileNotFoundException e) {
+          Log.e(LOG_TAG, e.getMessage());
+        e.printStackTrace();
+    } catch (IOException e) {
+
+            Log.e(LOG_TAG, e.getMessage());
+        e.printStackTrace();
+    }
+
+        String  path = this.activity.getApplicationInfo().dataDir + "/" + dbName;
+        File file = new File(path);
+
+        File salida = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Nov 2015/" + dbName);
+
+        if (copyFile(file, salida))
+            Log.e(LOG_TAG, "Copiada BD");
+
+    }
+
+
+    public File getBDStorageDir(String bd) {
+        // Get the directory for the user's public dowload directory.
+        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), bd);
+        if (!file.mkdirs()) {
+            Log.e(LOG_TAG, "Directory not created");
+        }
+        return file;
+    }
 
 
 

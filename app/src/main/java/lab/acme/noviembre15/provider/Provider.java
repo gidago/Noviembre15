@@ -44,12 +44,6 @@ public class Provider extends ContentProvider {
     public static final Uri CONTENT_URI = Uri.parse("content://" + PROVIDER_NAME + "/facts");
     private static final int FACTS = 1;
     private static final int FACTS_ID = 2;
-
-    /** The MIME type of {@link #CONTENT_URI} providing a directory of status messages. */
-    //public static final String CONTENT_TYPE = "vnd.android.cursor.dir/lab.acme.noviembre15";
-
-    /** The MIME type of a {@link #CONTENT_URI} a single status message. */
-    //public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/lab.acme.noviembre15";
     private static final UriMatcher uriMatcher;
     static {
         uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
@@ -132,7 +126,7 @@ public class Provider extends ContentProvider {
       public String getType(Uri uri) {
 
           String ret = getContext().getContentResolver().getType(CONTENT_URI);
-          Log.d(TAG, " ------ ----- ------ getType returning: " + ret);
+          Log.d(TAG, "********* getType returning: " + ret);
 
           switch (uriMatcher.match(uri)) {
               // get all facts
@@ -144,7 +138,6 @@ public class Provider extends ContentProvider {
               default:
                   throw new IllegalArgumentException("Unsupported URI: " + uri);
           }
-        //return ret;
       }
 
     /*
@@ -168,7 +161,6 @@ public class Provider extends ContentProvider {
           }
           throw new SQLException("Failed to insert row into " + uri);
       }
-
 
     /*
      * (non-Javadoc)
@@ -238,7 +230,7 @@ public class Provider extends ContentProvider {
     @Override
     public Cursor query(Uri uri, String[] projection, String selection,
                       String[] selectionArgs, String sortOrder) {
-        Log.d(TAG, "**** Prueba: query with uri: " + uri.toString());
+        Log.d(TAG, "**** Test: query with uri: " + uri.toString());
         SQLiteQueryBuilder sqlBuilder = new SQLiteQueryBuilder();
         sqlBuilder.setTables(DATABASE_TABLE);
         if (uriMatcher.match(uri) == FACTS_ID)
@@ -252,5 +244,4 @@ public class Provider extends ContentProvider {
         cursor.setNotificationUri(getContext().getContentResolver(), uri);
         return cursor;
     }
-
 }

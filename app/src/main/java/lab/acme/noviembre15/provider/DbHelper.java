@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import lab.acme.noviembre15.provider.FactsContract.ColumnsEntry;
-
+// TODO - ¿en donde se utiliza?
 /**
  * Manages a local database.
  */

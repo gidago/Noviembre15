@@ -3,7 +3,7 @@ package lab.acme.noviembre15.provider;
 import android.content.ContentResolver;
 import android.net.Uri;
 import android.provider.BaseColumns;
-
+//TODO ¿En donde se utiliza?
 public final class FactsContract {
 
     private FactsContract() {}
