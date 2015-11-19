@@ -5,14 +5,33 @@
     tools:context=".MainActivity">
 
     <item
-        android:id="@+id/app_icon"
-        android:orderInCategory="300"
-        android:name="App Icon"
-        />
+        android:id="@+id/action_app_icon"
+        android:name="@string/action_app_icon"
+        android:title="@string/action_app_icon"
+        android:orderInCategory="300" />
     <item
-        android:id="@+id/action_settings"
-        android:name="@string/action_settings"
+        android:id="@+id/action_app_version"
+        android:name="@string/action_app_version"
+        android:title="@string/action_app_version"
+        android:orderInCategory="200"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_bd_copy"
+        android:name="@string/action_bd_copy"
+        android:title="@string/action_bd_copy"
         android:orderInCategory="100"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_populate_db"
+        android:name="@string/action_populate_db"
+        android:title="@string/action_populate_db"
+        android:orderInCategory="400"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_db_delete_all"
+        android:name="@string/action_db_delete_all"
+        android:title="@string/action_db_delete_all"
+        android:orderInCategory="500"
         app:showAsAction="never" />
 
 </menu>

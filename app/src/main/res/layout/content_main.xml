@@ -13,9 +13,9 @@
     tools:showIn="@layout/activity_main"
     tools:context=".MainActivity">
 
+    <!--include layout="@layout/facts_card_view"/-->
 
-
-    <include layout="@layout/attendanats_recicler_view"/>
+    <include layout="@layout/facts_recicler_view"/>
 
 
 

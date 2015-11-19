@@ -31,5 +31,10 @@
 
     <!-- Provider related -->
     <string name="content_authority">lab.acme.noviembre15</string>
+    <string name="action_app_icon">App Icon</string>
+    <string name="action_app_version">App version</string>
+    <string name="action_bd_copy">Copy Db</string>
+    <string name="action_populate_db">Populate db</string>
+    <string name="action_db_delete_all">Delete all rows</string>
 
 </resources>

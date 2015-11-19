@@ -18,7 +18,6 @@ public class FactItem {                // Attendant = FactItem
     private String Value; //**
     private String Coord_lat;
     private String Coord_long;
-    //private boolean IsCheckedIn;
     private String ProfileImagePath;
     private int ProfileImageId;
     //private String SerializedAttendances;

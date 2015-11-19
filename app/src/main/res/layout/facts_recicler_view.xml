@@ -16,9 +16,10 @@
 
     <!-- A RecyclerView with some commonly used attributes -->
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/attendants_recycler_view"
+        android:id="@+id/facts_main_recycler_view"
         android:scrollbars="vertical"
         android:background="@color/white_transparent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
 </RelativeLayout>

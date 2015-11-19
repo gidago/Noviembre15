@@ -1,12 +1,20 @@
+import android.content.res.AssetManager;
 import android.os.Environment;
 import android.util.Log;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
-
-import lab.acme.noviembre15.DetailActivity;
+import java.io.OutputStream;
+import java.nio.channels.AsynchronousCloseException;
+import java.nio.channels.ClosedByInterruptException;
+import java.nio.channels.ClosedChannelException;
+import java.nio.channels.FileChannel;
+import java.nio.channels.NonReadableChannelException;
+import java.nio.channels.NonWritableChannelException;
 
 class utils {
 	
@@ -39,7 +47,7 @@ public static boolean copyFile(String from, String to) {
 }
 
 
-    public boolean copyFile(File src, File dst) {
+ /*   public boolean copyFile(File src, File dst) {
      boolean returnValue = true;
 
      FileChannel inChannel = null, outChannel = null;
@@ -123,7 +131,7 @@ public static boolean copyFile(String from, String to) {
      }
 
      return returnValue;
-     }
+     }*/
 //
 //http://stackoverflow.com/questions/4770004/how-to-move-rename-file-from-internal-app-storage-to-external-storage-on-android
 //
@@ -271,7 +279,7 @@ public File getAlbumStorageDir(String albumName) {
      *
      * @param dbName Name of the database to be copied
      */
-    private void copyDatabase(String dbName) {
+ /*   private void copyDatabase(String dbName) {
         String DATA_PATH =  Environment.getExternalStorageDirectory().toString() + "/Nov 2015/";
 
         AssetManager assetManager = mContext.getAssets();
@@ -317,7 +325,7 @@ public File getAlbumStorageDir(String albumName) {
             Log.e(LOG_TAG, "Directory not created");
         }
         return file;
-    }
+    }*/
 
 
 

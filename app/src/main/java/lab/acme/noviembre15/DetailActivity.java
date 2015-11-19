@@ -17,11 +17,9 @@ package lab.acme.noviembre15;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -29,21 +27,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.nio.channels.AsynchronousCloseException;
-import java.nio.channels.ClosedByInterruptException;
-import java.nio.channels.ClosedChannelException;
-import java.nio.channels.FileChannel;
-import java.nio.channels.NonReadableChannelException;
-import java.nio.channels.NonWritableChannelException;
-import lab.acme.noviembre15.provider.DbHelper;
+
 import lab.acme.noviembre15.provider.Provider;
 
 public class DetailActivity extends AppCompatActivity {
@@ -58,6 +42,8 @@ public class DetailActivity extends AppCompatActivity {
 
     private final String LOG_TAG = DetailActivity.class.getSimpleName();
 
+    protected int mVId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,17 +52,31 @@ public class DetailActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_detail);
 
-        if (savedInstanceState == null) {
-            Bundle arguments = new Bundle();
+
+        if(savedInstanceState != null) {
+            this.mVId = savedInstanceState.getInt("ID");
         }
+        else if(savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            this.mVId = extras.getInt("ID");
+        }
+
+        Log.d(LOG_TAG, "******** mVId:   " + mVId );
+
+      /*  if (savedInstanceState == null) {
+            Bundle arguments = new Bundle();
+        }*/
         initView();
 
         mTitle = (TextView) findViewById(R.id.info_txt_title);
+
         // test
-        Uri oneTitle = Uri.parse("content://lab.acme.noviembre15/facts/2");
+        Uri oneTitle = Uri.parse("content://lab.acme.noviembre15/facts/" + mVId + 1 );
+        //Uri oneTitle = Uri.parse("content://lab.acme.noviembre15/facts/1");
         Cursor c = managedQuery(oneTitle, null, null, null, null);
         if (c.moveToFirst()) {
         mTitle.setText(c.getString(c.getColumnIndex(Provider.COLUMN_TITLE)));
+            Log.d(LOG_TAG, "******** Provider title:   " +c.getString(c.getColumnIndex(Provider.COLUMN_TITLE)) );
         }
       /*  if (c.moveToFirst()) {
             do {
@@ -113,13 +113,15 @@ public class DetailActivity extends AppCompatActivity {
         mCopyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                micopia();
+
                 //copyDatabase(DbHelper.DB_NAME ) ;
-                Log.d(LOG_TAG, DbHelper.DB_NAME);
+                //Log.d(LOG_TAG, DbHelper.DB_NAME);
             }
         });
     }
 
+
+    //Lista filas en text view
     private void listaTest() {
 
         // test
@@ -153,63 +155,13 @@ public class DetailActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
+      /*  if (id == R.id.action_settings) {
           //  startActivity(new Intent(this, SettingsActivity.class));
             return true;
-        }
+        }*/
         return super.onOptionsItemSelected(item);
     }
 
-    // 
-    // Copy db from local storage to public storage
-    //
-    private void micopia() {
 
-        String[] dbList =  {"facts"};
-		// TODO - revisar falla
-        if ( checkDatabase("facts.db"))
-            Toast.makeText(getBaseContext(), "O.k. db", Toast.LENGTH_LONG).show();
-
-
-        try {
-            File sd = Environment.getExternalStorageDirectory();
-            File data = Environment.getDataDirectory();
-
-            Log.e(LOG_TAG, "1:  " + sd.toString());
-            Log.e(LOG_TAG, "2:  " + data.toString());
-
-
-            if (sd.canWrite()) {
-                String currentDBPath = "//data//"+ "lab.acme.noviembre15" +"//databases//"+  dbList[0];  //
-                String backupDBPath = dbList[0];  //
-                File currentDB = new File(data, currentDBPath);
-                File backupDB = new File(sd, backupDBPath);
-
-                Log.e(LOG_TAG, "3:   " +  currentDB.toString());
-                Log.e(LOG_TAG, "4:   " +  backupDB.toString());
-
-                FileChannel src = new FileInputStream(currentDB).getChannel();
-                FileChannel dst = new FileOutputStream(backupDB).getChannel();
-                dst.transferFrom(src, 0, src.size());
-                src.close();
-                dst.close();
-                Toast.makeText(getBaseContext(), backupDB.toString(), Toast.LENGTH_LONG).show();
-            }
-        } catch (Exception e) {
-            Toast.makeText(getBaseContext(), e.toString(), Toast.LENGTH_LONG).show();
-        }
-    }
-
-
-    /**
-     * Checks if the database exists at the application's data directory
-     *
-     * @param dbName Name of the database to check the existence of
-     * @return True if the database exists, false if not
-     */
-    private boolean checkDatabase(String dbName) {
-        File dbFile = new File(this.activity.getApplicationInfo().dataDir + "/" + dbName);
-        return dbFile.exists();
-    }
 
 }

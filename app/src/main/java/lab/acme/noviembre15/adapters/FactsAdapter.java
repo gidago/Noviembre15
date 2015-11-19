@@ -1,6 +1,7 @@
 package lab.acme.noviembre15.adapters;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +20,7 @@ import lab.acme.noviembre15.models.FactItem;
 // http://code.tutsplus.com/es/tutorials/getting-started-with-recyclerview-and-cardview-on-android--cms-23465
 // http://javatechig.com/android/android-recyclerview-example
 // http://www.hermosaprogramacion.com/2015/02/android-recyclerview-cardview/
-
+// https://github.com/tutsplus/Android-CardViewRecyclerView/blob/master/ListsAndCards/app/src/main/java/com/hathy/listsandcards/RVAdapter.java
 /**
 class AdapterNICList extends CursorAdapter {
 
@@ -116,17 +117,29 @@ public class FactsAdapter extends RecyclerView.Adapter<FactsAdapter.ViewHolder>{
    private Context mContext;
    View rowView;
 
+
    public static class ViewHolder extends RecyclerView.ViewHolder{
        ImageView factImage;
+       ImageView factCardImage;
+
        TextView factDate, factTitle;
        //ToggleButton checkInCheckOutButton;
 
+       CardView cv;
+
        public ViewHolder(View itemView) {
            super(itemView);
-           factImage = (ImageView) itemView.findViewById(R.id.image_view_fact_image);
-           factDate = (TextView)itemView.findViewById(R.id.text_view_fact_date);
-           factTitle = (TextView)itemView.findViewById(R.id.text_view_fact_title);
-           //checkInCheckOutButton = (ToggleButton)itemView.findViewById(R.id.togglebutton);
+
+
+           cv = (CardView)itemView.findViewById(R.id.facts_main_card_view);
+
+           factCardImage = (ImageView) itemView.findViewById(R.id.image_view_fact_card);
+
+//           factImage = (ImageView) itemView.findViewById(R.id.image_view_fact_image);
+           //factDate = (TextView)itemView.findViewById(R.id.text_view_fact_date);
+           factDate = (TextView)itemView.findViewById(R.id.text_card_view_fact_date);
+//           factTitle = (TextView)itemView.findViewById(R.id.text_view_fact_title);
+
        }
    }
 
@@ -135,11 +148,21 @@ public class FactsAdapter extends RecyclerView.Adapter<FactsAdapter.ViewHolder>{
        mContext = context;
    }
 
+//TODO test
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+    }
+
+
+
    // Create new views (invoked by the layout manager)
    @Override
    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 	   //TODO cambiar attendants_list_row por facts_list_row	   	
-       rowView = LayoutInflater.from(parent.getContext()).inflate(R.layout.facts_list_row, parent, false);
+       //rowView = LayoutInflater.from(parent.getContext()).inflate(R.layout.facts_list_row, parent, false);
+//TODO test
+       rowView = LayoutInflater.from(parent.getContext()).inflate(R.layout.facts_card_view, parent, false);
        ViewHolder viewHolder = new ViewHolder(rowView);
        return viewHolder;
    }
@@ -151,12 +174,13 @@ public class FactsAdapter extends RecyclerView.Adapter<FactsAdapter.ViewHolder>{
        final FactItem selectedFact = mFacItems.get(position);
 
        holder.factDate.setText(selectedFact.getDate());
-       holder.factTitle.setText(selectedFact.getTitle());
-       Picasso.with(mContext).load(selectedFact.getProfileImageId()).into(holder.factImage);
+ //      holder.factTitle.setText(selectedFact.getTitle());
+ //      Picasso.with(mContext).load(selectedFact.getProfileImageId()).into(holder.factImage);
+       Picasso.with(mContext).load(selectedFact.getProfileImageId()).into(holder.factCardImage );
 
-       if (position % 2 == 0){
+      /* if (position % 2 == 0){
            rowView.setBackgroundColor(mContext.getResources().getColor(R.color.activated_color));
-       }
+       }*/
        
 /**       Handle RecyclerView Click Event
 
