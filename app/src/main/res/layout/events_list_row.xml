@@ -10,13 +10,13 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" >
 
-        <ImageView
+        <!--ImageView
             android:id="@+id/image_view_event_image"
             android:contentDescription="@string/image_description"
             android:layout_width="fill_parent"
             android:layout_height="200dp"
             android:scaleType="centerCrop"
-            android:adjustViewBounds="true" />
+            android:adjustViewBounds="true" /-->
 
         <RelativeLayout
             android:layout_alignBottom="@+id/image_view_event_image"
@@ -76,10 +76,10 @@
             />
 
     </RelativeLayout>
-    <ImageView
+    <!--ImageView
         android:contentDescription="@string/image_description"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="@color/theme_color"/>
+        android:background="@color/theme_color"/-->
 
 </LinearLayout>

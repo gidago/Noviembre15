@@ -24,8 +24,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import lab.acme.noviembre15.provider.Provider;
@@ -34,10 +33,10 @@ public class DetailActivity extends AppCompatActivity {
 	
     private final String LOG_TAG = DetailActivity.class.getSimpleName();
     
-    Button mListButton;
-    Button mCopyButton;
+    //Button mListButton;
+    //Button mCopyButton;
 
-    private TextView mInfo; // TestView for test
+    //private TextView mInfo; // TestView for test
     private TextView mTitle;
     
     private TextView mDate;     
@@ -48,7 +47,9 @@ public class DetailActivity extends AppCompatActivity {
     private TextView mCoord_long;    
 //    private String ProfileImagePath;
 //    private int ProfileImageId;
-           
+
+    ImageView factCardImage;
+
     private Context mContext;
     private Activity activity;
 	//TODO review
@@ -69,19 +70,34 @@ public class DetailActivity extends AppCompatActivity {
             this.mVId = extras.getInt("ID");
         }
 
-        Log.d(LOG_TAG, "******** mVId:   " + mVId );
+        Log.d(LOG_TAG, "******** mVId:   " + mVId);
 
       /*  if (savedInstanceState == null) {
             Bundle arguments = new Bundle();
         }*/
         initView();
-        mTitle = (TextView) findViewById(R.id.info_txt_title);
+
+        mTitle = (TextView) findViewById(R.id.detail_title_textview);
+        mDate = (TextView) findViewById(R.id.detail_date_textview);
+        mFact = (TextView) findViewById(R.id.detail_high_textview);
+        mCategory  = (TextView) findViewById(R.id.detail_low_textview);
+        mValue = (TextView) findViewById(R.id.detail_forecast_textview);
+        mCoord_lat = (TextView) findViewById(R.id.detail_humidity_textview);
+        mCoord_long = (TextView) findViewById(R.id.detail_pressure_textview);
+        factCardImage = (ImageView) findViewById(R.id.detail_icon);
         // test
         Uri oneTitle = Uri.parse("content://lab.acme.noviembre15/facts/" + mVId + 1 );
         //Uri oneTitle = Uri.parse("content://lab.acme.noviembre15/facts/1");
         Cursor c = managedQuery(oneTitle, null, null, null, null);
         if (c.moveToFirst()) {
-        mTitle.setText(c.getString(c.getColumnIndex(Provider.COLUMN_TITLE)));
+            mTitle.setText(c.getString(c.getColumnIndex(Provider.COLUMN_TITLE)));
+            mDate.setText(c.getString(c.getColumnIndex(Provider.COLUMN_DATE)));
+            mFact.setText(c.getString(c.getColumnIndex(Provider.COLUMN_FACT)));
+            mCategory.setText(c.getString(c.getColumnIndex(Provider.COLUMN_CATEGORY)));
+            mValue.setText(c.getString(c.getColumnIndex(Provider.COLUMN_VALUE)));
+            mCoord_lat.setText(c.getString(c.getColumnIndex(Provider.COLUMN_COORD_LAT)));
+            mCoord_long.setText(c.getString(c.getColumnIndex(Provider.COLUMN_COORD_LONG)));
+
             Log.d(LOG_TAG, "******** Provider title:   " + c.getString(c.getColumnIndex(Provider.COLUMN_TITLE)) );
         }
         
@@ -104,25 +120,25 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        mInfo = (TextView) findViewById(R.id.info_txt);
+       // mInfo = (TextView) findViewById(R.id.info_txt);
 
-        mListButton = (Button) findViewById(R.id.save_button);
-        mCopyButton = (Button) findViewById(R.id.button_copy);
+       // mListButton = (Button) findViewById(R.id.save_button);
+       // mCopyButton = (Button) findViewById(R.id.button_copy);
         
-        mListButton.setOnClickListener(new View.OnClickListener() {
+      /*  mListButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 listaTest();
             }
-        });
+        });*/
         // Copy db from local storage to public storage
-        mCopyButton.setOnClickListener(new View.OnClickListener() {
+      /*  mCopyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //copyDatabase(DbHelper.DB_NAME ) ;
                 //Log.d(LOG_TAG, DbHelper.DB_NAME);
             }
-        });
+        });*/
     }
 
 
@@ -140,7 +156,7 @@ public class DetailActivity extends AppCompatActivity {
                         + c.getString(c.getColumnIndex(Provider.COLUMN_FACT))
                         + "\"";
                 Log.d(LOG_TAG, mReg);
-                mInfo.append(mReg);
+                //mInfo.append(mReg);
             } while (c.moveToNext());
         }
     }

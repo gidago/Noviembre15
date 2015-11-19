@@ -60,7 +60,6 @@ public class FactsAdapter extends RecyclerView.Adapter<FactsAdapter.ViewHolder>{
         super.onAttachedToRecyclerView(recyclerView);
     }
 
-
 	// Create new views (invoked by the layout manager)
    	@Override
    	public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {	   	
@@ -136,7 +135,6 @@ public void onBindViewHolder(FeedListRowHolder feedListRowHolder, int i) {
    });
 }       
 */       
-
 
 /*       holder.checkInCheckOutButton.setOnClickListener(new View.OnClickListener() {
            @Override

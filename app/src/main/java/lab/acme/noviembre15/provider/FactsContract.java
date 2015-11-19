@@ -1,7 +1,5 @@
 package lab.acme.noviembre15.provider;
 
-import android.content.ContentResolver;
-import android.net.Uri;
 import android.provider.BaseColumns;
 //TODO ¿En donde se utiliza?
 public final class FactsContract {
@@ -11,7 +9,7 @@ public final class FactsContract {
     /** The authority for the contacts provider */
     public static final String AUTHORITY = "lab.acme.noviembre15";
     /**atanarro*/
-    public static final String PROVIDER_NAME = "net.atanarro.provider.Songs";
+    //public static final String PROVIDER_NAME = "net.atanarro.provider.Songs";
 //    public static final Uri CONTENT_URI = Uri.parse("content://" + PROVIDER_NAME + "/songs");
 
     // static final String AUTHORITY = "content://lab.acme.noviembre15";
@@ -24,19 +22,19 @@ public final class FactsContract {
 
     // Use CONTENT_AUTHORITY to create the base of all URI's which apps will use to contact
     // the content provider.
-    public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
+    //public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
 
     // Possible paths (appended to base content URI for possible URI's)
     // For instance, content://com.example.android.sunshine.app/weather/ is a valid path for
     // looking at weather data. content://com.example.android.sunshine.app/givemeroot/ will fail,
     // as the ContentProvider hasn't been given any information on what to do with "givemeroot".
     // At least, let's hope not.  Don't be that dev, reader.  Don't be that dev.
-    public static final String PATH_FACTS = "facts";
+    //public static final String PATH_FACTS = "facts";
 
    // public static final Uri CONTENT_URI = Uri.parse(AUTHORITY);
 
     /** A content:// style uri to the authority for this table */
-    public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY );
+    //public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY );
 
 
 
@@ -47,20 +45,20 @@ public final class FactsContract {
     /* Inner class that defines the table contents of the facts table */
     public final static class ColumnsEntry implements BaseColumns {
 
-        public static final Uri CONTENT_URI =
-                BASE_CONTENT_URI.buildUpon().appendPath(PATH_FACTS).build();
+        /*public static final Uri CONTENT_URI =
+                BASE_CONTENT_URI.buildUpon().appendPath(PATH_FACTS).build();*/
 
-        public static final String CONTENT_TYPE =
+        /*public static final String CONTENT_TYPE =
                 ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_FACTS;
         public static final String CONTENT_ITEM_TYPE =
-                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_FACTS;
+                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_FACTS;*/
 
         private ColumnsEntry() {}
 
  	// Table name
 	public static final String TABLE_NAME = "myfacts";
 
-    public static final String COLUMN_ID = "_ID";
+    //public static final String COLUMN_ID = "_ID";
     /**
      * The date of fact
      * <P>Type: TEXT</P>
@@ -110,6 +108,6 @@ public final class FactsContract {
         /**
          * The default sort order for this table
          */
-        public static final String DEFAULT_SORT_ORDER = COLUMN_DATE + " DESC";
+       // public static final String DEFAULT_SORT_ORDER = COLUMN_DATE + " DESC";
 	}
 }

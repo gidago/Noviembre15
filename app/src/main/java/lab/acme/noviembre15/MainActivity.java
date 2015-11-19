@@ -73,10 +73,10 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mFactItemList  = new ArrayList<>();
 
-       // addTestGuessList();  // Carga datos en la lista (no quedan en la bd)
+
 
         populateList();   // Carga datos en la lista a mostrar, desde la bd
-
+addTestGuessList();  // Carga datos en la lista (no quedan en la bd)
         FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
         fab.attachToRecyclerView(mRecyclerView);
         fab.setOnClickListener(new View.OnClickListener() {

@@ -88,15 +88,15 @@ public class AddFactActivity extends AppCompatActivity {
 
     private void saveFact() {
         //populate the Attendant object with the data entered in the screen
-        FactItem mFact;
-        mFact = new FactItem();
-        mFact.setDate(mDate.getText().toString());
-        mFact.setTitle(mTitle.getText().toString());
-        mFact.setCategory(mCategory.getText().toString());
-        mFact.setFact(mFact.getText().toString());
-        mFact.setValue(mValue.getText().toString());
-        mFact.setCoord_lat(mLat.getText().toString());
-        mFact.setCoord_long(mLong.getText().toString());
+        FactItem mmFact;
+        mmFact = new FactItem();
+        mmFact.setDate(mDate.getText().toString());
+        mmFact.setTitle(mTitle.getText().toString());
+        mmFact.setCategory(mCategory.getText().toString());
+        mmFact.setFact(mFact.getText().toString());
+        mmFact.setValue(mValue.getText().toString());
+        mmFact.setCoord_lat(mLat.getText().toString());
+        mmFact.setCoord_long(mLong.getText().toString());
         //Save to the database
         // add a row (reg)
         ContentValues values = new ContentValues();
@@ -130,7 +130,7 @@ public class AddFactActivity extends AppCompatActivity {
         //Wipe all fields
         resetFields();
         //Provide feedback to the user
-        Toast.makeText(mContext, mFact.getTitle() + " saved", Toast.LENGTH_SHORT).show();
+        Toast.makeText(mContext, mmFact.getTitle() + " saved", Toast.LENGTH_SHORT).show();
     }
 
 }
