@@ -3,7 +3,6 @@ package lab.acme.noviembre15;
 import android.app.Application;
 import android.util.Log;
 
-
 public class MyApplication extends Application {
     private final String LOG_TAG = MyApplication.class.getSimpleName();
     private final String mMsg = "The application is starting - by ILG";
@@ -19,7 +18,6 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
         Log.i(LOG_TAG, mMsg);
     }
 }

@@ -56,28 +56,24 @@ public class MainActivity extends AppCompatActivity {
     private Activity activity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+		super.onCreate(savedInstanceState);
         activity = MainActivity.this;
         mContext = MainActivity.this;
+
         setContentView(R.layout.activity_main);
-//        setContentView(R.layout.facts_card_view);
+
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
-      mRecyclerView = (RecyclerView) findViewById(R.id.facts_main_recycler_view);
-       // mRecyclerView = (RecyclerView) findViewById(R.id.facts_main_card_view);
+		mRecyclerView = (RecyclerView) findViewById(R.id.facts_main_recycler_view);
+       	// mRecyclerView = (RecyclerView) findViewById(R.id.facts_main_card_view);
 
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(mContext);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mFactItemList  = new ArrayList<>();
 
-
-
-
-
-
-       // addTestGuessList();
+       // addTestGuessList();  // Carga datos en la lista (no quedan en la bd)
 
         populateList();   // Carga datos en la lista a mostrar, desde la bd
 
@@ -114,13 +110,10 @@ public class MainActivity extends AppCompatActivity {
                     // onTouchDrawer(recyclerView.getChildLayoutPosition(child));
                     // Snackbar.make(recyclerView, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
                     Log.d(LOG_TAG, "** child ly. pos.  " + recyclerView.getChildLayoutPosition(child));
-
                     //startActivity(new Intent(mContext, DetailActivity.class));
-
                  	Intent intentDetail = new Intent(mContext, DetailActivity.class);
                 	intentDetail.putExtra("ID", recyclerView.getChildLayoutPosition(child)); // Pasamos la posición del elemento de la lista
                 	startActivity(intentDetail);
-
                     return true;
                 }
                 return false;
@@ -162,11 +155,8 @@ public class MainActivity extends AppCompatActivity {
                         guest.setProfileImageId(R.drawable.headshot_9);
                         break;
                 }
-
-
                 mFactItemList.add(guest);
                 Log.d(LOG_TAG, "** Items.  " + cursor.getString(cursor.getColumnIndex(Provider.COLUMN_ID)));
-
             } while (cursor.moveToNext());
         }
     }
@@ -177,6 +167,9 @@ public class MainActivity extends AppCompatActivity {
                 null);
     }
 
+	//
+	// Add rows to db
+	//
     private void addTestBD() {
         String mMsg = "ILG PRUEBAS BD: " +"<------------------------->";
         Log.d(LOG_TAG, mMsg);
@@ -231,18 +224,8 @@ public class MainActivity extends AppCompatActivity {
             getContentResolver().insert(Provider.CONTENT_URI, values);
         }
 
-        // from external packages
-		/**        values.clear();
-		 values.put("title", "Baby");
-		 values.put("author", "Alice Smith & Aloe Blacc");
-		 uri = getContentResolver().insert(
-		 Uri.parse("content://net.atanarro.provider.Songs/songs"),
-		 values);+
-		 */
-		
         // test
         Uri allTitles = Uri.parse("content://lab.acme.noviembre15/facts");
-
         Cursor c = managedQuery(allTitles, null, null, null, "date desc");
         if (c.moveToFirst()) {
             do {
@@ -264,7 +247,6 @@ public class MainActivity extends AppCompatActivity {
         // update
         ContentValues editedValues = new ContentValues();
         editedValues.put(Provider.COLUMN_TITLE, "Should We Fight Back?");
-
         getContentResolver().update(
                 Uri.parse("content://lab.acme.noviembre15/facts/2"), editedValues, null, null);
 
@@ -398,10 +380,8 @@ public class MainActivity extends AppCompatActivity {
             case (R.id.action_db_delete_all):
                 deleteAllRowsTestBD();
                 break;
-
         }
         return super.onOptionsItemSelected(item);
-
     }
 
 
@@ -415,24 +395,18 @@ public class MainActivity extends AppCompatActivity {
         if ( checkDatabase("facts.db"))
             Toast.makeText(getBaseContext(), "O.k. db", Toast.LENGTH_LONG).show();
 
-
         try {
             File sd = Environment.getExternalStorageDirectory();
             File data = Environment.getDataDirectory();
-
             Log.e(LOG_TAG, "1:  " + sd.toString());
             Log.e(LOG_TAG, "2:  " + data.toString());
-
-
             if (sd.canWrite()) {
                 String currentDBPath = "//data//"+ "lab.acme.noviembre15" +"//databases//"+  dbList[0];  //
                 String backupDBPath = dbList[0];  //
                 File currentDB = new File(data, currentDBPath);
                 File backupDB = new File(sd, backupDBPath);
-
                 Log.e(LOG_TAG, "3:   " +  currentDB.toString());
                 Log.e(LOG_TAG, "4:   " +  backupDB.toString());
-
                 FileChannel src = new FileInputStream(currentDB).getChannel();
                 FileChannel dst = new FileOutputStream(backupDB).getChannel();
                 dst.transferFrom(src, 0, src.size());
@@ -445,7 +419,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     /**
      * Checks if the database exists at the application's data directory
      *
@@ -456,7 +429,6 @@ public class MainActivity extends AppCompatActivity {
         File dbFile = new File(this.activity.getApplicationInfo().dataDir + "/" + dbName);
         return dbFile.exists();
     }
-
 
 }
 //REFS:

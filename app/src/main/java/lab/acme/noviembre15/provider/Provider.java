@@ -37,8 +37,7 @@ import android.util.Log;
 
 public class Provider extends ContentProvider {
 
-  static final String TAG = "Provider";
-
+	static final String TAG = "Provider";
     //private DbHelper mOpenHelper;
     public static final String PROVIDER_NAME = "lab.acme.noviembre15";
     public static final Uri CONTENT_URI = Uri.parse("content://" + PROVIDER_NAME + "/facts");
@@ -56,7 +55,6 @@ public class Provider extends ContentProvider {
     private static final String DATABASE_NAME = "facts";
     private static final String DATABASE_TABLE = "myfacts";
     private static final int DATABASE_VERSION = 1;
-
     public static final String COLUMN_ID = "_ID";
     public static final String COLUMN_DATE = "date";
     public static final String COLUMN_TITLE = "title";
@@ -108,9 +106,7 @@ public class Provider extends ContentProvider {
      */
     @Override
     public boolean onCreate() {
-
         Log.d(TAG, "onCreate");
-
         Context context = getContext();
         DatabaseHelper dbHelper = new DatabaseHelper(context);
         factsDB = dbHelper.getWritableDatabase();
@@ -124,10 +120,8 @@ public class Provider extends ContentProvider {
      */
       @Override
       public String getType(Uri uri) {
-
           String ret = getContext().getContentResolver().getType(CONTENT_URI);
           Log.d(TAG, "********* getType returning: " + ret);
-
           switch (uriMatcher.match(uri)) {
               // get all facts
               case FACTS:

@@ -43,7 +43,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
         //set the event name, location and number of guests for this event
         holder.eventLocation.setText(selectEvent.getVenue() + ", " + selectEvent.getCity());
         holder.eventName.setText(selectEvent.getName());
-
+// TODO review date
         //Format event date
         java.text.DateFormat dateFormat = DateFormat.getMediumDateFormat(mContext);
         holder.eventDate.setText(dateFormat.format(selectEvent.getEventDate()));

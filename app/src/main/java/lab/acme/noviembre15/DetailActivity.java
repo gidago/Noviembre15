@@ -31,17 +31,27 @@ import android.widget.TextView;
 import lab.acme.noviembre15.provider.Provider;
 
 public class DetailActivity extends AppCompatActivity {
-
+	
+    private final String LOG_TAG = DetailActivity.class.getSimpleName();
+    
     Button mListButton;
     Button mCopyButton;
 
-    private TextView mInfo;
+    private TextView mInfo; // TestView for test
     private TextView mTitle;
+    
+    private TextView mDate;     
+    private TextView mFact; 
+    private TextView mCategory;
+    private TextView mValue; 
+    private TextView mCoord_lat;
+    private TextView mCoord_long;    
+//    private String ProfileImagePath;
+//    private int ProfileImageId;
+           
     private Context mContext;
     private Activity activity;
-
-    private final String LOG_TAG = DetailActivity.class.getSimpleName();
-
+	//TODO review
     protected int mVId;
 
     @Override
@@ -51,8 +61,6 @@ public class DetailActivity extends AppCompatActivity {
         activity = DetailActivity.this;
 
         setContentView(R.layout.activity_detail);
-
-
         if(savedInstanceState != null) {
             this.mVId = savedInstanceState.getInt("ID");
         }
@@ -67,17 +75,16 @@ public class DetailActivity extends AppCompatActivity {
             Bundle arguments = new Bundle();
         }*/
         initView();
-
         mTitle = (TextView) findViewById(R.id.info_txt_title);
-
         // test
         Uri oneTitle = Uri.parse("content://lab.acme.noviembre15/facts/" + mVId + 1 );
         //Uri oneTitle = Uri.parse("content://lab.acme.noviembre15/facts/1");
         Cursor c = managedQuery(oneTitle, null, null, null, null);
         if (c.moveToFirst()) {
         mTitle.setText(c.getString(c.getColumnIndex(Provider.COLUMN_TITLE)));
-            Log.d(LOG_TAG, "******** Provider title:   " +c.getString(c.getColumnIndex(Provider.COLUMN_TITLE)) );
+            Log.d(LOG_TAG, "******** Provider title:   " + c.getString(c.getColumnIndex(Provider.COLUMN_TITLE)) );
         }
+        
       /*  if (c.moveToFirst()) {
             do {
                 Toast.makeText(
@@ -94,7 +101,6 @@ public class DetailActivity extends AppCompatActivity {
                 Log.i(LOG_TAG, mReg);
             } while (c.moveToNext());
         }*/
-
     }
 
     private void initView() {
@@ -113,7 +119,6 @@ public class DetailActivity extends AppCompatActivity {
         mCopyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 //copyDatabase(DbHelper.DB_NAME ) ;
                 //Log.d(LOG_TAG, DbHelper.DB_NAME);
             }
@@ -141,7 +146,6 @@ public class DetailActivity extends AppCompatActivity {
     }
 
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -161,8 +165,5 @@ public class DetailActivity extends AppCompatActivity {
         }*/
         return super.onOptionsItemSelected(item);
     }
-
-
-
 
 }

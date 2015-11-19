@@ -10,30 +10,18 @@ COLUMN_VALUE = "value";
 COLUMN_COORD_LAT = "coord_lat";
  public static final String COLUMN_COORD_LONG = "coord_long";
  */
-public class FactItem {                // Attendant = FactItem
-    private String Date; //**
-    private String Title; //**
-    private String Fact; //**
-    private String Category; //**
-    private String Value; //**
+public class FactItem {               
+    private String Date; 
+    private String Title;
+    private String Fact; 
+    private String Category;
+    private String Value; 
     private String Coord_lat;
     private String Coord_long;
     private String ProfileImagePath;
     private int ProfileImageId;
-    //private String SerializedAttendances;
-
-    //private List<Attendance> Attendances;
 
     public FactItem(){}
-
-
-   /* public boolean isCheckedIn() {
-        return IsCheckedIn;
-    } */
-
-   /* public void setIsCheckedIn(boolean isCheckedIn) {
-        IsCheckedIn = isCheckedIn;
-    } */
 
     public String getDate() {
         return Date;

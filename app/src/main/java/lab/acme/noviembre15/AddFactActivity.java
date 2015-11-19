@@ -34,7 +34,6 @@ public class AddFactActivity extends AppCompatActivity {
         initView();
     }
 
-
     private void initView() {
         mDate = (EditText) findViewById(R.id.edit_text_date);
         mTitle = (EditText)findViewById(R.id.edit_text_title);
@@ -77,7 +76,7 @@ public class AddFactActivity extends AppCompatActivity {
 
     private void resetFields(){
         //Wipe out any information the user entered so they can enter another
-        //Attendant
+        //Fact
         mDate.setText("");
         mTitle.setText("");
         mCategory.setText("");
@@ -89,16 +88,15 @@ public class AddFactActivity extends AppCompatActivity {
 
     private void saveFact() {
         //populate the Attendant object with the data entered in the screen
-        FactItem mAttendant;
-        mAttendant = new FactItem();
-        mAttendant.setDate(mDate.getText().toString());
-        mAttendant.setTitle(mTitle.getText().toString());
-        mAttendant.setCategory(mCategory.getText().toString());
-        mAttendant.setFact(mFact.getText().toString());
-        mAttendant.setValue(mValue.getText().toString());
-        mAttendant.setCoord_lat(mLat.getText().toString());
-        mAttendant.setCoord_long(mLong.getText().toString());
-
+        FactItem mFact;
+        mFact = new FactItem();
+        mFact.setDate(mDate.getText().toString());
+        mFact.setTitle(mTitle.getText().toString());
+        mFact.setCategory(mCategory.getText().toString());
+        mFact.setFact(mFact.getText().toString());
+        mFact.setValue(mValue.getText().toString());
+        mFact.setCoord_lat(mLat.getText().toString());
+        mFact.setCoord_long(mLong.getText().toString());
         //Save to the database
         // add a row (reg)
         ContentValues values = new ContentValues();
@@ -132,7 +130,7 @@ public class AddFactActivity extends AppCompatActivity {
         //Wipe all fields
         resetFields();
         //Provide feedback to the user
-        Toast.makeText(mContext, mAttendant.getTitle() + " saved", Toast.LENGTH_SHORT).show();
+        Toast.makeText(mContext, mFact.getTitle() + " saved", Toast.LENGTH_SHORT).show();
     }
 
 }

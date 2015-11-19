@@ -7,9 +7,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
-
 import lab.acme.noviembre15.common.Common;
-
 
 public class AppIconAct extends Activity {
     Context mContext;
@@ -21,24 +19,18 @@ public class AppIconAct extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.app_icon_act);
         mContext = AppIconAct.this;
-
         init();
-
     }
 
     private void init() {
         ivImagePich = (ImageView) findViewById(R.id.ivAppIcon);
-
-
         btnAppIcon = (Button) findViewById(R.id.btnAppIcon);
         btnAppIcon.setOnClickListener(new OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
                 ivImagePich.setImageDrawable(Common.getAppIcon(mContext));
             }
         });
-
     }
 }
