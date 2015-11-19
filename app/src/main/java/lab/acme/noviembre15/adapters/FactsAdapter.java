@@ -143,6 +143,7 @@ public class FactsAdapter extends RecyclerView.Adapter<FactsAdapter.ViewHolder>{
        }
    }
 
+
    public FactsAdapter(List<FactItem> factsList, Context context){
        mFacItems = factsList;
        mContext = context;
