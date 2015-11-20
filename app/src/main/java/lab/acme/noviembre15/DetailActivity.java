@@ -101,6 +101,37 @@ public class DetailActivity extends AppCompatActivity {
             Log.d(LOG_TAG, "******** Provider title:   " + c.getString(c.getColumnIndex(Provider.COLUMN_TITLE)) );
         }
         
+        
+/***
+ArrayList<WhateverTypeYouWant> mArrayList = new ArrayList<WhateverTypeYouWant>();
+for(mCursor.moveToFirst(); !mCursor.isAfterLast(); mCursor.moveToNext()) {
+    // The Cursor is now set to the right position
+    mArrayList.add(mCursor.getWhateverTypeYouWant(WHATEVER_COLUMN_INDEX_YOU_WANT));
+}
+
+ArrayList<String> mArrayList = new ArrayList<String>();
+mCursor.moveToFirst();
+while(!mCursor.isAfterLast()) {
+     mArrayList.add(mCursor.getString(mCursor.getColumnIndex(dbAdapter.KEY_NAME))); //add the item
+     mCursor.moveToNext();
+}
+
+ArrayList<String> mArrayList = new ArrayList<String>();
+while(mCursor.moveToNext()) {
+     mArrayList.add(mCursor.getString(mCursor.getColumnIndex(dbAdapter.KEY_NAME))); //add the item
+}
+
+
+ArrayList<String> mArrayList = new ArrayList<String>();
+int columnIndex=mCursor.getColumnIndex(dbAdapter.KEY_NAME)
+while(mCursor.moveToNext()) {
+     mArrayList.add(mCursor.getString(columnIndex)); //add the item
+}
+
+
+*/        
+        
+        
       /*  if (c.moveToFirst()) {
             do {
                 Toast.makeText(

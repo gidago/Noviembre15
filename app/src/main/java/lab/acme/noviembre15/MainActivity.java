@@ -66,13 +66,15 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
 
 		mRecyclerView = (RecyclerView) findViewById(R.id.facts_main_recycler_view);
-       	// mRecyclerView = (RecyclerView) findViewById(R.id.facts_main_card_view);
 
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(mContext);
         mRecyclerView.setLayoutManager(mLayoutManager);
+        
+        //
+        //TODO - replace with cursor
+        //
         mFactItemList  = new ArrayList<>();
-
 
 
         populateList();   // Carga datos en la lista a mostrar, desde la bd
