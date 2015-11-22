@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
+
 import com.melnykov.fab.FloatingActionButton;
 
 import java.io.File;
@@ -27,7 +28,8 @@ import java.io.FileOutputStream;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.List;
-import lab.acme.noviembre15.adapters.FactsAdapter;
+
+import lab.acme.noviembre15.adapters.MyListCursorAdapter;
 import lab.acme.noviembre15.common.Common;
 import lab.acme.noviembre15.models.FactItem;
 import lab.acme.noviembre15.provider.Provider;
@@ -37,20 +39,12 @@ public class MainActivity extends AppCompatActivity {
 
     private final String LOG_TAG = MainActivity.class.getSimpleName();
 
-    /**
-     * /*
-     Declarar instancias globales
-
-   -  private RecyclerView recycler;
-   -  private RecyclerView.Adapter adapter;
-   -  private RecyclerView.LayoutManager lManager;
-     *
-     * */
     private Toolbar mToolbar;
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private RecyclerView.Adapter mAdapter;
     private List<FactItem> mFactItemList;
+
     private Context mContext;
 
     private Activity activity;
@@ -76,9 +70,9 @@ public class MainActivity extends AppCompatActivity {
         //
         mFactItemList  = new ArrayList<>();
 
+        //populateList();   // Carga datos en la lista a mostrar, desde la bd
+        //addTestGuessList();  // Carga datos en la lista (no quedan en la bd)
 
-        populateList();   // Carga datos en la lista a mostrar, desde la bd
-addTestGuessList();  // Carga datos en la lista (no quedan en la bd)
         FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
         fab.attachToRecyclerView(mRecyclerView);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -91,7 +85,10 @@ addTestGuessList();  // Carga datos en la lista (no quedan en la bd)
             }
         });
 
-        mAdapter = new FactsAdapter( mFactItemList, mContext);
+        // Cambiado adaptador a adaptador con cursor
+        //mAdapter = new FactsAdapter( mFactItemList, mContext);
+
+        mAdapter =  new MyListCursorAdapter(mContext, cursorFacts());
         mRecyclerView.setAdapter(mAdapter);
 
         final GestureDetector mGestureDetector =
@@ -111,9 +108,12 @@ addTestGuessList();  // Carga datos en la lista (no quedan en la bd)
                 if (child != null && mGestureDetector.onTouchEvent(motionEvent)) {
                     // onTouchDrawer(recyclerView.getChildLayoutPosition(child));
                     // Snackbar.make(recyclerView, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+
                     Log.d(LOG_TAG, "** child ly. pos.  " + recyclerView.getChildLayoutPosition(child));
+
                     //startActivity(new Intent(mContext, DetailActivity.class));
                  	Intent intentDetail = new Intent(mContext, DetailActivity.class);
+
                 	intentDetail.putExtra("ID", recyclerView.getChildLayoutPosition(child)); // Pasamos la posición del elemento de la lista
                 	startActivity(intentDetail);
                     return true;
@@ -130,6 +130,17 @@ addTestGuessList();  // Carga datos en la lista (no quedan en la bd)
             public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
             }
         });
+    }
+
+    /**
+     * Cursor with complete DB
+     *
+     *
+     */
+    private Cursor cursorFacts(){
+        Uri allTitles = Uri.parse("content://lab.acme.noviembre15/facts");
+        Cursor c = managedQuery(allTitles, null, null, null, "title asc");
+        return c;
     }
 
     private void populateList() {
@@ -178,12 +189,12 @@ addTestGuessList();  // Carga datos en la lista (no quedan en la bd)
 
         // add a row (reg)
         ContentValues values = new ContentValues();
-        values.put(Provider.COLUMN_DATE, "25 enero 2015");
+        values.put(Provider.COLUMN_DATE, "01 enero 2015");
         values.put(Provider.COLUMN_CATEGORY_ID, 1);
         values.put(Provider.COLUMN_VALUE, 20);
         values.put(Provider.COLUMN_COORD_LAT, 20.40);
         values.put(Provider.COLUMN_COORD_LONG, 50.40);
-        values.put(Provider.COLUMN_TITLE, "Walking Out the Door");
+        values.put(Provider.COLUMN_TITLE, "Primer registro añadido");
         values.put(Provider.COLUMN_FACT, "John Doe write Walking Out the Door");
         values.put(Provider.COLUMN_CATEGORY, "Pruebas");
         Uri uri = getContentResolver().insert(Provider.CONTENT_URI, values);
@@ -194,8 +205,8 @@ addTestGuessList();  // Carga datos en la lista (no quedan en la bd)
         values.put(Provider.COLUMN_VALUE, 320);
         values.put(Provider.COLUMN_COORD_LAT, 20.40);
         values.put(Provider.COLUMN_COORD_LONG, 50.40);
-        values.put(Provider.COLUMN_DATE, "25 enero 2015");
-        values.put(Provider.COLUMN_TITLE, "Should we fight back");
+        values.put(Provider.COLUMN_DATE, "02 enero 2015");
+        values.put(Provider.COLUMN_TITLE, "Primer registro añadido");
         values.put(Provider.COLUMN_FACT, "The Parlotones sing Should we fight back");
         values.put(Provider.COLUMN_CATEGORY, "Pruebas");
         uri = getContentResolver().insert(Provider.CONTENT_URI, values);
@@ -206,7 +217,7 @@ addTestGuessList();  // Carga datos en la lista (no quedan en la bd)
         values.put(Provider.COLUMN_COORD_LAT, 20.40);
         values.put(Provider.COLUMN_COORD_LONG, 50.40);
         values.put(Provider.COLUMN_DATE, "12 noviembre 2015");
-        values.put(Provider.COLUMN_TITLE, "Informes parcial");
+        values.put(Provider.COLUMN_TITLE, "Segundo registro añadido");
         values.put(Provider.COLUMN_FACT, "Texto largo de Informes parcial");
         values.put(Provider.COLUMN_CATEGORY, "Test");
         //uri = getContentResolver().insert(Provider.CONTENT_URI, values);
@@ -219,8 +230,8 @@ addTestGuessList();  // Carga datos en la lista (no quedan en la bd)
             values.put(Provider.COLUMN_VALUE, 320 + i);
             values.put(Provider.COLUMN_COORD_LAT, 20.40);
             values.put(Provider.COLUMN_COORD_LONG, 50.40);
-            values.put(Provider.COLUMN_DATE, "12 noviembre 2015");
-            values.put(Provider.COLUMN_TITLE, "Titulo " + i);
+            values.put(Provider.COLUMN_DATE, i + " mayo 2015 " );
+            values.put(Provider.COLUMN_TITLE,  i + 3 + " registro añadido" );
             values.put(Provider.COLUMN_FACT, "Texto largo de Informes parcial " + i);
             values.put(Provider.COLUMN_CATEGORY, "Test");
             getContentResolver().insert(Provider.CONTENT_URI, values);
@@ -229,6 +240,7 @@ addTestGuessList();  // Carga datos en la lista (no quedan en la bd)
         // test
         Uri allTitles = Uri.parse("content://lab.acme.noviembre15/facts");
         Cursor c = managedQuery(allTitles, null, null, null, "date desc");
+
         if (c.moveToFirst()) {
             do {
                /* Toast.makeText(
@@ -349,6 +361,8 @@ addTestGuessList();  // Carga datos en la lista (no quedan en la bd)
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        // Set an icon in the ActionBar
+       // menu.findItem(R.id.lab).setIcon(R.drawable.ic_image_arrow);
         return true;
     }
 
@@ -381,6 +395,11 @@ addTestGuessList();  // Carga datos en la lista (no quedan en la bd)
                 break;
             case (R.id.action_db_delete_all):
                 deleteAllRowsTestBD();
+                break;
+            case (R.id.lab):
+                Intent activityPis;
+                activityPis = new Intent(this, PisActivity.class);
+                startActivity(activityPis);
                 break;
         }
         return super.onOptionsItemSelected(item);

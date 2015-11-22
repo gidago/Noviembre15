@@ -146,10 +146,7 @@ public class Common {
      * @return true or false
      */
     public static boolean isEmptyEditText(EditText edText) {
-        if (edText.getText().toString().trim().length() > 0)
-            return false;
-        else
-            return true;
+        return edText.getText().toString().trim().length() <= 0;
     }
 
     /**
@@ -163,10 +160,7 @@ public class Common {
         ConnectivityManager cm = (ConnectivityManager) context
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-            return true;
-        }
-        return false;
+        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
     /**
@@ -332,10 +326,7 @@ public class Common {
         Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(inputStr);
 
-        if (matcher.matches())
-            return true;
-        else
-            return false;
+        return matcher.matches();
     }
 
     /**
@@ -707,8 +698,7 @@ public class Common {
                 SimpleDateFormat dateFormatter = new SimpleDateFormat(format);
                 dateTime.set(year, monthOfYear, dayOfMonth);
 
-                mTextView.setText(dateFormatter.format(dateTime.getTime())
-                        .toString());
+                mTextView.setText(dateFormatter.format(dateTime.getTime()).toString());
             }
         }, dateTime.get(Calendar.YEAR), dateTime.get(Calendar.MONTH),
                 dateTime.get(Calendar.DAY_OF_MONTH)).show();

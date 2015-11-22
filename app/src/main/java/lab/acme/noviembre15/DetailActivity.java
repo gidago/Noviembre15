@@ -32,26 +32,10 @@ import lab.acme.noviembre15.provider.Provider;
 public class DetailActivity extends AppCompatActivity {
 	
     private final String LOG_TAG = DetailActivity.class.getSimpleName();
-    
-    //Button mListButton;
-    //Button mCopyButton;
-
-    //private TextView mInfo; // TestView for test
-    private TextView mTitle;
-    
-    private TextView mDate;     
-    private TextView mFact; 
-    private TextView mCategory;
-    private TextView mValue; 
-    private TextView mCoord_lat;
-    private TextView mCoord_long;    
-//    private String ProfileImagePath;
-//    private int ProfileImageId;
-
-    ImageView factCardImage;
 
     private Context mContext;
     private Activity activity;
+
 	//TODO review
     protected int mVId;
 
@@ -75,16 +59,17 @@ public class DetailActivity extends AppCompatActivity {
       /*  if (savedInstanceState == null) {
             Bundle arguments = new Bundle();
         }*/
+
         initView();
 
-        mTitle = (TextView) findViewById(R.id.detail_title_textview);
-        mDate = (TextView) findViewById(R.id.detail_date_textview);
-        mFact = (TextView) findViewById(R.id.detail_high_textview);
-        mCategory  = (TextView) findViewById(R.id.detail_low_textview);
-        mValue = (TextView) findViewById(R.id.detail_forecast_textview);
-        mCoord_lat = (TextView) findViewById(R.id.detail_humidity_textview);
-        mCoord_long = (TextView) findViewById(R.id.detail_pressure_textview);
-        factCardImage = (ImageView) findViewById(R.id.detail_icon);
+        TextView mTitle = (TextView) findViewById(R.id.detail_title_textview);
+        TextView mDate = (TextView) findViewById(R.id.detail_date_textview);
+        TextView mFact = (TextView) findViewById(R.id.detail_high_textview);
+        TextView mCategory = (TextView) findViewById(R.id.detail_low_textview);
+        TextView mValue = (TextView) findViewById(R.id.detail_forecast_textview);
+        TextView mCoord_lat = (TextView) findViewById(R.id.detail_humidity_textview);
+        TextView mCoord_long = (TextView) findViewById(R.id.detail_pressure_textview);
+        ImageView factCardImage = (ImageView) findViewById(R.id.detail_icon);
         // test
         Uri oneTitle = Uri.parse("content://lab.acme.noviembre15/facts/" + mVId + 1 );
         //Uri oneTitle = Uri.parse("content://lab.acme.noviembre15/facts/1");
@@ -92,7 +77,8 @@ public class DetailActivity extends AppCompatActivity {
         if (c.moveToFirst()) {
             mTitle.setText(c.getString(c.getColumnIndex(Provider.COLUMN_TITLE)));
             mDate.setText(c.getString(c.getColumnIndex(Provider.COLUMN_DATE)));
-            mFact.setText(c.getString(c.getColumnIndex(Provider.COLUMN_FACT)));
+            //mFact.setText(c.getString(c.getColumnIndex(Provider.COLUMN_FACT)));
+            mFact.setText("" + mVId);
             mCategory.setText(c.getString(c.getColumnIndex(Provider.COLUMN_CATEGORY)));
             mValue.setText(c.getString(c.getColumnIndex(Provider.COLUMN_VALUE)));
             mCoord_lat.setText(c.getString(c.getColumnIndex(Provider.COLUMN_COORD_LAT)));

@@ -226,18 +226,96 @@ public class Provider extends ContentProvider {
     @Override
     public Cursor query(Uri uri, String[] projection, String selection,
                       String[] selectionArgs, String sortOrder) {
+        //todo new
+        Cursor retCursor;
+
         Log.d(TAG, "**** Test: query with uri: " + uri.toString());
+
         SQLiteQueryBuilder sqlBuilder = new SQLiteQueryBuilder();
+
         sqlBuilder.setTables(DATABASE_TABLE);
+
         if (uriMatcher.match(uri) == FACTS_ID)
             // if getting a particular row
             sqlBuilder.appendWhere(COLUMN_ID + " = " + uri.getPathSegments().get(1));
+
         if (sortOrder == null || sortOrder == "")
             sortOrder = COLUMN_DATE;
+
         Cursor cursor = sqlBuilder.query(factsDB, projection, selection,
                 selectionArgs, null, null, sortOrder);
+
         // register to watch a content URI for changes
         cursor.setNotificationUri(getContext().getContentResolver(), uri);
+
+        //todo new
+        //retCursor.setNotificationUri(getContext().getContentResolver(), uri);
+        //return retCursor;
         return cursor;
     }
+
+
+ /**
+     @Override
+     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs,
+     String sortOrder) {
+     // Here's the switch statement that, given a URI, will determine what kind of request it is,
+     // and query the database accordingly.
+     Cursor retCursor;
+     switch (sUriMatcher.match(uri)) {
+
+
+            case WEATHER_WITH_LOCATION_AND_DATE:
+    {
+        retCursor = getWeatherByLocationSettingAndDate(uri, projection, sortOrder);
+        break;
+    }
+    // "weather/*"
+    case WEATHER_WITH_LOCATION: {
+        retCursor = getWeatherByLocationSetting(uri, projection, sortOrder);
+        break;
+    }
+    // "weather"
+    case WEATHER: {
+        retCursor = mOpenHelper.getReadableDatabase().query(
+                WeatherContract.WeatherEntry.TABLE_NAME,
+                projection,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                sortOrder
+        );
+        break;
+    }
+    // "location"
+    case LOCATION: {
+        retCursor = mOpenHelper.getReadableDatabase().query(
+                WeatherContract.LocationEntry.TABLE_NAME,
+                projection,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                sortOrder
+        );
+        break;
+    }
+
+    default:
+            throw new UnsupportedOperationException("Unknown uri: " + uri);
+}
+retCursor.setNotificationUri(getContext().getContentResolver(), uri);
+        return retCursor;
+        }
+
+        */
+
+
+
+
+
+
+
+
 }

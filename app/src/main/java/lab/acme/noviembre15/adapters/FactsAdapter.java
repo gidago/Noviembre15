@@ -8,8 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.squareup.picasso.Picasso;
+
 import java.util.List;
+
 import lab.acme.noviembre15.R;
 import lab.acme.noviembre15.models.FactItem;
 
@@ -24,11 +27,11 @@ import lab.acme.noviembre15.models.FactItem;
 // https://www.buzzingandroid.com/tools/android-layout-finder/
 // http://android-holo-colors.com/
 // http://unitid.nl/androidpatterns/
+// https://android-arsenal.com/tag/53
+//
 
 public class FactsAdapter extends RecyclerView.Adapter<FactsAdapter.ViewHolder>{
-// public class ForecastAdapter extends CursorAdapter {
-// public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder> {
-	
+
    private List<FactItem> mFacItems;
    private Context mContext;
    View rowView;
@@ -181,74 +184,15 @@ public void onBindViewHolder(FeedListRowHolder feedListRowHolder, int i) {
 	/*
 		Remember that these views are reused as needed.
 	*/
-	@Override
+/*	@Override
 	public View newView(Context context, Cursor cursor, ViewGroup parent) {
 		View view = LayoutInflater.from(context).inflate(R.layout.facts_card_view, parent, false);
 		View view = LayoutInflater.from(context).inflate(layoutId, parent, false);
 		ViewHolder viewHolder = new ViewHolder(view);
 		view.setTag(viewHolder);
 		return view;
-	}
+	}*/
       
-}
-
-public class MyCursorAdapter extends CursorAdapter {
-
-	/**
-	 * ViewHolder class for layout.<br />
-	 * <br />
-	 * Auto-created on 2015-11-20 11:53:11 by Android Layout Finder
-	 * (http://www.buzzingandroid.com/tools/android-layout-finder)
-	 */
-	private static class ViewHolder {
-		public final CircleImageView imageViewFactCard;
-		public final TextView textCardViewFactDate;
-		public final TextView textCardViewFactTitle;
-		public final View linea;
-		public final ImageView compartir;
-	
-		private ViewHolder(CircleImageView imageViewFactCard, TextView textCardViewFactDate, TextView textCardViewFactTitle, View linea, ImageView compartir) {
-			this.imageViewFactCard = imageViewFactCard;
-			this.textCardViewFactDate = textCardViewFactDate;
-			this.textCardViewFactTitle = textCardViewFactTitle;
-			this.linea = linea;
-			this.compartir = compartir;
-		}
-	
-		public static ViewHolder create(android.support.v7.widget.CardView facts_main_card_view) {
-			CircleImageView imageViewFactCard = (CircleImageView)facts_main_card_view.findViewById( R.id.image_view_fact_card );
-			TextView textCardViewFactDate = (TextView)facts_main_card_view.findViewById( R.id.text_card_view_fact_date );
-			TextView textCardViewFactTitle = (TextView)facts_main_card_view.findViewById( R.id.text_card_view_fact_title );
-			View linea = (View)facts_main_card_view.findViewById( R.id.linea );
-			ImageView compartir = (ImageView)facts_main_card_view.findViewById( R.id.compartir );
-			return new ViewHolder( imageViewFactCard, textCardViewFactDate, textCardViewFactTitle, linea, compartir );
-		}
-	}
-	
-	@Override
-	public void bindView(View view, Context context, Cursor cursor) {
-		final ViewHolder vh = (ViewHolder)view.getTag();
-
-		// TODO Bind your data to the views here
-	}
-	@Override
-	public View newView(Context context, Cursor cursor, ViewGroup parent) {
-		View view = mInflater.inflate( R.layout.listitem, parent, false );
-		view.setTag( ViewHolder.create( (android.support.v7.widget.CardView)view ) );
-		return view;
-	}
-
-	private LayoutInflater mInflater;
-
-	// Constructors
-	public MyCursorAdapter(Context context) {
-		super(context, null, true);
-		this.mInflater = LayoutInflater.from( context );
-	}
-	public MyCursorAdapter(Context context, Cursor c) {
-		super(context, c, true);
-		this.mInflater = LayoutInflater.from( context );
-	}
 }
 
 

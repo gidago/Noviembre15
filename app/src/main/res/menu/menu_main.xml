@@ -33,5 +33,11 @@
         android:title="@string/action_db_delete_all"
         android:orderInCategory="500"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/lab"
+        android:orderInCategory="600"
+        android:title="LAB"
+        android:icon="@drawable/ic_image_arrow"
+        android:showAsAction="ifRoom"/>
 
 </menu>
