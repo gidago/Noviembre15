@@ -1,20 +1,16 @@
-import android.content.res.AssetManager;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.nio.channels.AsynchronousCloseException;
-import java.nio.channels.ClosedByInterruptException;
-import java.nio.channels.ClosedChannelException;
-import java.nio.channels.FileChannel;
-import java.nio.channels.NonReadableChannelException;
-import java.nio.channels.NonWritableChannelException;
+
+import lab.acme.noviembre15.R;
+import lab.acme.noviembre15.models.FactItem;
+import lab.acme.noviembre15.provider.Provider;
 
 class utils {
 	
@@ -251,10 +247,7 @@ public static boolean copyFile(String from, String to) {
 /* Checks if external storage is available for read and write */
 public boolean isExternalStorageWritable() {
     String state = Environment.getExternalStorageState();
-    if (Environment.MEDIA_MOUNTED.equals(state)) {
-        return true;
-    }
-    return false;
+    return Environment.MEDIA_MOUNTED.equals(state);
 }
 
     private final String LOG_TAG = utils.class.getSimpleName();
@@ -329,7 +322,7 @@ public File getAlbumStorageDir(String albumName) {
 
 
 
-    private void populateList() {
+ /*   private void populateList() {
         // test
         Uri allTitles = Uri.parse("content://lab.acme.noviembre15/facts");
         Cursor cursor = managedQuery(allTitles, null, null, null, "date desc");
@@ -358,9 +351,9 @@ public File getAlbumStorageDir(String albumName) {
                 Log.d(LOG_TAG, "** Items.  " + cursor.getString(cursor.getColumnIndex(Provider.COLUMN_ID)));
             } while (cursor.moveToNext());
         }
-    }
+    }*/
 
-   private void addTestGuessList() {
+ /*  private void addTestGuessList() {
 
         FactItem  guest1 = new FactItem();
         guest1.setDate("12 noviembre 2015");
@@ -368,7 +361,7 @@ public File getAlbumStorageDir(String albumName) {
 	    guest1.setFact("Texto largo de Informes parcial");
 	    guest1.setCategory("Test");
         guest1.setProfileImageId(R.drawable.category_3);
-        mFactItemList.add(guest1);
+        mFactItemList.add(guest1);*/
 
         /**
         values.put(Provider.COLUMN_DATE, "25 enero 2015");
@@ -382,7 +375,7 @@ public File getAlbumStorageDir(String albumName) {
         * */
 
 
-        FactItem  guest2 = new FactItem();
+ /*       FactItem  guest2 = new FactItem();
         guest2.setDate("24 diciembre 2015");
         guest2.setTitle("Navidad");
 	    guest2.setCategory("Test");
@@ -439,7 +432,18 @@ public File getAlbumStorageDir(String albumName) {
         guest10.setTitle("Patines");
         guest10.setProfileImageId(R.drawable.headshot_10);
         mFactItemList.add(guest10);
-    }
+    }*/
+
+
+    /**      // delete
+     getContentResolver().delete(
+     Uri.parse("content://lab.acme.noviembre15/facts/2"),
+     null, null);
+
+     // delete all
+     getContentResolver().delete(
+     Uri.parse("content://lab.acme.noviembre15/facts"), null,
+     null);*/
 
 
 }

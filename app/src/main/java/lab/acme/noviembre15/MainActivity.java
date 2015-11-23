@@ -26,12 +26,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.nio.channels.FileChannel;
-import java.util.ArrayList;
-import java.util.List;
 
 import lab.acme.noviembre15.adapters.MyListCursorAdapter;
 import lab.acme.noviembre15.common.Common;
-import lab.acme.noviembre15.models.FactItem;
 import lab.acme.noviembre15.provider.Provider;
 
 
@@ -101,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
                     // onTouchDrawer(recyclerView.getChildLayoutPosition(child));
                     // Snackbar.make(recyclerView, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
 
-                    Log.d(LOG_TAG, "** child ly. pos.  " + recyclerView.getChildLayoutPosition(child));
+                    Log.e(LOG_TAG, "** child ly. pos.  " + recyclerView.getChildLayoutPosition(child));
 
                     //startActivity(new Intent(mContext, DetailActivity.class));
                  	Intent intentDetail = new Intent(mContext, DetailActivity.class);
@@ -131,7 +128,10 @@ public class MainActivity extends AppCompatActivity {
      */
     private Cursor cursorFacts(){
         Uri allTitles = Uri.parse("content://lab.acme.noviembre15/facts");
-        Cursor cursor = managedQuery(allTitles, null, null, null, "title asc");
+        //Cursor cursor = managedQuery(allTitles, null, null, null, "title asc");
+        Cursor cursor = managedQuery(allTitles, null, null, null, null);
+        Log.d(LOG_TAG, "==================>>>>>>>>>>>Registros del cursor: " + cursor.getCount());
+
         return cursor;
     }
 
@@ -150,8 +150,8 @@ public class MainActivity extends AppCompatActivity {
         Log.d(LOG_TAG, mMsg);
 
         // add a row (reg)
-        ContentValues values = new ContentValues();
-        values.put(Provider.COLUMN_DATE, "01 enero 2015");
+      ContentValues values = new ContentValues();
+      /*     values.put(Provider.COLUMN_DATE, "01 enero 2015");
         values.put(Provider.COLUMN_CATEGORY_ID, 1);
         values.put(Provider.COLUMN_VALUE, 20);
         values.put(Provider.COLUMN_COORD_LAT, 20.40);
@@ -183,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
         values.put(Provider.COLUMN_FACT, "Texto largo de Informes parcial");
         values.put(Provider.COLUMN_CATEGORY, "Test");
         //uri = getContentResolver().insert(Provider.CONTENT_URI, values);
-        getContentResolver().insert(Provider.CONTENT_URI, values);
+        getContentResolver().insert(Provider.CONTENT_URI, values); */
 
         for (int i = 0; i < 5; i++) {
        // int i = 0;
@@ -192,53 +192,40 @@ public class MainActivity extends AppCompatActivity {
             values.put(Provider.COLUMN_VALUE, 320 + i);
             values.put(Provider.COLUMN_COORD_LAT, 20.40);
             values.put(Provider.COLUMN_COORD_LONG, 50.40);
-            values.put(Provider.COLUMN_DATE, i + " mayo 2015 " );
-            values.put(Provider.COLUMN_TITLE,  i + 3 + " registro añadido" );
-            values.put(Provider.COLUMN_FACT, "Texto largo de Informes parcial " + i);
+            values.put(Provider.COLUMN_DATE, (i+1) + " noviembre 2015 " );
+            values.put(Provider.COLUMN_TITLE,  (i+1) +  " Registro añadido" );
+            values.put(Provider.COLUMN_FACT, (i+1) + "Texto largo de Informes parcial ");
             values.put(Provider.COLUMN_CATEGORY, "Test");
             getContentResolver().insert(Provider.CONTENT_URI, values);
         }
 
         // test
-        Uri allTitles = Uri.parse("content://lab.acme.noviembre15/facts");
+     /*    Uri allTitles = Uri.parse("content://lab.acme.noviembre15/facts");
         Cursor c = managedQuery(allTitles, null, null, null, "date desc");
 
         if (c.moveToFirst()) {
             do {
-               /* Toast.makeText(
+               Toast.makeText(
                         this,
                         c.getString(c.getColumnIndex(Provider.COLUMN_DATE))
                                 + ", \""
                                 + c.getString(c.getColumnIndex(Provider.COLUMN_FACT))
                                 + "\"",
-                        Toast.LENGTH_LONG).show();*/
+                        Toast.LENGTH_LONG).show();
                 String mReg = c.getString(c.getColumnIndex(Provider.COLUMN_DATE))
                         + ", \""
                         + c.getString(c.getColumnIndex(Provider.COLUMN_FACT))
                         + "\"";
                 Log.i(LOG_TAG, mReg);
             } while (c.moveToNext());
-        }
+        } */
 
         // update
-        ContentValues editedValues = new ContentValues();
+     /*   ContentValues editedValues = new ContentValues();
         editedValues.put(Provider.COLUMN_TITLE, "Should We Fight Back?");
         getContentResolver().update(
-                Uri.parse("content://lab.acme.noviembre15/facts/2"), editedValues, null, null);
-
-  /**      // delete
-        getContentResolver().delete(
-                Uri.parse("content://lab.acme.noviembre15/facts/2"),
-                null, null);
-
-        // delete all
-        getContentResolver().delete(
-                Uri.parse("content://lab.acme.noviembre15/facts"), null,
-                null);*/
-
+                Uri.parse("content://lab.acme.noviembre15/facts/2"), editedValues, null, null);*/
     }
-
- 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

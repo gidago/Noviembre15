@@ -27,6 +27,8 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import lab.acme.noviembre15.provider.Provider;
 
 public class DetailActivity extends AppCompatActivity {
@@ -56,33 +58,51 @@ public class DetailActivity extends AppCompatActivity {
 
         Log.d(LOG_TAG, "******** mVId:   " + mVId);
 
-      /*  if (savedInstanceState == null) {
-            Bundle arguments = new Bundle();
-        }*/
 
         initView();
-
+        TextView mID = (TextView) findViewById(R.id.detail_ID_textview);
         TextView mTitle = (TextView) findViewById(R.id.detail_title_textview);
         TextView mDate = (TextView) findViewById(R.id.detail_date_textview);
-        TextView mFact = (TextView) findViewById(R.id.detail_high_textview);
-        TextView mCategory = (TextView) findViewById(R.id.detail_low_textview);
-        TextView mValue = (TextView) findViewById(R.id.detail_forecast_textview);
-        TextView mCoord_lat = (TextView) findViewById(R.id.detail_humidity_textview);
-        TextView mCoord_long = (TextView) findViewById(R.id.detail_pressure_textview);
+        TextView mFact = (TextView) findViewById(R.id.detail_fact_textview);
+        TextView mCategory = (TextView) findViewById(R.id.detail_category_textview);
+        TextView mValue = (TextView) findViewById(R.id.detail_value_textview);
+        TextView mCoord_lat = (TextView) findViewById(R.id.detail_lat_textview);
+        TextView mCoord_long = (TextView) findViewById(R.id.detail_long_textview);
         ImageView factCardImage = (ImageView) findViewById(R.id.detail_icon);
         // test
-        Uri oneTitle = Uri.parse("content://lab.acme.noviembre15/facts/" + mVId + 1 );
+        Uri oneTitle = Uri.parse("content://lab.acme.noviembre15/facts/" + (mVId + 1) );
+
+        Log.e(LOG_TAG, "******** URI:   " + oneTitle.toString());
+
         //Uri oneTitle = Uri.parse("content://lab.acme.noviembre15/facts/1");
         Cursor c = managedQuery(oneTitle, null, null, null, null);
-        if (c.moveToFirst()) {
+       if (c.moveToFirst()) {
+            mID.setText(c.getString(c.getColumnIndex(Provider.COLUMN_ID)));
             mTitle.setText(c.getString(c.getColumnIndex(Provider.COLUMN_TITLE)));
             mDate.setText(c.getString(c.getColumnIndex(Provider.COLUMN_DATE)));
-            //mFact.setText(c.getString(c.getColumnIndex(Provider.COLUMN_FACT)));
-            mFact.setText("" + mVId);
+            mFact.setText(c.getString(c.getColumnIndex(Provider.COLUMN_FACT)));
+            //mFact.setText("" + mVId);
             mCategory.setText(c.getString(c.getColumnIndex(Provider.COLUMN_CATEGORY)));
             mValue.setText(c.getString(c.getColumnIndex(Provider.COLUMN_VALUE)));
             mCoord_lat.setText(c.getString(c.getColumnIndex(Provider.COLUMN_COORD_LAT)));
             mCoord_long.setText(c.getString(c.getColumnIndex(Provider.COLUMN_COORD_LONG)));
+
+
+            switch (c.getInt(c.getColumnIndex(Provider.COLUMN_CATEGORY_ID))) {
+                case 1:
+                    Picasso.with(mContext).load(R.drawable.category_1).into(factCardImage );
+                    break;
+                case 2:
+                    Picasso.with(mContext).load(R.drawable.category_2).into(factCardImage );
+                    break;
+                case 3:
+                    Picasso.with(mContext).load(R.drawable.category_3).into(factCardImage );
+                    break;
+                default:
+                    Picasso.with(mContext).load(R.drawable.no_category).into(factCardImage );
+            }
+
+
 
             Log.d(LOG_TAG, "******** Provider title:   " + c.getString(c.getColumnIndex(Provider.COLUMN_TITLE)) );
         }

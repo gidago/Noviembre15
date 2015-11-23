@@ -157,7 +157,7 @@
 
                     <TextView
                         android:text="Segundos"
-                        android:id="@+id/detail_low_textview"
+                        android:id="@+id/detail_ID_textview"
                         android:layout_gravity="center_horizontal"
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
@@ -178,7 +178,7 @@
 
                 <TextView
                     android:text="... de estar en este convento."
-                    android:id="@+id/detail_wind_textview"
+                    android:id="@+id/detail_long_textview"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:layout_width="match_parent"
@@ -188,7 +188,7 @@
 
                 <TextView
                     tools:text="John Doe"
-                    android:id="@+id/detail_humidity_textview"
+                    android:id="@+id/detail_value_textview"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     android:textColor="@color/grey_700"
@@ -196,7 +196,7 @@
 
                 <TextView
                     tools:text="John Doe"
-                    android:id="@+id/detail_pressure_textview"
+                    android:id="@+id/detail_lat_textview"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:layout_width="match_parent"

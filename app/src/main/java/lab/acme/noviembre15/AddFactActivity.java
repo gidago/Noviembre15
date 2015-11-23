@@ -1,5 +1,6 @@
 package lab.acme.noviembre15;
 
+import android.app.DatePickerDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -9,8 +10,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import lab.acme.noviembre15.models.FactItem;
 import lab.acme.noviembre15.provider.Provider;
@@ -23,6 +29,7 @@ public class AddFactActivity extends AppCompatActivity {
     Button mSaveButton;
     private View mRootView;
     private Context mContext;
+    private static Calendar dateTime = Calendar.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +52,19 @@ public class AddFactActivity extends AppCompatActivity {
         mLat = (EditText) findViewById(R.id.edit_text_latitude);
         mLong = (EditText) findViewById(R.id.edit_text_longitude);
 
+        mDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePickerDialog(mContext, "dd/MM/yyyy", mDate);
+
+            }
+        });
+
         mSaveButton = (Button) findViewById(R.id.save_button);
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (requiredFieldsCompleted()){
+                if (requiredFieldsCompleted()) {
                     saveFact();
                 }
             }
@@ -131,6 +146,32 @@ public class AddFactActivity extends AppCompatActivity {
         resetFields();
         //Provide feedback to the user
         Toast.makeText(mContext, mmFact.getTitle() + " saved", Toast.LENGTH_SHORT).show();
+    }
+
+
+    /**
+     * use to show datepicker
+     *
+     * @param mContext
+     * @param format    of the date format
+     * @param mTextView in which you have to set selected date
+     */
+    public static void showDatePickerDialog(final Context mContext,
+                                            final String format, final TextView mTextView) {
+
+        new DatePickerDialog(mContext, new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+
+                SimpleDateFormat dateFormatter = new SimpleDateFormat(format);
+                dateTime.set(year, monthOfYear, dayOfMonth);
+
+                mTextView.setText(dateFormatter.format(dateTime.getTime()).toString());
+            }
+        }, dateTime.get(Calendar.YEAR), dateTime.get(Calendar.MONTH),
+                dateTime.get(Calendar.DAY_OF_MONTH)).show();
     }
 
 }
