@@ -13,13 +13,6 @@
     tools:showIn="@layout/activity_main"
     tools:context=".MainActivity"
     android:background="@android:color/darker_gray">
-
     <!--include layout="@layout/facts_card_view"/-->
-
     <include layout="@layout/facts_recicler_view"/>
-
-
-
-
-
 </RelativeLayout>

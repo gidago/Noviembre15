@@ -329,4 +329,117 @@ public File getAlbumStorageDir(String albumName) {
 
 
 
+    private void populateList() {
+        // test
+        Uri allTitles = Uri.parse("content://lab.acme.noviembre15/facts");
+        Cursor cursor = managedQuery(allTitles, null, null, null, "date desc");
+        if (cursor.moveToFirst()) {
+            do {
+                FactItem guest = new FactItem();
+                guest.setDate(cursor.getString(cursor.getColumnIndex(Provider.COLUMN_DATE)));
+                guest.setTitle(cursor.getString(cursor.getColumnIndex(Provider.COLUMN_FACT)));
+
+                switch (cursor.getInt(cursor.getColumnIndex(Provider.COLUMN_CATEGORY_ID))) {
+
+                    case (1):
+                        guest.setProfileImageId(R.drawable.category_1);
+                        break;
+                    case (2):
+                        guest.setProfileImageId(R.drawable.category_2);
+                        break;
+                    case (3):
+                        guest.setProfileImageId(R.drawable.category_3);
+                        break;
+                    default:
+                        guest.setProfileImageId(R.drawable.headshot_9);
+                        break;
+                }
+                mFactItemList.add(guest);
+                Log.d(LOG_TAG, "** Items.  " + cursor.getString(cursor.getColumnIndex(Provider.COLUMN_ID)));
+            } while (cursor.moveToNext());
+        }
+    }
+
+   private void addTestGuessList() {
+
+        FactItem  guest1 = new FactItem();
+        guest1.setDate("12 noviembre 2015");
+        guest1.setTitle("Informes parcial");
+	    guest1.setFact("Texto largo de Informes parcial");
+	    guest1.setCategory("Test");
+        guest1.setProfileImageId(R.drawable.category_3);
+        mFactItemList.add(guest1);
+
+        /**
+        values.put(Provider.COLUMN_DATE, "25 enero 2015");
+        values.put(Provider.COLUMN_CATEGORY_ID, 1);
+        values.put(Provider.COLUMN_VALUE, 20);
+        values.put(Provider.COLUMN_COORD_LAT, 20.40);
+        values.put(Provider.COLUMN_COORD_LONG, 50.40);
+        values.put(Provider.COLUMN_TITLE, "Walking Out the Door");
+        values.put(Provider.COLUMN_FACT, "John Doe write Walking Out the Door");
+        values.put(Provider.COLUMN_CATEGORY, "Pruebas");
+        * */
+
+
+        FactItem  guest2 = new FactItem();
+        guest2.setDate("24 diciembre 2015");
+        guest2.setTitle("Navidad");
+	    guest2.setCategory("Test");
+	    
+        guest2.setProfileImageId(R.drawable.headshot_2);
+        mFactItemList.add(guest2);
+
+        FactItem  guest3 = new FactItem();
+        guest3.setDate("28 octubre 2015");
+        guest3.setTitle("Viaje a Venecia");
+        guest3.setCategory("Test");
+        guest3.setProfileImageId(R.drawable.category_1);
+        mFactItemList.add(guest3);
+
+        FactItem  guest4 = new FactItem();
+        guest4.setDate("01 enero 2016");
+        guest4.setTitle("La gran decisión");
+        guest4.setCategory("Test");
+        guest4.setProfileImageId(R.drawable.no_category);
+        mFactItemList.add(guest4);
+
+        FactItem  guest5 = new FactItem();
+        guest5.setDate("01 mayo 2016");
+        guest5.setTitle("Una actividad");
+        guest5.setProfileImageId(R.drawable.headshot_5);
+        mFactItemList.add(guest5);
+
+        FactItem  guest6 = new FactItem();
+        guest6.setDate("22 mayo 2016");
+        guest6.setTitle("Cualquier hecho");
+        guest6.setProfileImageId(R.drawable.category_2);
+        mFactItemList.add(guest6);
+
+        FactItem  guest7 = new FactItem();
+        guest7.setDate("20 marzo 2014");
+        guest7.setTitle("Autoescuela");
+        guest7.setProfileImageId(R.drawable.headshot_7);
+        mFactItemList.add(guest7);
+
+        FactItem  guest8 = new FactItem();
+        guest8.setDate("21 agosto 2016");
+        guest8.setTitle("Dentista");
+        guest8.setProfileImageId(R.drawable.headshot_8);
+        mFactItemList.add(guest8);
+
+        FactItem  guest9 = new FactItem();
+        guest9.setDate("11 noviembre 2016");
+        guest9.setTitle("Regalos");
+        guest9.setProfileImageId(R.drawable.headshot_9);
+        mFactItemList.add(guest9);
+
+        FactItem  guest10 = new FactItem();
+        guest10.setDate("01 junio 2016");
+        guest10.setTitle("Patines");
+        guest10.setProfileImageId(R.drawable.headshot_10);
+        mFactItemList.add(guest10);
+    }
+
+
 }
