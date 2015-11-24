@@ -15,24 +15,24 @@
  */
 package lab.acme.noviembre15;
 
-import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.squareup.picasso.Picasso;
+
 import lab.acme.noviembre15.provider.Provider;
 
 public class DetailActivity extends AppCompatActivity {
 	
     private final String LOG_TAG = DetailActivity.class.getSimpleName();    
     //private Activity activity;
+    private Context mContext;
 	//TODO review
     protected int mVId;
 

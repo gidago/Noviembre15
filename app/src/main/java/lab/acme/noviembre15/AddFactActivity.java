@@ -3,11 +3,8 @@ package lab.acme.noviembre15;
 import android.app.DatePickerDialog;
 import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -128,7 +125,7 @@ public class AddFactActivity extends AppCompatActivity {
         getContentResolver().insert(Provider.CONTENT_URI, values);
 
         // test
-        Uri allTitles = Uri.parse("content://lab.acme.noviembre15/facts");
+     /*   Uri allTitles = Uri.parse("content://lab.acme.noviembre15/facts");
 
         Cursor c = managedQuery(allTitles, null, null, null, "date desc");
 
@@ -140,7 +137,7 @@ public class AddFactActivity extends AppCompatActivity {
                         + "\"";
                 Log.d(LOG_TAG, mReg);
             } while (c.moveToNext());
-        }
+        }*/
         //mAttendant.save();
         //Wipe all fields
         resetFields();

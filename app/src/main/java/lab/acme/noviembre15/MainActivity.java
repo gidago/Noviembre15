@@ -19,11 +19,14 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
+
 import com.melnykov.fab.FloatingActionButton;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.nio.channels.FileChannel;
+
 import lab.acme.noviembre15.adapters.MyListCursorAdapter;
 import lab.acme.noviembre15.common.Common;
 import lab.acme.noviembre15.provider.Provider;
@@ -40,7 +43,9 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private RecyclerView.Adapter mAdapter;
-    
+    private MyListCursorAdapter myListCursorAdapter;
+
+
     // Changed by a Cursor private List<FactItem> mFactItemList;
 
     private Context mContext;
@@ -74,19 +79,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mAdapter =  new MyListCursorAdapter(mContext, cursorFacts());
+        //mAdapter =  new MyListCursorAdapter(mContext, cursorFacts());
+        myListCursorAdapter=  new MyListCursorAdapter(mContext, cursorFacts());
         //TODO añadido listener
-        mAdapter.setOnClickListener(new View.OnClickListener() {
+        //mAdapter.setOnClickListener(new View.OnClickListener() {
+        myListCursorAdapter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("DemoRecView", "Pulsado el elemento " + mRecyclerView.getChildPosition(v));
+                Log.e("DemoRecView", "Pulsado el elemento " + mRecyclerView.getChildPosition(v));
                 //Intent intentDetail = new Intent(mContext, DetailActivity.class);
                 //intentDetail.putExtra("ID", recyclerView.getChildLayoutPosition(child)); // Pasamos la posición del elemento de la lista
                 //startActivity(intentDetail);
             }
         });
         
-        mRecyclerView.setAdapter(mAdapter);
+       // mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setAdapter(myListCursorAdapter);
 
 		// TODO - comandos para el adaptador
 		// adaptador.notifyItemInserted(1);
@@ -95,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
 		// mAdapter.notifyItemInserted(1);
 		// ....
 
-        final GestureDetector mGestureDetector =
+      final GestureDetector mGestureDetector =
                 new GestureDetector ( MainActivity.this, new GestureDetector.SimpleOnGestureListener()
                 {
                 @Override
@@ -152,6 +160,7 @@ public class MainActivity extends AppCompatActivity {
         getContentResolver().delete(
                 Uri.parse("content://lab.acme.noviembre15/facts"), null,
                 null);
+
     }
 
 	//

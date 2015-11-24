@@ -41,6 +41,7 @@ public class MyListCursorAdapter extends CursorRecyclerViewAdapter<MyListCursorA
     private final String LOG_TAG = MyListCursorAdapter.class.getSimpleName();
     private Context mContext;
     private Cursor mCursor;
+
     private View.OnClickListener listener;
 
     public MyListCursorAdapter(Context context,Cursor cursor){
@@ -72,7 +73,8 @@ public class MyListCursorAdapter extends CursorRecyclerViewAdapter<MyListCursorA
         View rowView = LayoutInflater.from(parent.getContext()).inflate(R.layout.facts_card_view, parent, false);
         //TODO añadido listener
         rowView.setOnClickListener(this);
-        ViewHolder viewHolder = new ViewHolder(rowView);
+        ViewHolder viewHolder;
+        viewHolder = new ViewHolder(rowView);
         return viewHolder;
     }
 
