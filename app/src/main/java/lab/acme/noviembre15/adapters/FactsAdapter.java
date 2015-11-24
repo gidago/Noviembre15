@@ -16,20 +16,7 @@ import java.util.List;
 import lab.acme.noviembre15.R;
 import lab.acme.noviembre15.models.FactItem;
 
-// Refs:
-// http://code.tutsplus.com/es/tutorials/getting-started-with-recyclerview-and-cardview-on-android--cms-23465
-// http://javatechig.com/android/android-recyclerview-example
-// http://www.hermosaprogramacion.com/2015/02/android-recyclerview-cardview/
-// https://github.com/tutsplus/Android-CardViewRecyclerView/blob/master/ListsAndCards/app/src/main/java/com/hathy/listsandcards/RVAdapter.java
-// https://github.com/codepath/android_guides/wiki/Populating-a-ListView-with-a-CursorAdapter
-// http://developer.android.com/intl/es/training/improving-layouts/smooth-scrolling.html
-//
-// https://www.buzzingandroid.com/tools/android-layout-finder/
-// http://android-holo-colors.com/
-// http://unitid.nl/androidpatterns/
-// https://android-arsenal.com/tag/53
-//
-
+//TODO dispose this class
 public class FactsAdapter extends RecyclerView.Adapter<FactsAdapter.ViewHolder>{
 
    private List<FactItem> mFacItems;

@@ -445,5 +445,33 @@ public File getAlbumStorageDir(String albumName) {
      Uri.parse("content://lab.acme.noviembre15/facts"), null,
      null);*/
 
+        // test
+     /*    Uri allTitles = Uri.parse("content://lab.acme.noviembre15/facts");
+        Cursor c = managedQuery(allTitles, null, null, null, "date desc");
+
+        if (c.moveToFirst()) {
+            do {
+               Toast.makeText(
+                        this,
+                        c.getString(c.getColumnIndex(Provider.COLUMN_DATE))
+                                + ", \""
+                                + c.getString(c.getColumnIndex(Provider.COLUMN_FACT))
+                                + "\"",
+                        Toast.LENGTH_LONG).show();
+                String mReg = c.getString(c.getColumnIndex(Provider.COLUMN_DATE))
+                        + ", \""
+                        + c.getString(c.getColumnIndex(Provider.COLUMN_FACT))
+                        + "\"";
+                Log.i(LOG_TAG, mReg);
+            } while (c.moveToNext());
+        } */
+
+        // update
+     /*   ContentValues editedValues = new ContentValues();
+        editedValues.put(Provider.COLUMN_TITLE, "Should We Fight Back?");
+        getContentResolver().update(
+                Uri.parse("content://lab.acme.noviembre15/facts/2"), editedValues, null, null);*/
+
+
 
 }

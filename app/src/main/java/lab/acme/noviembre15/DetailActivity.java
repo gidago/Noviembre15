@@ -26,27 +26,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.squareup.picasso.Picasso;
-
 import lab.acme.noviembre15.provider.Provider;
 
 public class DetailActivity extends AppCompatActivity {
 	
-    private final String LOG_TAG = DetailActivity.class.getSimpleName();
-
-    private Context mContext;
-    private Activity activity;
-
+    private final String LOG_TAG = DetailActivity.class.getSimpleName();    
+    //private Activity activity;
 	//TODO review
     protected int mVId;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mContext = DetailActivity.this;
-        activity = DetailActivity.this;
-
+	protected void onCreate(Bundle savedInstanceState) {
+    	super.onCreate(savedInstanceState);        
+        //activity = DetailActivity.this;
         setContentView(R.layout.activity_detail);
         if(savedInstanceState != null) {
             this.mVId = savedInstanceState.getInt("ID");
@@ -55,11 +48,7 @@ public class DetailActivity extends AppCompatActivity {
             Bundle extras = getIntent().getExtras();
             this.mVId = extras.getInt("ID");
         }
-
         Log.d(LOG_TAG, "******** mVId:   " + mVId);
-
-
-        initView();
         TextView mID = (TextView) findViewById(R.id.detail_ID_textview);
         TextView mTitle = (TextView) findViewById(R.id.detail_title_textview);
         TextView mDate = (TextView) findViewById(R.id.detail_date_textview);
@@ -71,13 +60,12 @@ public class DetailActivity extends AppCompatActivity {
         ImageView factCardImage = (ImageView) findViewById(R.id.detail_icon);
         // test
         Uri oneTitle = Uri.parse("content://lab.acme.noviembre15/facts/" + (mVId + 1) );
-
+		//
         Log.e(LOG_TAG, "******** URI:   " + oneTitle.toString());
-
         //Uri oneTitle = Uri.parse("content://lab.acme.noviembre15/facts/1");
         Cursor c = managedQuery(oneTitle, null, null, null, null);
-       if (c.moveToFirst()) {
-            mID.setText(c.getString(c.getColumnIndex(Provider.COLUMN_ID)));
+		if (c.moveToFirst()) {
+        	mID.setText(c.getString(c.getColumnIndex(Provider.COLUMN_ID)));
             mTitle.setText(c.getString(c.getColumnIndex(Provider.COLUMN_TITLE)));
             mDate.setText(c.getString(c.getColumnIndex(Provider.COLUMN_DATE)));
             mFact.setText(c.getString(c.getColumnIndex(Provider.COLUMN_FACT)));
@@ -86,137 +74,20 @@ public class DetailActivity extends AppCompatActivity {
             mValue.setText(c.getString(c.getColumnIndex(Provider.COLUMN_VALUE)));
             mCoord_lat.setText(c.getString(c.getColumnIndex(Provider.COLUMN_COORD_LAT)));
             mCoord_long.setText(c.getString(c.getColumnIndex(Provider.COLUMN_COORD_LONG)));
-
-
             switch (c.getInt(c.getColumnIndex(Provider.COLUMN_CATEGORY_ID))) {
                 case 1:
-                    Picasso.with(mContext).load(R.drawable.category_1).into(factCardImage );
+                    Picasso.with(mContext).load(R.drawable.category_1).into(factCardImage);
                     break;
                 case 2:
-                    Picasso.with(mContext).load(R.drawable.category_2).into(factCardImage );
+                    Picasso.with(mContext).load(R.drawable.category_2).into(factCardImage);
                     break;
                 case 3:
-                    Picasso.with(mContext).load(R.drawable.category_3).into(factCardImage );
+                    Picasso.with(mContext).load(R.drawable.category_3).into(factCardImage);
                     break;
                 default:
-                    Picasso.with(mContext).load(R.drawable.no_category).into(factCardImage );
+                    Picasso.with(mContext).load(R.drawable.no_category).into(factCardImage);
             }
-
-
-
             Log.d(LOG_TAG, "******** Provider title:   " + c.getString(c.getColumnIndex(Provider.COLUMN_TITLE)) );
         }
-        
-        
-/***
-ArrayList<WhateverTypeYouWant> mArrayList = new ArrayList<WhateverTypeYouWant>();
-for(mCursor.moveToFirst(); !mCursor.isAfterLast(); mCursor.moveToNext()) {
-    // The Cursor is now set to the right position
-    mArrayList.add(mCursor.getWhateverTypeYouWant(WHATEVER_COLUMN_INDEX_YOU_WANT));
-}
-
-ArrayList<String> mArrayList = new ArrayList<String>();
-mCursor.moveToFirst();
-while(!mCursor.isAfterLast()) {
-     mArrayList.add(mCursor.getString(mCursor.getColumnIndex(dbAdapter.KEY_NAME))); //add the item
-     mCursor.moveToNext();
-}
-
-ArrayList<String> mArrayList = new ArrayList<String>();
-while(mCursor.moveToNext()) {
-     mArrayList.add(mCursor.getString(mCursor.getColumnIndex(dbAdapter.KEY_NAME))); //add the item
-}
-
-
-ArrayList<String> mArrayList = new ArrayList<String>();
-int columnIndex=mCursor.getColumnIndex(dbAdapter.KEY_NAME)
-while(mCursor.moveToNext()) {
-     mArrayList.add(mCursor.getString(columnIndex)); //add the item
-}
-
-
-*/        
-        
-        
-      /*  if (c.moveToFirst()) {
-            do {
-                Toast.makeText(
-                        this,
-                        c.getString(c.getColumnIndex(Provider.COLUMN_DATE))
-                                + ", \""
-                                + c.getString(c.getColumnIndex(Provider.COLUMN_FACT))
-                                + "\"",
-                        Toast.LENGTH_LONG).show();
-                String mReg = c.getString(c.getColumnIndex(Provider.COLUMN_DATE))
-                        + ", \""
-                        + c.getString(c.getColumnIndex(Provider.COLUMN_FACT))
-                        + "\" " ;
-                Log.i(LOG_TAG, mReg);
-            } while (c.moveToNext());
-        }*/
     }
-
-    private void initView() {
-       // mInfo = (TextView) findViewById(R.id.info_txt);
-
-       // mListButton = (Button) findViewById(R.id.save_button);
-       // mCopyButton = (Button) findViewById(R.id.button_copy);
-        
-      /*  mListButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listaTest();
-            }
-        });*/
-        // Copy db from local storage to public storage
-      /*  mCopyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //copyDatabase(DbHelper.DB_NAME ) ;
-                //Log.d(LOG_TAG, DbHelper.DB_NAME);
-            }
-        });*/
-    }
-
-
-    //Lista filas en text view
-    private void listaTest() {
-
-        // test
-        Uri allTitles = Uri.parse("content://lab.acme.noviembre15/facts");
-        Cursor c = managedQuery(allTitles, null, null, null, "date desc");
-
-        if (c.moveToFirst()) {
-            do {
-                String mReg = c.getString(c.getColumnIndex(Provider.COLUMN_DATE))
-                        + ", \""
-                        + c.getString(c.getColumnIndex(Provider.COLUMN_FACT))
-                        + "\"";
-                Log.d(LOG_TAG, mReg);
-                //mInfo.append(mReg);
-            } while (c.moveToNext());
-        }
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.detail, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-      /*  if (id == R.id.action_settings) {
-          //  startActivity(new Intent(this, SettingsActivity.class));
-            return true;
-        }*/
-        return super.onOptionsItemSelected(item);
-    }
-
 }

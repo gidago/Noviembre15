@@ -36,7 +36,7 @@
     <item
         android:id="@+id/lab"
         android:title="LAB"
-        android:icon="@drawable/ic_image_arrow"
+        android:icon="@drawable/ic_pis"
         app:showAsAction="ifRoom"/>
 
 </menu>

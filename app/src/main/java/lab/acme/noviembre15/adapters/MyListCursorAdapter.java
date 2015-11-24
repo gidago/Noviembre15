@@ -19,15 +19,29 @@ import lab.acme.noviembre15.provider.Provider;
 /**
  * Created by skyfishjy on 10/31/14.
  */
-//
+// Refs:
+// http://code.tutsplus.com/es/tutorials/getting-started-with-recyclerview-and-cardview-on-android--cms-23465
+// http://javatechig.com/android/android-recyclerview-example
+// http://www.hermosaprogramacion.com/2015/02/android-recyclerview-cardview/
+// https://github.com/tutsplus/Android-CardViewRecyclerView/blob/master/ListsAndCards/app/src/main/java/com/hathy/listsandcards/RVAdapter.java
+// https://github.com/codepath/android_guides/wiki/Populating-a-ListView-with-a-CursorAdapter
+// http://developer.android.com/intl/es/training/improving-layouts/smooth-scrolling.html
+// https://github.com/hdodenhof/CircleImageView
+// http://square.github.io/picasso/
+// https://www.buzzingandroid.com/tools/android-layout-finder/
+// http://android-holo-colors.com/
+// http://unitid.nl/androidpatterns/
+// https://android-arsenal.com/tag/53//
 // https://gist.github.com/skyfishjy/443b7448f59be978bc59#file-cursorrecyclerviewadapter-java
 //
 
-public class MyListCursorAdapter extends CursorRecyclerViewAdapter<MyListCursorAdapter.ViewHolder>{
+//TODO - añadido onClickListener - probar
+public class MyListCursorAdapter extends CursorRecyclerViewAdapter<MyListCursorAdapter.ViewHolder> implements View.OnClickListener{
 
     private final String LOG_TAG = MyListCursorAdapter.class.getSimpleName();
     private Context mContext;
     private Cursor mCursor;
+    private View.OnClickListener listener;
 
     public MyListCursorAdapter(Context context,Cursor cursor){
         super(context,cursor);
@@ -55,21 +69,32 @@ public class MyListCursorAdapter extends CursorRecyclerViewAdapter<MyListCursorA
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        //rowView = LayoutInflater.from(parent.getContext()).inflate(R.layout.facts_list_row, parent, false);
-        //TODO test
         View rowView = LayoutInflater.from(parent.getContext()).inflate(R.layout.facts_card_view, parent, false);
+        //TODO añadido listener
+        rowView.setOnClickListener(this);
         ViewHolder viewHolder = new ViewHolder(rowView);
         return viewHolder;
     }
 
+	//TODO añadido listener
+	public void setOnClickListener(View.OnClickListener listener) {
+        this.listener = listener;
+    }
+
+	//TODO añadido listener 
+    @Override
+    public void onClick(View view) {
+        if(listener != null)
+            listener.onClick(view);
+    }
+
+
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, Cursor cursor) {
         mCursor = cursor;
-
         viewHolder.factDate.setText(mCursor.getString(mCursor.getColumnIndex(Provider.COLUMN_DATE)));
         viewHolder.factTitle.setText(mCursor.getString(mCursor.getColumnIndex(Provider.COLUMN_TITLE)));
         viewHolder.factID.setText(mCursor.getString(mCursor.getColumnIndex(Provider.COLUMN_ID)));
-
         switch (mCursor.getInt(mCursor.getColumnIndex(Provider.COLUMN_CATEGORY_ID))) {
             case 1:
                 Picasso.with(mContext).load(R.drawable.category_1).into(viewHolder.factCardImage);

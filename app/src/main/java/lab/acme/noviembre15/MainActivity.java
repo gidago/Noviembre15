@@ -19,17 +19,17 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
-
 import com.melnykov.fab.FloatingActionButton;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.nio.channels.FileChannel;
-
 import lab.acme.noviembre15.adapters.MyListCursorAdapter;
 import lab.acme.noviembre15.common.Common;
 import lab.acme.noviembre15.provider.Provider;
+
+//REFS:
+// http://valokafor.com/create-and-publish-your-first-android-app-part-2/
 
 
 public class MainActivity extends AppCompatActivity {
@@ -74,11 +74,26 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Cambiado adaptador a adaptador con cursor
-        //mAdapter = new FactsAdapter( mFactItemList, mContext);
-
         mAdapter =  new MyListCursorAdapter(mContext, cursorFacts());
+        //TODO añadido listener
+        mAdapter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("DemoRecView", "Pulsado el elemento " + mRecyclerView.getChildPosition(v));
+                //Intent intentDetail = new Intent(mContext, DetailActivity.class);
+                //intentDetail.putExtra("ID", recyclerView.getChildLayoutPosition(child)); // Pasamos la posición del elemento de la lista
+                //startActivity(intentDetail);
+            }
+        });
+        
         mRecyclerView.setAdapter(mAdapter);
+
+		// TODO - comandos para el adaptador
+		// adaptador.notifyItemInserted(1);
+		// adaptador.notifyItemRemoved(1);
+		//
+		// mAdapter.notifyItemInserted(1);
+		// ....
 
         final GestureDetector mGestureDetector =
                 new GestureDetector ( MainActivity.this, new GestureDetector.SimpleOnGestureListener()
@@ -88,33 +103,31 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
          });
-
+         
+		//TODO revisar por ser añadido listener
         mRecyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
-
+			//TODO revisar por ser añadido listener
             @Override
             public boolean onInterceptTouchEvent(RecyclerView recyclerView, MotionEvent motionEvent) {
                 View child = recyclerView.findChildViewUnder(motionEvent.getX(), motionEvent.getY());
                 if (child != null && mGestureDetector.onTouchEvent(motionEvent)) {
                     // onTouchDrawer(recyclerView.getChildLayoutPosition(child));
                     // Snackbar.make(recyclerView, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-
                     Log.e(LOG_TAG, "** child ly. pos.  " + recyclerView.getChildLayoutPosition(child));
-
                     //startActivity(new Intent(mContext, DetailActivity.class));
                  	Intent intentDetail = new Intent(mContext, DetailActivity.class);
-
                 	intentDetail.putExtra("ID", recyclerView.getChildLayoutPosition(child)); // Pasamos la posición del elemento de la lista
                 	startActivity(intentDetail);
                     return true;
                 }
                 return false;
             }
-
+			//TODO revisar por ser añadido listener
             @Override
             public void onTouchEvent(RecyclerView rv, MotionEvent e) {
                 //  Snackbar.make(this, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             }
-
+			//TODO revisar por ser añadido listener
             @Override
             public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
             }
@@ -122,20 +135,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Cursor with complete DB
-     *
-     *
+     * 	Cursor with complete DB
      */
     private Cursor cursorFacts(){
         Uri allTitles = Uri.parse("content://lab.acme.noviembre15/facts");
         //Cursor cursor = managedQuery(allTitles, null, null, null, "title asc");
         Cursor cursor = managedQuery(allTitles, null, null, null, null);
         Log.d(LOG_TAG, "==================>>>>>>>>>>>Registros del cursor: " + cursor.getCount());
-
         return cursor;
     }
 
-
+	//
+	// Delete all rows of db
+	//
     private void deleteAllRowsTestBD() {
         getContentResolver().delete(
                 Uri.parse("content://lab.acme.noviembre15/facts"), null,
@@ -145,49 +157,13 @@ public class MainActivity extends AppCompatActivity {
 	//
 	// Add rows to db
 	//
-    private void addTestBD() {
-        String mMsg = "ILG PRUEBAS BD: " +"<------------------------->";
+	private void addTestBD() {
+    	String mMsg = "ILG PRUEBAS BD: " +"<------------------------->";
         Log.d(LOG_TAG, mMsg);
-
         // add a row (reg)
-      ContentValues values = new ContentValues();
-      /*     values.put(Provider.COLUMN_DATE, "01 enero 2015");
-        values.put(Provider.COLUMN_CATEGORY_ID, 1);
-        values.put(Provider.COLUMN_VALUE, 20);
-        values.put(Provider.COLUMN_COORD_LAT, 20.40);
-        values.put(Provider.COLUMN_COORD_LONG, 50.40);
-        values.put(Provider.COLUMN_TITLE, "Primer registro añadido");
-        values.put(Provider.COLUMN_FACT, "John Doe write Walking Out the Door");
-        values.put(Provider.COLUMN_CATEGORY, "Pruebas");
-        Uri uri = getContentResolver().insert(Provider.CONTENT_URI, values);
-
-        // add another row (reg)
-        values.clear();
-        values.put(Provider.COLUMN_CATEGORY_ID, 2);
-        values.put(Provider.COLUMN_VALUE, 320);
-        values.put(Provider.COLUMN_COORD_LAT, 20.40);
-        values.put(Provider.COLUMN_COORD_LONG, 50.40);
-        values.put(Provider.COLUMN_DATE, "02 enero 2015");
-        values.put(Provider.COLUMN_TITLE, "Primer registro añadido");
-        values.put(Provider.COLUMN_FACT, "The Parlotones sing Should we fight back");
-        values.put(Provider.COLUMN_CATEGORY, "Pruebas");
-        uri = getContentResolver().insert(Provider.CONTENT_URI, values);
-
-        values.clear();
-        values.put(Provider.COLUMN_CATEGORY_ID, 3);
-        values.put(Provider.COLUMN_VALUE, 320);
-        values.put(Provider.COLUMN_COORD_LAT, 20.40);
-        values.put(Provider.COLUMN_COORD_LONG, 50.40);
-        values.put(Provider.COLUMN_DATE, "12 noviembre 2015");
-        values.put(Provider.COLUMN_TITLE, "Segundo registro añadido");
-        values.put(Provider.COLUMN_FACT, "Texto largo de Informes parcial");
-        values.put(Provider.COLUMN_CATEGORY, "Test");
-        //uri = getContentResolver().insert(Provider.CONTENT_URI, values);
-        getContentResolver().insert(Provider.CONTENT_URI, values); */
-
-        for (int i = 0; i < 5; i++) {
-       // int i = 0;
-            values.clear();
+		ContentValues values = new ContentValues();      	
+		for (int i = 0; i < 5; i++) {
+			values.clear();
             values.put(Provider.COLUMN_CATEGORY_ID, i);
             values.put(Provider.COLUMN_VALUE, 320 + i);
             values.put(Provider.COLUMN_COORD_LAT, 20.40);
@@ -198,33 +174,6 @@ public class MainActivity extends AppCompatActivity {
             values.put(Provider.COLUMN_CATEGORY, "Test");
             getContentResolver().insert(Provider.CONTENT_URI, values);
         }
-
-        // test
-     /*    Uri allTitles = Uri.parse("content://lab.acme.noviembre15/facts");
-        Cursor c = managedQuery(allTitles, null, null, null, "date desc");
-
-        if (c.moveToFirst()) {
-            do {
-               Toast.makeText(
-                        this,
-                        c.getString(c.getColumnIndex(Provider.COLUMN_DATE))
-                                + ", \""
-                                + c.getString(c.getColumnIndex(Provider.COLUMN_FACT))
-                                + "\"",
-                        Toast.LENGTH_LONG).show();
-                String mReg = c.getString(c.getColumnIndex(Provider.COLUMN_DATE))
-                        + ", \""
-                        + c.getString(c.getColumnIndex(Provider.COLUMN_FACT))
-                        + "\"";
-                Log.i(LOG_TAG, mReg);
-            } while (c.moveToNext());
-        } */
-
-        // update
-     /*   ContentValues editedValues = new ContentValues();
-        editedValues.put(Provider.COLUMN_TITLE, "Should We Fight Back?");
-        getContentResolver().update(
-                Uri.parse("content://lab.acme.noviembre15/facts/2"), editedValues, null, null);*/
     }
 
     @Override
@@ -251,7 +200,6 @@ public class MainActivity extends AppCompatActivity {
             case (R.id.action_app_version):
                 Common.showAlertDialog(this, getString(R.string.app_name), "Your application version is: " + Common.getAppVersionCode(mContext) + ".", false);
                 break;
-
             case (R.id.action_app_icon):
                 Intent activityAppIcon;
                 activityAppIcon = new Intent(this,  AppIconAct.class);
@@ -274,7 +222,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 
     //
     // Copy db from local storage to public storage
@@ -322,5 +269,3 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
-//REFS:
-// http://valokafor.com/create-and-publish-your-first-android-app-part-2/
