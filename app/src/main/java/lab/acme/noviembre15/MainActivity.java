@@ -124,6 +124,10 @@ public class MainActivity extends AppCompatActivity {
                     Log.e(LOG_TAG, "** child ly. pos.  " + recyclerView.getChildLayoutPosition(child));
                     //startActivity(new Intent(mContext, DetailActivity.class));
                  	Intent intentDetail = new Intent(mContext, DetailActivity.class);
+
+
+                   // myListCursorAdapter.getItemId(recyclerView.getChildLayoutPosition(child))
+
                 	intentDetail.putExtra("ID", recyclerView.getChildLayoutPosition(child)); // Pasamos la posición del elemento de la lista
                 	startActivity(intentDetail);
                     return true;
@@ -149,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
         Uri allTitles = Uri.parse("content://lab.acme.noviembre15/facts");
         //Cursor cursor = managedQuery(allTitles, null, null, null, "title asc");
         Cursor cursor = managedQuery(allTitles, null, null, null, null);
-        Log.d(LOG_TAG, "==================>>>>>>>>>>>Registros del cursor: " + cursor.getCount());
+        Log.e(LOG_TAG, "==================>>>>>>>>>>> Registros del cursor: " + cursor.getCount());
         return cursor;
     }
 
@@ -160,7 +164,8 @@ public class MainActivity extends AppCompatActivity {
         getContentResolver().delete(
                 Uri.parse("content://lab.acme.noviembre15/facts"), null,
                 null);
-
+        myListCursorAdapter.notifyDataSetChanged();
+        mLayoutManager.removeAllViews();
     }
 
 	//
@@ -168,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
 	//
 	private void addTestBD() {
     	String mMsg = "ILG PRUEBAS BD: " +"<------------------------->";
-        Log.d(LOG_TAG, mMsg);
+        Log.e(LOG_TAG, mMsg);
         // add a row (reg)
 		ContentValues values = new ContentValues();      	
 		for (int i = 0; i < 5; i++) {
@@ -177,12 +182,14 @@ public class MainActivity extends AppCompatActivity {
             values.put(Provider.COLUMN_VALUE, 320 + i);
             values.put(Provider.COLUMN_COORD_LAT, 20.40);
             values.put(Provider.COLUMN_COORD_LONG, 50.40);
-            values.put(Provider.COLUMN_DATE, (i+1) + " noviembre 2015 " );
+            values.put(Provider.COLUMN_DATE, (i+1) + "/12/2015 " );
             values.put(Provider.COLUMN_TITLE,  (i+1) +  " Registro añadido" );
             values.put(Provider.COLUMN_FACT, (i+1) + "Texto largo de Informes parcial ");
             values.put(Provider.COLUMN_CATEGORY, "Test");
             getContentResolver().insert(Provider.CONTENT_URI, values);
         }
+        //myListCursorAdapter.swapCursor(cursorFacts());
+
     }
 
     @Override

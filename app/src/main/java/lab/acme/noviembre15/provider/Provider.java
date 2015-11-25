@@ -211,7 +211,7 @@ public class Provider extends ContentProvider {
                   throw new IllegalArgumentException("Unknown URI " + uri);
           }
           getContext().getContentResolver().notifyChange(uri, null);
-          Log.d(TAG, "**** delete count: " + count);
+          Log.e(TAG, "**** delete count: " + count);
           return count;
       }
 

@@ -2,7 +2,6 @@ package lab.acme.noviembre15.adapters;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,7 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.squareup.picasso.Picasso;
+
 import lab.acme.noviembre15.R;
 import lab.acme.noviembre15.provider.Provider;
 
@@ -56,18 +57,20 @@ public class MyListCursorAdapter extends CursorRecyclerViewAdapter<MyListCursorA
         private final TextView  factTitle;
         private final TextView  factID;
         
-        public final CardView  cardView;
+        //public final CardView  cardView;
         
 
         public ViewHolder(View itemView) {
             super(itemView);
             // TODO ¿Es necesario cardView?
-            cardView = (CardView)itemView.findViewById(R.id.facts_main_card_view);
+            //cardView = (CardView)itemView.findViewById(R.id.facts_main_card_view);
             factCardImage = (ImageView) itemView.findViewById(R.id.image_view_fact_card);
             factDate = (TextView)itemView.findViewById(R.id.text_card_view_fact_date);
             factTitle = (TextView)itemView.findViewById(R.id.text_card_view_fact_title);
             factID = (TextView)itemView.findViewById(R.id.textView_DBID);
         }
+
+
     }
 
     @Override
@@ -118,4 +121,37 @@ public class MyListCursorAdapter extends CursorRecyclerViewAdapter<MyListCursorA
         Log.e(LOG_TAG, " --> " + mCursor.getString(mCursor.getColumnIndex(Provider.COLUMN_TITLE)));
         Log.e(LOG_TAG, " Category_ID --> " + mCursor.getString(mCursor.getColumnIndex(Provider.COLUMN_CATEGORY_ID)));
     }
+
+    /**
+     * Swap in a new Cursor, returning the old Cursor.  Unlike
+     * {@link #changeCursor(Cursor)}, the returned old Cursor is <em>not</em>
+     * closed.
+     *
+     * @param newCursor
+     */
+    @Override
+    public Cursor swapCursor(Cursor newCursor) {
+        return super.swapCursor(newCursor);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return super.getItemId(position);
+    }
+
+
+
+ /*
+
+    int positionToRemove = mLayoutManager.findFirstCompletelyVisibleItemPosition();
+                sampleRecyclerAdapter.removeData(positionToRemove);
+
+
+    public void removeData (int position) {
+
+        sampleData.remove(position);
+        notifyItemRemoved(position);
+    }
+*/
+
 }

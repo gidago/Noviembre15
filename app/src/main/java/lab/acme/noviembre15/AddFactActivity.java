@@ -11,10 +11,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
 import lab.acme.noviembre15.models.FactItem;
 import lab.acme.noviembre15.provider.Provider;
 
@@ -24,7 +22,6 @@ public class AddFactActivity extends AppCompatActivity {
 
     private EditText mDate, mTitle, mCategory, mFact, mValue, mLong, mLat;
     Button mSaveButton;
-    private View mRootView;
     private Context mContext;
     private static Calendar dateTime = Calendar.getInstance();
 
@@ -32,9 +29,7 @@ public class AddFactActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_fact);
-       //mContext = AppIconAct.this;
         mContext = AddFactActivity.this;
-        //init();
         initView();
     }
 
@@ -120,25 +115,7 @@ public class AddFactActivity extends AppCompatActivity {
         values.put(Provider.COLUMN_TITLE, mTitle.getText().toString()); //"Prueba DB"
         values.put(Provider.COLUMN_FACT, mFact.getText().toString()); // Long description
         values.put(Provider.COLUMN_CATEGORY, mCategory.getText().toString());
-        //Uri uri = getContentResolver().insert(Provider.CONTENT_URI, values);
-        //Uri uri =
         getContentResolver().insert(Provider.CONTENT_URI, values);
-
-        // test
-     /*   Uri allTitles = Uri.parse("content://lab.acme.noviembre15/facts");
-
-        Cursor c = managedQuery(allTitles, null, null, null, "date desc");
-
-        if (c.moveToFirst()) {
-            do {
-                String mReg = c.getString(c.getColumnIndex(Provider.COLUMN_DATE))
-                        + ", \""
-                        + c.getString(c.getColumnIndex(Provider.COLUMN_FACT))
-                        + "\"";
-                Log.d(LOG_TAG, mReg);
-            } while (c.moveToNext());
-        }*/
-        //mAttendant.save();
         //Wipe all fields
         resetFields();
         //Provide feedback to the user

@@ -48,7 +48,7 @@ public class DetailActivity extends AppCompatActivity {
             Bundle extras = getIntent().getExtras();
             this.mVId = extras.getInt("ID");
         }
-        Log.d(LOG_TAG, "******** mVId:   " + mVId);
+        Log.e(LOG_TAG, "******** mVId:   " + mVId);
         TextView mID = (TextView) findViewById(R.id.detail_ID_textview);
         TextView mTitle = (TextView) findViewById(R.id.detail_title_textview);
         TextView mDate = (TextView) findViewById(R.id.detail_date_textview);
