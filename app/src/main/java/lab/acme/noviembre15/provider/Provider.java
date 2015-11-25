@@ -93,7 +93,6 @@ public class Provider extends ContentProvider {
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             Log.d("CP db ", "Upgrading db from version: " );
             Log.d("  ....    " , oldVersion + newVersion + ", which will destroy all old data");
-
             db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE);
             onCreate(db);
         }
@@ -121,7 +120,7 @@ public class Provider extends ContentProvider {
       @Override
       public String getType(Uri uri) {
           String ret = getContext().getContentResolver().getType(CONTENT_URI);
-          Log.d(TAG, "********* getType returning: " + ret);
+          Log.e(TAG, "==============> Get URI type:   " + ret);
           switch (uriMatcher.match(uri)) {
               // get all facts
               case FACTS:
@@ -142,7 +141,7 @@ public class Provider extends ContentProvider {
 	 */
       @Override
       public Uri insert(Uri uri, ContentValues values) {
-        Log.d(TAG, "insert uri: " + uri.toString());
+        Log.e(TAG, "==================> Insert URI:    " + uri.toString());
 
           // add a new row
           long rowID = factsDB.insert(DATABASE_TABLE, "", values);
@@ -226,10 +225,8 @@ public class Provider extends ContentProvider {
     @Override
     public Cursor query(Uri uri, String[] projection, String selection,
                       String[] selectionArgs, String sortOrder) {
-        //todo new
-        Cursor retCursor;
 
-        Log.d(TAG, "**** Test: query with uri: " + uri.toString());
+        Log.e(TAG, "==============>   Query with URI:  " + uri.toString());
 
         SQLiteQueryBuilder sqlBuilder = new SQLiteQueryBuilder();
 
@@ -247,75 +244,6 @@ public class Provider extends ContentProvider {
 
         // register to watch a content URI for changes
         cursor.setNotificationUri(getContext().getContentResolver(), uri);
-
-        //todo new
-        //retCursor.setNotificationUri(getContext().getContentResolver(), uri);
-        //return retCursor;
         return cursor;
     }
-
-
- /**
-     @Override
-     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs,
-     String sortOrder) {
-     // Here's the switch statement that, given a URI, will determine what kind of request it is,
-     // and query the database accordingly.
-     Cursor retCursor;
-     switch (sUriMatcher.match(uri)) {
-
-
-            case WEATHER_WITH_LOCATION_AND_DATE:
-    {
-        retCursor = getWeatherByLocationSettingAndDate(uri, projection, sortOrder);
-        break;
-    }
-    // "weather/*"
-    case WEATHER_WITH_LOCATION: {
-        retCursor = getWeatherByLocationSetting(uri, projection, sortOrder);
-        break;
-    }
-    // "weather"
-    case WEATHER: {
-        retCursor = mOpenHelper.getReadableDatabase().query(
-                WeatherContract.WeatherEntry.TABLE_NAME,
-                projection,
-                selection,
-                selectionArgs,
-                null,
-                null,
-                sortOrder
-        );
-        break;
-    }
-    // "location"
-    case LOCATION: {
-        retCursor = mOpenHelper.getReadableDatabase().query(
-                WeatherContract.LocationEntry.TABLE_NAME,
-                projection,
-                selection,
-                selectionArgs,
-                null,
-                null,
-                sortOrder
-        );
-        break;
-    }
-
-    default:
-            throw new UnsupportedOperationException("Unknown uri: " + uri);
-}
-retCursor.setNotificationUri(getContext().getContentResolver(), uri);
-        return retCursor;
-        }
-
-        */
-
-
-
-
-
-
-
-
 }

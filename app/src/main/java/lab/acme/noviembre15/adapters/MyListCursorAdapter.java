@@ -10,9 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.squareup.picasso.Picasso;
-
 import lab.acme.noviembre15.R;
 import lab.acme.noviembre15.provider.Provider;
 
@@ -33,7 +31,8 @@ import lab.acme.noviembre15.provider.Provider;
 // http://unitid.nl/androidpatterns/
 // https://android-arsenal.com/tag/53//
 // https://gist.github.com/skyfishjy/443b7448f59be978bc59#file-cursorrecyclerviewadapter-java
-//
+// http://www.sgoliver.net/blog/controles-de-seleccion-v-recyclerview/
+
 
 //TODO - añadido onClickListener - probar
 public class MyListCursorAdapter extends CursorRecyclerViewAdapter<MyListCursorAdapter.ViewHolder> implements View.OnClickListener{
@@ -51,15 +50,18 @@ public class MyListCursorAdapter extends CursorRecyclerViewAdapter<MyListCursorA
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-
-        public final ImageView factCardImage;
-        public final TextView factDate;
-        public final TextView factTitle;
-        public final CardView cardView;
-        public final TextView factID;
+		//  TODO cambiados de public a private
+        private final ImageView factCardImage;
+        private final TextView  factDate;
+        private final TextView  factTitle;
+        private final TextView  factID;
+        
+        public final CardView  cardView;
+        
 
         public ViewHolder(View itemView) {
             super(itemView);
+            // TODO ¿Es necesario cardView?
             cardView = (CardView)itemView.findViewById(R.id.facts_main_card_view);
             factCardImage = (ImageView) itemView.findViewById(R.id.image_view_fact_card);
             factDate = (TextView)itemView.findViewById(R.id.text_card_view_fact_date);
@@ -90,7 +92,7 @@ public class MyListCursorAdapter extends CursorRecyclerViewAdapter<MyListCursorA
             listener.onClick(view);
     }
 
-
+	// TODO - ¿necesario definir metodo bindFact? Ver http://www.sgoliver.net/blog/controles-de-seleccion-v-recyclerview/
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, Cursor cursor) {
         mCursor = cursor;
