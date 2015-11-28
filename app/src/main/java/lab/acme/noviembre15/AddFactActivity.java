@@ -28,7 +28,7 @@ public class AddFactActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_fact);
+        setContentView(R.layout.activity_add);
         mContext = AddFactActivity.this;
         initView();
     }
@@ -43,12 +43,10 @@ public class AddFactActivity extends AppCompatActivity {
         mValue = (EditText) findViewById(R.id.edit_text_value);
         mLat = (EditText) findViewById(R.id.edit_text_latitude);
         mLong = (EditText) findViewById(R.id.edit_text_longitude);
-
         mDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDatePickerDialog(mContext, "dd/MM/yyyy", mDate);
-
             }
         });
 
@@ -122,7 +120,6 @@ public class AddFactActivity extends AppCompatActivity {
         Toast.makeText(mContext, mmFact.getTitle() + " saved", Toast.LENGTH_SHORT).show();
     }
 
-
     /**
      * use to show datepicker
      *
@@ -132,20 +129,16 @@ public class AddFactActivity extends AppCompatActivity {
      */
     public static void showDatePickerDialog(final Context mContext,
                                             final String format, final TextView mTextView) {
-
         new DatePickerDialog(mContext, new DatePickerDialog.OnDateSetListener() {
 
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear,
                                   int dayOfMonth) {
-
                 SimpleDateFormat dateFormatter = new SimpleDateFormat(format);
                 dateTime.set(year, monthOfYear, dayOfMonth);
-
                 mTextView.setText(dateFormatter.format(dateTime.getTime()).toString());
             }
         }, dateTime.get(Calendar.YEAR), dateTime.get(Calendar.MONTH),
                 dateTime.get(Calendar.DAY_OF_MONTH)).show();
     }
-
 }

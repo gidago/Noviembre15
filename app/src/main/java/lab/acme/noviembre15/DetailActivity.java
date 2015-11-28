@@ -33,13 +33,13 @@ public class DetailActivity extends AppCompatActivity {
     private final String LOG_TAG = DetailActivity.class.getSimpleName();    
     //private Activity activity;
     private Context mContext;
-	//TODO review
     protected int mVId;
 
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);        
         //activity = DetailActivity.this;
+        setTitle("Detalles");
         setContentView(R.layout.activity_detail);
         if(savedInstanceState != null) {
             this.mVId = savedInstanceState.getInt("ID");
@@ -65,7 +65,7 @@ public class DetailActivity extends AppCompatActivity {
         //Uri oneTitle = Uri.parse("content://lab.acme.noviembre15/facts/1");
         Cursor c = managedQuery(oneTitle, null, null, null, null);
 		if (c.moveToFirst()) {
-        	mID.setText(c.getString(c.getColumnIndex(Provider.COLUMN_ID)));
+        	mID.setText("ID: " + c.getString(c.getColumnIndex(Provider.COLUMN_ID)));
             mTitle.setText(c.getString(c.getColumnIndex(Provider.COLUMN_TITLE)));
             mDate.setText(c.getString(c.getColumnIndex(Provider.COLUMN_DATE)));
             mFact.setText(c.getString(c.getColumnIndex(Provider.COLUMN_FACT)));

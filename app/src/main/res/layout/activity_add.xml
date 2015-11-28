@@ -51,13 +51,16 @@
             android:layout_below="@+id/edit_text_date"
             android:hint="@string/hint_guest_email"
             android:imeOptions="actionNext"
+            android:inputType="textCapSentences"
             />
+
         <EditText
             android:id="@+id/edit_text_category"
             style="@style/AddAttendantForm"
             android:layout_below="@+id/edit_text_title"
             android:hint="@string/hint_guest_phone"
             android:imeOptions="actionNext"
+            android:inputType="textCapSentences"
              />
         <EditText
             android:id="@+id/edit_text_fact"
@@ -65,24 +68,27 @@
             android:hint="@string/hint_guest_street_address"
             android:layout_below="@+id/edit_text_category"
             android:imeOptions="actionNext"
-            android:inputType="textMultiLine"/>
+            android:inputType="textMultiLine|textCapSentences"/>
         <EditText
             android:id="@+id/edit_text_value"
             style="@style/AddAttendantForm"
             android:layout_below="@+id/edit_text_fact"
             android:hint="@string/hint_guest_city"
+            android:inputType="number"
             android:imeOptions="actionNext" />
         <EditText
             android:id="@+id/edit_text_latitude"
             style="@style/AddAttendantForm"
             android:layout_below="@+id/edit_text_value"
             android:hint="@string/coord_lat"
+            android:inputType="numberDecimal"
             android:imeOptions="actionNext" />
         <EditText
             android:id="@+id/edit_text_longitude"
             style="@style/AddAttendantForm"
             android:layout_below="@+id/edit_text_latitude"
             android:hint="@string/hint_zip_code"
+            android:inputType="numberDecimal"
             android:imeOptions="actionNext" />
 
         <Button
@@ -99,4 +105,6 @@
 
 </RelativeLayout>
 
-    <!-- TODO rename to activity_add.xml -->
+    <!--
+    http://developer.android.com/intl/es/guide/topics/ui/controls/text.html
+    -->

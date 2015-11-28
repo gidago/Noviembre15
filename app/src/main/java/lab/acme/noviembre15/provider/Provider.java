@@ -38,7 +38,7 @@ import android.util.Log;
 public class Provider extends ContentProvider {
 
 	static final String TAG = "Provider";
-    //private DbHelper mOpenHelper;
+
     public static final String PROVIDER_NAME = "lab.acme.noviembre15";
     public static final Uri CONTENT_URI = Uri.parse("content://" + PROVIDER_NAME + "/facts");
     private static final int FACTS = 1;

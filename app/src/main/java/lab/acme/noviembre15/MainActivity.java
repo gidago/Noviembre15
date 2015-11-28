@@ -39,15 +39,8 @@ public class MainActivity extends AppCompatActivity {
 
     private final String LOG_TAG = MainActivity.class.getSimpleName();
 
-    private Toolbar mToolbar;
-    private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
-    private RecyclerView.Adapter mAdapter;
     private MyListCursorAdapter myListCursorAdapter;
-
-
-    // Changed by a Cursor private List<FactItem> mFactItemList;
-
     private Context mContext;
     private Activity activity;
     
@@ -59,10 +52,10 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
-		mRecyclerView = (RecyclerView) findViewById(R.id.facts_main_recycler_view);
+        RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.facts_main_recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(mContext);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -79,29 +72,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //mAdapter =  new MyListCursorAdapter(mContext, cursorFacts());
         myListCursorAdapter=  new MyListCursorAdapter(mContext, cursorFacts());
-        //TODO añadido listener
-        //mAdapter.setOnClickListener(new View.OnClickListener() {
-        myListCursorAdapter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.e("DemoRecView", "Pulsado el elemento " + mRecyclerView.getChildPosition(v));
-                //Intent intentDetail = new Intent(mContext, DetailActivity.class);
-                //intentDetail.putExtra("ID", recyclerView.getChildLayoutPosition(child)); // Pasamos la posición del elemento de la lista
-                //startActivity(intentDetail);
-            }
-        });
-        
-       // mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setAdapter(myListCursorAdapter);
-
-		// TODO - comandos para el adaptador
-		// adaptador.notifyItemInserted(1);
-		// adaptador.notifyItemRemoved(1);
-		//
-		// mAdapter.notifyItemInserted(1);
-		// ....
 
       final GestureDetector mGestureDetector =
                 new GestureDetector ( MainActivity.this, new GestureDetector.SimpleOnGestureListener()
@@ -111,35 +83,25 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
          });
-         
-		//TODO revisar por ser añadido listener
+
         mRecyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
-			//TODO revisar por ser añadido listener
+
             @Override
             public boolean onInterceptTouchEvent(RecyclerView recyclerView, MotionEvent motionEvent) {
                 View child = recyclerView.findChildViewUnder(motionEvent.getX(), motionEvent.getY());
                 if (child != null && mGestureDetector.onTouchEvent(motionEvent)) {
-                    // onTouchDrawer(recyclerView.getChildLayoutPosition(child));
-                    // Snackbar.make(recyclerView, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                    Log.e(LOG_TAG, "** child ly. pos.  " + recyclerView.getChildLayoutPosition(child));
-                    //startActivity(new Intent(mContext, DetailActivity.class));
                  	Intent intentDetail = new Intent(mContext, DetailActivity.class);
-
-
-                   // myListCursorAdapter.getItemId(recyclerView.getChildLayoutPosition(child))
-
                 	intentDetail.putExtra("ID", recyclerView.getChildLayoutPosition(child)); // Pasamos la posición del elemento de la lista
                 	startActivity(intentDetail);
                     return true;
                 }
                 return false;
             }
-			//TODO revisar por ser añadido listener
+
             @Override
             public void onTouchEvent(RecyclerView rv, MotionEvent e) {
-                //  Snackbar.make(this, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             }
-			//TODO revisar por ser añadido listener
+
             @Override
             public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
             }
@@ -151,9 +113,9 @@ public class MainActivity extends AppCompatActivity {
      */
     private Cursor cursorFacts(){
         Uri allTitles = Uri.parse("content://lab.acme.noviembre15/facts");
-        //Cursor cursor = managedQuery(allTitles, null, null, null, "title asc");
-        Cursor cursor = managedQuery(allTitles, null, null, null, null);
-        Log.e(LOG_TAG, "==================>>>>>>>>>>> Registros del cursor: " + cursor.getCount());
+        Cursor cursor = managedQuery(allTitles, null, null, null, "_id asc");
+        //Cursor cursor = managedQuery(allTitles, null, null, null, null);
+        //Log.e(LOG_TAG, "==================>>>>>>>>>>> Registros del cursor: " + cursor.getCount());
         return cursor;
     }
 
@@ -188,16 +150,12 @@ public class MainActivity extends AppCompatActivity {
             values.put(Provider.COLUMN_CATEGORY, "Test");
             getContentResolver().insert(Provider.CONTENT_URI, values);
         }
-        //myListCursorAdapter.swapCursor(cursorFacts());
-
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        // Set an icon in the ActionBar
-       // menu.findItem(R.id.lab).setIcon(R.drawable.ic_image_arrow);
         return true;
     }
 

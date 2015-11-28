@@ -9,11 +9,10 @@
 
           <!-- Header: Day, Date -->
 
-
-
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_gravity="right|bottom">
 
         <LinearLayout
             android:gravity="center_vertical"
@@ -68,8 +67,8 @@
                     android:id="@+id/detail_category_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:textAppearanceLarge"
-                    android:textColor="@color/grey_700" />
+                    android:textSize="16sp"
+                    android:textColor="@color/sunshine_dark_blue" />
             </LinearLayout>
 
             <LinearLayout
@@ -82,8 +81,9 @@
                 <LinearLayout
                     android:gravity="left"
                     android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:background="@color/sunshine_dark_blue">
 
                     <TextView
                         tools:text="John Doe"
@@ -91,17 +91,21 @@
                         android:id="@+id/detail_fact_textview"
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
-                        android:textSize="16sp"
-                        android:textIsSelectable="true" />
+                        android:textColor="@color/white"
+                        android:textSize="22sp"
+                        android:textIsSelectable="true"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp" />
 
                     <TextView
                         tools:text="John Doe"
                         android:id="@+id/detail_ID_textview"
-                        android:layout_gravity="center_horizontal"
+                        android:layout_gravity="center_horizontal|right"
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
-                        android:textColor="@color/grey_700"
-                        android:textSize="48sp" />
+                        android:textColor="@color/white"
+                        android:textSize="10sp" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -145,7 +149,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:layout_width="match_parent"
-                    android:textAppearance="?android:textAppearanceLarge" />
+                    android:textAppearance="?android:textAppearanceLarge"
+                    android:textColor="@color/material_grey_600"
+                    android:gravity="right" />
 
                 <TextView
                     tools:text="John Doe"
@@ -153,7 +159,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:layout_width="match_parent"
-                    android:textAppearance="?android:textAppearanceLarge" />
+                    android:textAppearance="?android:textAppearanceLarge"
+                    android:textColor="@color/material_grey_600"
+                    android:gravity="right" />
             </LinearLayout>
         </LinearLayout>
 

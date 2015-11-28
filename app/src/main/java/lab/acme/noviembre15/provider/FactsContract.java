@@ -8,35 +8,10 @@ public final class FactsContract {
     // Todo: Elegir AUTHORITY vs. CONTENT_AUTHORITY
     /** The authority for the contacts provider */
     public static final String AUTHORITY = "lab.acme.noviembre15";
-    /**atanarro*/
-    //public static final String PROVIDER_NAME = "net.atanarro.provider.Songs";
-//    public static final Uri CONTENT_URI = Uri.parse("content://" + PROVIDER_NAME + "/songs");
-
-    // static final String AUTHORITY = "content://lab.acme.noviembre15";
-
-    // The "Content authority" is a name for the entire content provider, similar to the
-    // relationship between a domain name and its website.  A convenient string to use for the
-    // content authority is the package name for the app, which is guaranteed to be unique on the
-    // device.
     public static final String CONTENT_AUTHORITY = "lab.acme.noviembre15";
-
-    // Use CONTENT_AUTHORITY to create the base of all URI's which apps will use to contact
-    // the content provider.
-    //public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
-
-    // Possible paths (appended to base content URI for possible URI's)
-    // For instance, content://com.example.android.sunshine.app/weather/ is a valid path for
-    // looking at weather data. content://com.example.android.sunshine.app/givemeroot/ will fail,
-    // as the ContentProvider hasn't been given any information on what to do with "givemeroot".
-    // At least, let's hope not.  Don't be that dev, reader.  Don't be that dev.
-    //public static final String PATH_FACTS = "facts";
-
-   // public static final Uri CONTENT_URI = Uri.parse(AUTHORITY);
 
     /** A content:// style uri to the authority for this table */
     //public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY );
-
-
 
 	// TODO - Cambiar ColumnsEntry por factsEntry
     /**

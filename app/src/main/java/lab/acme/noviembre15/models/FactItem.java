@@ -21,13 +21,6 @@ public class FactItem {
     private String ProfileImagePath;
     private int ProfileImageId;
 
- /*   public static FactItem fromCursor(Cursor cursor) {
-        //TODO return your FactItem from cursor.
-        cursor.getInt(cursor.getColumnIndex(Provider.COLUMN_DATE);
-
-        return this;
-    }*/
-
 
     public FactItem(){}
 
@@ -102,14 +95,4 @@ public class FactItem {
     public void setProfileImageId(int profileImageId) {
         ProfileImageId = profileImageId;
     }
-
-       /* public String getSerializedAttendances() {
-                return SerializedAttendances;
-        }*/
-
-       /* public void setSerializedAttendances(String serializedAttendances) {
-                SerializedAttendances = serializedAttendances;
-        } */
-
-
 }
