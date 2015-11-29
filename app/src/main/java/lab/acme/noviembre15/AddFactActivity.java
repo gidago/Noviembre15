@@ -6,15 +6,25 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
+import lab.acme.noviembre15.common.TrackIconUtils;
 import lab.acme.noviembre15.models.FactItem;
 import lab.acme.noviembre15.provider.Provider;
+
+
+
 
 public class AddFactActivity extends AppCompatActivity {
 
@@ -24,6 +34,9 @@ public class AddFactActivity extends AppCompatActivity {
     Button mSaveButton;
     private Context mContext;
     private static Calendar dateTime = Calendar.getInstance();
+
+    private AutoCompleteTextView activityType;
+    private Spinner activityTypeIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +72,21 @@ public class AddFactActivity extends AppCompatActivity {
                 }
             }
         });
+
+        activityType = (AutoCompleteTextView) findViewById(R.id.track_edit_activity_type);
+      //  activityType.setText(track.getCategory());
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                this, R.array.activity_types, android.R.layout.simple_dropdown_item_1line);
+        activityType.setAdapter(adapter);
+        activityType.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                setActivityTypeIcon(TrackIconUtils.getIconValue(
+                        AddFactActivity.this, (String) activityType.getAdapter().getItem(position)));
+            }
+        });
+
+
     }
 
     private boolean requiredFieldsCompleted() {
