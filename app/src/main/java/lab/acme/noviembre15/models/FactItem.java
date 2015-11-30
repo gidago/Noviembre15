@@ -1,23 +1,15 @@
 package lab.acme.noviembre15.models;
 
-/**
-COLUMN_DATE = "date";
-COLUMN_TITLE = "title";
-COLUMN_CATEGORY = "category";
- public static final String COLUMN_CATEGORY_ID = "category_id";
-COLUMN_FACT = "fact";
-COLUMN_VALUE = "value";
-COLUMN_COORD_LAT = "coord_lat";
- public static final String COLUMN_COORD_LONG = "coord_long";
- */
 public class FactItem {               
     private String Date; 
     private String Title;
     private String Fact; 
     private String Category;
+    private int category_id;
     private String Value; 
     private String Coord_lat;
     private String Coord_long;
+
     private String ProfileImagePath;
     private int ProfileImageId;
 

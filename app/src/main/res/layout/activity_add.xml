@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
     <RelativeLayout
@@ -54,6 +57,7 @@
             android:inputType="textCapSentences"
             />
 
+
         <EditText
             android:id="@+id/edit_text_category"
             style="@style/AddAttendantForm"
@@ -62,13 +66,41 @@
             android:imeOptions="actionNext"
             android:inputType="textCapSentences"
              />
+
+
+
+        <LinearLayout
+            android:id="@+id/tmp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/edit_text_category">
+            <AutoCompleteTextView
+                tools:text="John Doe"
+                android:hint="track_edit_activity_type_hint"
+                android:id="@+id/track_edit_activity_type"
+                android:imeOptions="actionNext"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                 />
+            <Spinner
+                android:id="@+id/track_edit_activity_type_icon"
+                android:layout_gravity="bottom"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content" />
+        </LinearLayout>
+
+
+
+
         <EditText
             android:id="@+id/edit_text_fact"
             style="@style/AddAttendantForm"
             android:hint="@string/hint_guest_street_address"
-            android:layout_below="@+id/edit_text_category"
+            android:layout_below="@+id/tmp"
             android:imeOptions="actionNext"
             android:inputType="textMultiLine|textCapSentences"/>
+
         <EditText
             android:id="@+id/edit_text_value"
             style="@style/AddAttendantForm"
@@ -107,4 +139,5 @@
 
     <!--
     http://developer.android.com/intl/es/guide/topics/ui/controls/text.html
+    style="@style/EditCategory"
     -->
