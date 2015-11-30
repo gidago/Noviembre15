@@ -73,6 +73,7 @@ public class PisActivity extends AppCompatActivity {
         mCamera .setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+            	// TODO - probar "dd MMMM yyyy"
                 showDatePickerDialog( mContext, "dd/MM/yyyy", mDateEnd);
                 calculo();
             }
