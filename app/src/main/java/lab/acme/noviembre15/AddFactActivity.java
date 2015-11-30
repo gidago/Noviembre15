@@ -34,9 +34,39 @@ public class AddFactActivity extends AppCompatActivity {
     Button mSaveButton;
     private Context mContext;
     private static Calendar dateTime = Calendar.getInstance();
-
+//TODO - en curso
+	private static final String ICON_VALUE_KEY = "icon_value_key";
     private AutoCompleteTextView activityType;
     private Spinner activityTypeIcon;
+	private String iconValue;
+
+	/**
+	* Activity types.
+	*/
+	public enum ActivityType {
+	CYCLING, RUNNING, WALKING, INVALID
+	}
+
+	 /**
+	* Gets the activity type.
+	*
+	* @param context the context
+	* @param activityType the activity type
+	*/
+	public static ActivityType getActivityType(Context context, String activityType) {
+		if (activityType == null || activityType.equals("")) {
+			return ActivityType.INVALID;
+		}
+		if (TrackIconUtils.getIconValue(context, activityType).equals(TrackIconUtils.WALK)) {
+			return ActivityType.WALKING;
+		} else if (TrackIconUtils.getIconValue(context, activityType).equals(TrackIconUtils.RUN)) {
+			return ActivityType.RUNNING;
+		} else if (TrackIconUtils.getIconValue(context, activityType).equals(TrackIconUtils.BIKE)) {
+			return ActivityType.CYCLING;
+		}
+		return ActivityType.INVALID;
+	}
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +80,6 @@ public class AddFactActivity extends AppCompatActivity {
         mDate = (EditText) findViewById(R.id.edit_text_date);
         mTitle = (EditText)findViewById(R.id.edit_text_title);
         mCategory = (EditText) findViewById(R.id.edit_text_category);
-       //  mPhone.setInputType(InputType.TYPE_CLASS_PHONE);
-       // mPhone.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
         mFact = (EditText) findViewById(R.id.edit_text_fact);
         mValue = (EditText) findViewById(R.id.edit_text_value);
         mLat = (EditText) findViewById(R.id.edit_text_latitude);
@@ -73,6 +101,19 @@ public class AddFactActivity extends AppCompatActivity {
             }
         });
 
+
+//TODO - en curso
+Spinner spinner = (Spinner) findViewById(R.id.track_edit_activity_type_icon);
+// Create an ArrayAdapter using the string array and a default spinner layout
+ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+        R.array.planets_array, android.R.layout.simple_spinner_item);
+// Specify the layout to use when the list of choices appears
+adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+spinner.setAdapter(adapter);
+
+
+
         activityType = (AutoCompleteTextView) findViewById(R.id.track_edit_activity_type);
       //  activityType.setText(track.getCategory());
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
@@ -88,6 +129,13 @@ public class AddFactActivity extends AppCompatActivity {
 
 
     }
+
+
+ private void setActivityTypeIcon(String value) {
+	iconValue = value;
+	TrackIconUtils.setIconSpinner(activityTypeIcon, value);
+}
+
 
     private boolean requiredFieldsCompleted() {
         //Check if required information are entered, here we are only checking for
