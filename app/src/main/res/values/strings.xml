@@ -439,16 +439,14 @@
     <item>@string/activity_type_water_skiing</item>
     <item>@string/activity_type_wind_surfing</item>
   </string-array>
+
 <!-- TODO test -->   
-    <string-array name="planets_array">
-        <item>Mercury</item>
-        <item>Venus</item>
-        <item>Earth</item>
-        <item>Mars</item>
-        <item>Jupiter</item>
-        <item>Saturn</item>
-        <item>Uranus</item>
-        <item>Neptune</item>
+    <string-array name="category_array">
+        <item>Hogar</item>
+        <item>Trabajo</item>
+        <item>Vacaciones</item>
+        <item>Viajes</item>
+        <item>Otros</item>
     </string-array>
 
 

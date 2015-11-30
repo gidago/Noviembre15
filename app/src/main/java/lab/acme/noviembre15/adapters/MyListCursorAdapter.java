@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import lab.acme.noviembre15.R;
+import lab.acme.noviembre15.provider.FactsContract;
 import lab.acme.noviembre15.provider.Provider;
 
 // Refs:
@@ -71,10 +72,10 @@ public class MyListCursorAdapter extends CursorRecyclerViewAdapter<MyListCursorA
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, Cursor cursor) {
         mCursor = cursor;
-        viewHolder.factDate.setText(mCursor.getString(mCursor.getColumnIndex(Provider.COLUMN_DATE)));
-        viewHolder.factTitle.setText(mCursor.getString(mCursor.getColumnIndex(Provider.COLUMN_TITLE)));
-        viewHolder.factID.setText(mCursor.getString(mCursor.getColumnIndex(Provider.COLUMN_ID)));
-        switch (mCursor.getInt(mCursor.getColumnIndex(Provider.COLUMN_CATEGORY_ID))) {
+        viewHolder.factDate.setText(mCursor.getString(mCursor.getColumnIndex(FactsContract.FactsEntry.COLUMN_DATE)));
+        viewHolder.factTitle.setText(mCursor.getString(mCursor.getColumnIndex(FactsContract.FactsEntry.COLUMN_TITLE)));
+        viewHolder.factID.setText(mCursor.getString(mCursor.getColumnIndex(FactsContract.FactsEntry.COLUMN_ID)));
+        switch (mCursor.getInt(mCursor.getColumnIndex(FactsContract.FactsEntry.COLUMN_CATEGORY_ID))) {
             case 1:
                 Picasso.with(mContext).load(R.drawable.category_1).into(viewHolder.factCardImage);
                 break;

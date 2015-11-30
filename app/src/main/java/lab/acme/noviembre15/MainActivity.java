@@ -29,6 +29,7 @@ import java.nio.channels.FileChannel;
 
 import lab.acme.noviembre15.adapters.MyListCursorAdapter;
 import lab.acme.noviembre15.common.Common;
+import lab.acme.noviembre15.provider.FactsContract;
 import lab.acme.noviembre15.provider.Provider;
 
 //REFS:
@@ -140,14 +141,14 @@ public class MainActivity extends AppCompatActivity {
 		ContentValues values = new ContentValues();      	
 		for (int i = 0; i < 5; i++) {
 			values.clear();
-            values.put(Provider.COLUMN_CATEGORY_ID, i);
-            values.put(Provider.COLUMN_VALUE, 320 + i);
-            values.put(Provider.COLUMN_COORD_LAT, 20.40);
-            values.put(Provider.COLUMN_COORD_LONG, 50.40);
-            values.put(Provider.COLUMN_DATE, (i+1) + "/12/2015 " );
-            values.put(Provider.COLUMN_TITLE,  (i+1) +  " Registro añadido" );
-            values.put(Provider.COLUMN_FACT, (i+1) + "Texto largo de Informes parcial ");
-            values.put(Provider.COLUMN_CATEGORY, "Test");
+            values.put(FactsContract.FactsEntry.COLUMN_CATEGORY_ID, i);
+            values.put(FactsContract.FactsEntry.COLUMN_VALUE, 320 + i);
+            values.put(FactsContract.FactsEntry.COLUMN_COORD_LAT,  20.40);
+            values.put(FactsContract.FactsEntry.COLUMN_COORD_LONG, 50.40);
+            values.put(FactsContract.FactsEntry.COLUMN_DATE,   (i+1) + "/12/2015 " );
+            values.put(FactsContract.FactsEntry.COLUMN_TITLE,  (i+1) +  " Registro añadido" );
+            values.put(FactsContract.FactsEntry.COLUMN_FACT,   (i+1) + "Texto largo de Informes parcial ");
+            values.put(FactsContract.FactsEntry.COLUMN_CATEGORY, "Test");
             getContentResolver().insert(Provider.CONTENT_URI, values);
         }
     }

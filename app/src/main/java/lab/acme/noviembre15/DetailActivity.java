@@ -26,7 +26,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import lab.acme.noviembre15.provider.Provider;
+import lab.acme.noviembre15.provider.FactsContract;
 
 public class DetailActivity extends AppCompatActivity {
 	
@@ -65,16 +65,16 @@ public class DetailActivity extends AppCompatActivity {
         //Uri oneTitle = Uri.parse("content://lab.acme.noviembre15/facts/1");
         Cursor c = managedQuery(oneTitle, null, null, null, null);
 		if (c.moveToFirst()) {
-        	mID.setText("ID: " + c.getString(c.getColumnIndex(Provider.COLUMN_ID)));
-            mTitle.setText(c.getString(c.getColumnIndex(Provider.COLUMN_TITLE)));
-            mDate.setText(c.getString(c.getColumnIndex(Provider.COLUMN_DATE)));
-            mFact.setText(c.getString(c.getColumnIndex(Provider.COLUMN_FACT)));
+        	mID.setText("ID: " + c.getString(c.getColumnIndex(FactsContract.FactsEntry.COLUMN_ID)));
+            mTitle.setText(c.getString(c.getColumnIndex(FactsContract.FactsEntry.COLUMN_TITLE)));
+            mDate.setText(c.getString(c.getColumnIndex(FactsContract.FactsEntry.COLUMN_DATE)));
+            mFact.setText(c.getString(c.getColumnIndex(FactsContract.FactsEntry.COLUMN_FACT)));
             //mFact.setText("" + mVId);
-            mCategory.setText(c.getString(c.getColumnIndex(Provider.COLUMN_CATEGORY)));
-            mValue.setText(c.getString(c.getColumnIndex(Provider.COLUMN_VALUE)));
-            mCoord_lat.setText(c.getString(c.getColumnIndex(Provider.COLUMN_COORD_LAT)));
-            mCoord_long.setText(c.getString(c.getColumnIndex(Provider.COLUMN_COORD_LONG)));
-            switch (c.getInt(c.getColumnIndex(Provider.COLUMN_CATEGORY_ID))) {
+            mCategory.setText(c.getString(c.getColumnIndex(FactsContract.FactsEntry.COLUMN_CATEGORY)));
+            mValue.setText(c.getString(c.getColumnIndex(FactsContract.FactsEntry.COLUMN_VALUE)));
+            mCoord_lat.setText(c.getString(c.getColumnIndex(FactsContract.FactsEntry.COLUMN_COORD_LAT)));
+            mCoord_long.setText(c.getString(c.getColumnIndex(FactsContract.FactsEntry.COLUMN_COORD_LONG)));
+            switch (c.getInt(c.getColumnIndex(FactsContract.FactsEntry.COLUMN_CATEGORY_ID))) {
                 case 1:
                     Picasso.with(mContext).load(R.drawable.category_1).into(factCardImage);
                     break;
@@ -87,7 +87,7 @@ public class DetailActivity extends AppCompatActivity {
                 default:
                     Picasso.with(mContext).load(R.drawable.no_category).into(factCardImage);
             }
-            Log.d(LOG_TAG, "******** Provider title:   " + c.getString(c.getColumnIndex(Provider.COLUMN_TITLE)) );
+            Log.d(LOG_TAG, "** Provider title:   " + c.getString(c.getColumnIndex(FactsContract.FactsEntry.COLUMN_TITLE)) );
         }
     }
 }

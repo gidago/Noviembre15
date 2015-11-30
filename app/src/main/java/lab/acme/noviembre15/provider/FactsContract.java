@@ -13,12 +13,13 @@ public final class FactsContract {
     /** A content:// style uri to the authority for this table */
     //public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY );
 
-	// TODO - Cambiar ColumnsEntry por factsEntry
+
+
     /**
      * Column definitions for facts information.
      */
     /* Inner class that defines the table contents of the facts table */
-    public final static class ColumnsEntry implements BaseColumns {
+    public final static class FactsEntry implements BaseColumns {
 
         /*public static final Uri CONTENT_URI =
                 BASE_CONTENT_URI.buildUpon().appendPath(PATH_FACTS).build();*/
@@ -28,12 +29,15 @@ public final class FactsContract {
         public static final String CONTENT_ITEM_TYPE =
                 ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_FACTS;*/
 
-        private ColumnsEntry() {}
-
+        private FactsEntry() {}
+        public static final String DATABASE_NAME = "facts";
+        public static final int DATABASE_VERSION = 1;
  	// Table name
 	public static final String TABLE_NAME = "myfacts";
+    public static final String DATABASE_TABLE = "myfacts";
 
-    //public static final String COLUMN_ID = "_ID";
+    public static final String COLUMN_ID = "_ID";
+
     /**
      * The date of fact
      * <P>Type: TEXT</P>
@@ -84,5 +88,7 @@ public final class FactsContract {
          * The default sort order for this table
          */
        // public static final String DEFAULT_SORT_ORDER = COLUMN_DATE + " DESC";
+
+
 	}
 }

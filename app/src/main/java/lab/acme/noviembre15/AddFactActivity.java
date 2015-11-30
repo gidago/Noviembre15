@@ -6,7 +6,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -21,6 +20,7 @@ import java.util.Calendar;
 
 import lab.acme.noviembre15.common.TrackIconUtils;
 import lab.acme.noviembre15.models.FactItem;
+import lab.acme.noviembre15.provider.FactsContract;
 import lab.acme.noviembre15.provider.Provider;
 
 
@@ -102,39 +102,40 @@ public class AddFactActivity extends AppCompatActivity {
         });
 
 
-//TODO - en curso
-Spinner spinner = (Spinner) findViewById(R.id.track_edit_activity_type_icon);
-// Create an ArrayAdapter using the string array and a default spinner layout
-ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-        R.array.planets_array, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
-adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
-spinner.setAdapter(adapter);
+        //TODO - en curso
+        Spinner spinner = (Spinner) findViewById(R.id.track_edit_activity_type_icon);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.category_array, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
 
 
 
-        activityType = (AutoCompleteTextView) findViewById(R.id.track_edit_activity_type);
+
+     /*   activityType = (AutoCompleteTextView) findViewById(R.id.track_edit_activity_type);
       //  activityType.setText(track.getCategory());
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(
                 this, R.array.activity_types, android.R.layout.simple_dropdown_item_1line);
-        activityType.setAdapter(adapter);
+        activityType.setAdapter(adapter1);
         activityType.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 setActivityTypeIcon(TrackIconUtils.getIconValue(
                         AddFactActivity.this, (String) activityType.getAdapter().getItem(position)));
             }
-        });
+        });*/
 
 
     }
 
 
- private void setActivityTypeIcon(String value) {
-	iconValue = value;
-	TrackIconUtils.setIconSpinner(activityTypeIcon, value);
-}
+     private void setActivityTypeIcon(String value) {
+        iconValue = value;
+        TrackIconUtils.setIconSpinner(activityTypeIcon, value);
+    }
 
 
     private boolean requiredFieldsCompleted() {
@@ -181,14 +182,14 @@ spinner.setAdapter(adapter);
         //Save to the database
         // add a row (reg)
         ContentValues values = new ContentValues();
-        values.put(Provider.COLUMN_DATE, mDate.getText().toString()); //Get date from input form
-        values.put(Provider.COLUMN_CATEGORY_ID, 1);
-        values.put(Provider.COLUMN_VALUE, mValue.getText().toString()); ///Get value from input form
-        values.put(Provider.COLUMN_COORD_LAT, mLat.getText().toString());
-        values.put(Provider.COLUMN_COORD_LONG, mLong.getText().toString());
-        values.put(Provider.COLUMN_TITLE, mTitle.getText().toString()); //"Prueba DB"
-        values.put(Provider.COLUMN_FACT, mFact.getText().toString()); // Long description
-        values.put(Provider.COLUMN_CATEGORY, mCategory.getText().toString());
+        values.put(FactsContract.FactsEntry.COLUMN_DATE, mDate.getText().toString()); //Get date from input form
+        values.put(FactsContract.FactsEntry.COLUMN_CATEGORY_ID, 1);
+        values.put(FactsContract.FactsEntry.COLUMN_VALUE, mValue.getText().toString()); ///Get value from input form
+        values.put(FactsContract.FactsEntry.COLUMN_COORD_LAT, mLat.getText().toString());
+        values.put(FactsContract.FactsEntry.COLUMN_COORD_LONG, mLong.getText().toString());
+        values.put(FactsContract.FactsEntry.COLUMN_TITLE, mTitle.getText().toString()); //"Prueba DB"
+        values.put(FactsContract.FactsEntry.COLUMN_FACT, mFact.getText().toString()); // Long description
+        values.put(FactsContract.FactsEntry.COLUMN_CATEGORY, mCategory.getText().toString());
         getContentResolver().insert(Provider.CONTENT_URI, values);
         //Wipe all fields
         resetFields();

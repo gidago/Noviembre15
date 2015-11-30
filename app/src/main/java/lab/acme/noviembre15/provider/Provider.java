@@ -52,36 +52,36 @@ public class Provider extends ContentProvider {
     // database stuff
     private SQLiteDatabase factsDB;
     // CONTRACT
-    private static final String DATABASE_NAME = "facts";
-    private static final String DATABASE_TABLE = "myfacts";
-    private static final int DATABASE_VERSION = 1;
-    public static final String COLUMN_ID = "_ID";
-    public static final String COLUMN_DATE = "date";
-    public static final String COLUMN_TITLE = "title";
-    public static final String COLUMN_CATEGORY = "category";
-    public static final String COLUMN_CATEGORY_ID = "category_id";
-    public static final String COLUMN_FACT = "fact";
-    public static final String COLUMN_VALUE = "value";
-    public static final String COLUMN_COORD_LAT = "coord_lat";
-    public static final String COLUMN_COORD_LONG = "coord_long";
+    //private static final String DATABASE_NAME = "facts";
+    //private static final String DATABASE_TABLE = "myfacts";
+    //private static final int DATABASE_VERSION = 1;
+    //public static final String COLUMN_ID = "_ID";
+    //public static final String COLUMN_DATE = "date";
+    //public static final String COLUMN_TITLE = "title";
+    //public static final String COLUMN_CATEGORY = "category";
+    //public static final String COLUMN_CATEGORY_ID = "category_id";
+    //public static final String COLUMN_FACT = "fact";
+    //public static final String COLUMN_VALUE = "value";
+    //public static final String COLUMN_COORD_LAT = "coord_lat";
+    //public static final String COLUMN_COORD_LONG = "coord_long";
 
     // Create a table to hold facts.
     private static final String DATABASE_CREATE = "CREATE TABLE " +
-            DATABASE_TABLE  + " (" +
-            COLUMN_ID + " INTEGER UNIQUE PRIMARY KEY," +
-            COLUMN_DATE + " TEXT , " +
-            COLUMN_TITLE + " TEXT NOT NULL, " +
-            COLUMN_CATEGORY + " TEXT NOT NULL, " +
-            COLUMN_CATEGORY_ID + " INTEGER , " +
-            COLUMN_FACT + " TEXT NOT NULL, " +
-            COLUMN_VALUE + " REAL , " +
-            COLUMN_COORD_LAT + " REAL , " +
-            COLUMN_COORD_LONG + " REAL  " +
+            FactsContract.FactsEntry.DATABASE_TABLE  + " (" +
+            FactsContract.FactsEntry.COLUMN_ID + " INTEGER UNIQUE PRIMARY KEY," +
+            FactsContract.FactsEntry.COLUMN_DATE + " TEXT , " +
+            FactsContract.FactsEntry.COLUMN_TITLE + " TEXT NOT NULL, " +
+            FactsContract.FactsEntry.COLUMN_CATEGORY + " TEXT NOT NULL, " +
+            FactsContract.FactsEntry.COLUMN_CATEGORY_ID + " INTEGER , " +
+            FactsContract.FactsEntry.COLUMN_FACT + " TEXT NOT NULL, " +
+            FactsContract.FactsEntry.COLUMN_VALUE + " REAL , " +
+            FactsContract.FactsEntry.COLUMN_COORD_LAT + " REAL , " +
+            FactsContract.FactsEntry.COLUMN_COORD_LONG + " REAL  " +
             " );";
 
     private static class DatabaseHelper extends SQLiteOpenHelper {
         DatabaseHelper(Context context) {
-            super(context, DATABASE_NAME, null, DATABASE_VERSION);
+            super(context, FactsContract.FactsEntry.DATABASE_NAME, null, FactsContract.FactsEntry.DATABASE_VERSION);
         }
 
         @Override
@@ -93,7 +93,7 @@ public class Provider extends ContentProvider {
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             Log.d("CP db ", "Upgrading db from version: " );
             Log.d("  ....    " , oldVersion + newVersion + ", which will destroy all old data");
-            db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE);
+            db.execSQL("DROP TABLE IF EXISTS " + FactsContract.FactsEntry.DATABASE_TABLE);
             onCreate(db);
         }
     }
@@ -144,7 +144,7 @@ public class Provider extends ContentProvider {
         Log.e(TAG, "==================> Insert URI:    " + uri.toString());
 
           // add a new row
-          long rowID = factsDB.insert(DATABASE_TABLE, "", values);
+          long rowID = factsDB.insert(FactsContract.FactsEntry.DATABASE_TABLE, "", values);
 
           // if added successfully
           if (rowID > 0) {
@@ -167,11 +167,11 @@ public class Provider extends ContentProvider {
           int count = 0;
           switch (uriMatcher.match(uri)) {
               case FACTS:
-                  count = factsDB.update(DATABASE_TABLE, values, selection,
+                  count = factsDB.update(FactsContract.FactsEntry.DATABASE_TABLE, values, selection,
                           selectionArgs);
                   break;
               case FACTS_ID:
-                  count = factsDB.update(DATABASE_TABLE, values, COLUMN_ID
+                  count = factsDB.update(FactsContract.FactsEntry.DATABASE_TABLE, values, FactsContract.FactsEntry.COLUMN_ID
                           + " = "
                           + uri.getPathSegments().get(1)
                           + (!TextUtils.isEmpty(selection) ? " AND (" + selection
@@ -197,11 +197,11 @@ public class Provider extends ContentProvider {
           int count = 0;
           switch (uriMatcher.match(uri)) {
               case FACTS:
-                  count = factsDB.delete(DATABASE_TABLE, selection, selectionArgs);
+                  count = factsDB.delete(FactsContract.FactsEntry.DATABASE_TABLE, selection, selectionArgs);
                   break;
               case FACTS_ID:
                   String id = uri.getPathSegments().get(1);
-                  count = factsDB.delete(DATABASE_TABLE, COLUMN_ID
+                  count = factsDB.delete(FactsContract.FactsEntry.DATABASE_TABLE, FactsContract.FactsEntry.COLUMN_ID
                           + " = "
                           + id
                           + (!TextUtils.isEmpty(selection) ? " AND (" + selection
@@ -230,14 +230,14 @@ public class Provider extends ContentProvider {
 
         SQLiteQueryBuilder sqlBuilder = new SQLiteQueryBuilder();
 
-        sqlBuilder.setTables(DATABASE_TABLE);
+        sqlBuilder.setTables(FactsContract.FactsEntry.DATABASE_TABLE);
 
         if (uriMatcher.match(uri) == FACTS_ID)
             // if getting a particular row
-            sqlBuilder.appendWhere(COLUMN_ID + " = " + uri.getPathSegments().get(1));
+            sqlBuilder.appendWhere(FactsContract.FactsEntry.COLUMN_ID + " = " + uri.getPathSegments().get(1));
 
         if (sortOrder == null || sortOrder == "")
-            sortOrder = COLUMN_DATE;
+            sortOrder = FactsContract.FactsEntry.COLUMN_DATE;
 
         Cursor cursor = sqlBuilder.query(factsDB, projection, selection,
                 selectionArgs, null, null, sortOrder);

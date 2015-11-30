@@ -7,7 +7,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.drawable.Drawable;
 import android.util.Pair;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -210,7 +209,7 @@ public class TrackIconUtils {
      *
      * @param menu the menu
      */
-    public static void setMenuIconColor(Menu menu) {
+  /*  public static void setMenuIconColor(Menu menu) {
         if (ApiAdapterFactory.getApiAdapter().revertMenuIconColor()) {
             int size = menu.size();
             for (int i = 0; i < size; i++) {
@@ -218,18 +217,18 @@ public class TrackIconUtils {
                 revertMenuIconColor(menuitem);
             }
         }
-    }
+    }*/
 
     /**
      * Sets the menu icon color.
      *
      * @param menuitem the menu item
      */
-    public static void setMenuIconColor(MenuItem menuitem) {
+   /* public static void setMenuIconColor(MenuItem menuitem) {
         if (ApiAdapterFactory.getApiAdapter().revertMenuIconColor()) {
             revertMenuIconColor(menuitem);
         }
-    }
+    }*/
 
     /**
      * Reverts the menu icon color.
