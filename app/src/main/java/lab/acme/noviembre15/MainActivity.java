@@ -112,9 +112,11 @@ public class MainActivity extends AppCompatActivity {
     /**
      * 	Cursor with complete DB
      */
-    private Cursor cursorFacts(){
-        Uri allTitles = Uri.parse("content://lab.acme.noviembre15/facts");
-        Cursor cursor = managedQuery(allTitles, null, null, null, "_id asc");
+	private Cursor cursorFacts(){
+        Uri allTitles = Uri.parse("content://lab.acme.noviembre15/facts");              
+		//Cursor cursor = managedQuery(allTitles, null, null, null, "_id asc");
+        // TODO - Validar
+        Cursor cursor = managedQuery(allTitles, null, null, null, FactsContract.FactsEntry.DEFAULT_SORT_ORDER);
         //Cursor cursor = managedQuery(allTitles, null, null, null, null);
         //Log.e(LOG_TAG, "==================>>>>>>>>>>> Registros del cursor: " + cursor.getCount());
         return cursor;
@@ -124,9 +126,8 @@ public class MainActivity extends AppCompatActivity {
 	// Delete all rows of db
 	//
     private void deleteAllRowsTestBD() {
-        getContentResolver().delete(
-                Uri.parse("content://lab.acme.noviembre15/facts"), null,
-                null);
+    	getContentResolver().delete(
+        	Uri.parse("content://lab.acme.noviembre15/facts"), null, null);
         myListCursorAdapter.notifyDataSetChanged();
         mLayoutManager.removeAllViews();
     }
@@ -135,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
 	// Add rows to db
 	//
 	private void addTestBD() {
-    	String mMsg = "ILG PRUEBAS BD: " +"<------------------------->";
+		String mMsg = "ILG PRUEBAS BD: " +"<------------------------->";
         Log.e(LOG_TAG, mMsg);
         // add a row (reg)
 		ContentValues values = new ContentValues();      	
@@ -167,13 +168,10 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         String mMsg = "Method onOptionsItemSelected";
         Log.i(LOG_TAG, mMsg);
-
         int id = item.getItemId();
-
         switch (id) {
-
-            case (R.id.action_app_version):
-                Common.showAlertDialog(this, getString(R.string.app_name), "Your application version is: " + Common.getAppVersionCode(mContext) + ".", false);
+        	case (R.id.action_app_version):
+            	Common.showAlertDialog(this, getString(R.string.app_name), "Your application version is: " + Common.getAppVersionCode(mContext) + ".", false);
                 break;
             case (R.id.action_app_icon):
                 Intent activityAppIcon;
@@ -207,7 +205,6 @@ public class MainActivity extends AppCompatActivity {
         // TODO - revisar fallo
         if ( checkDatabase("facts.db"))
             Toast.makeText(getBaseContext(), "O.k. db", Toast.LENGTH_LONG).show();
-
         try {
             File sd = Environment.getExternalStorageDirectory();
             File data = Environment.getDataDirectory();

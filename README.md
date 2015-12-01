@@ -4,7 +4,6 @@ Practice "Android Studio" with support from GitHub.
 
 ## Introduction
 The goal of this project is to prepare a Andoid Content Provider. 
-Additionally it was used the library CommonSDK.
 The content provider is implemented and used by the application "facts."
 
 ![Content Provider](https://cloud.githubusercontent.com/assets/6483001/10971968/5fb4a8ec-83d7-11e5-8d81-08581f62d67f.JPG)
@@ -17,10 +16,10 @@ The facts application works like a diary, in which the relevant facts are collec
 |  | Field  | Type | Comment |
 |:-:|:--------       | -----:   |-----:   |
 | 1 | _id      |key ||
-| 2 |date |date?   | the date of fact |
+| 2 |date |date   | the date of fact |
 | 3 |name |character |short description|
 | 4 | category   |character | indeed categorization |
-| 5 | category_id   |int | Numerical identification of the categories |
+| 5 | category_id|int | Numerical id of the categories |
 | 6 | fact   |character | detailed description of the fact |
 | 7 | value   |numeric |  quantifying the economic fact |
 | 8 | coord_lat   |numeric | geographical location |
@@ -40,7 +39,6 @@ The facts application works like a diary, in which the relevant facts are collec
 This project is inspired by:
 
 * [Udacity - SunShine App](https://github.com/udacity/Sunshine-Version-2)
-* [CommonSDK](https://github.com/CommonUtils/android)
 * [NewCircle's - Android Content Provider Tutorial](https://newcircle.com/s/post/1375/android_content_provider_tutorial)
 
 

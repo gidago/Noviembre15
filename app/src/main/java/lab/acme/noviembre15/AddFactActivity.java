@@ -111,7 +111,54 @@ public class AddFactActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
+        //TODO - test it
+        // Spinner item selection Listener 
+        addListenerOnSpinnerItemSelection();
 
+//TODO - test it
+    // Add spinner data     
+    public void addListenerOnSpinnerItemSelection(){         
+    	spinner.setOnItemSelectedListener(new CustomOnItemSelectedListener());
+    }
+
+
+//TODO - test it
+		spinner.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              mCategory.setText( String.valueOf(spinner.getSelectedItem()));
+            }
+        });
+
+//TODO - test it
+	class SpinnerActivity extends Activity implements OnItemSelectedListener {
+    	public void onItemSelected(AdapterView<?> parent, View view, 
+            int pos, long id) {
+        	// An item was selected. You can retrieve the selected item using
+        	// parent.getItemAtPosition(pos)
+    	}
+   	 public void onNothingSelected(AdapterView<?> parent) {
+        	// Another interface callback
+    	}
+	}
+	
+	public class CustomOnItemSelectedListener implements OnItemSelectedListener {
+	 
+	    public void onItemSelected(AdapterView<?> parent, View view, int pos,
+	            long id) {
+	         
+	        Toast.makeText(parent.getContext(),
+	                "On Item Select : \n" + parent.getItemAtPosition(pos).toString(),
+	                Toast.LENGTH_LONG).show();
+	    }
+	 
+	    @Override
+	    public void onNothingSelected(AdapterView<?> arg0) {
+	        // TODO Auto-generated method stub
+	 
+	    }
+	 
+	}
 
 
 

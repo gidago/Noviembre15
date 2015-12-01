@@ -39,6 +39,19 @@ public class Provider extends ContentProvider {
 
 	static final String TAG = "Provider";
 
+	//TODO - for study
+	/**
+	 * Types of url.
+	 *
+  	 * @author Jimmy Shih
+ 	 */
+	@VisibleForTesting
+	enum UrlType {
+		TRACKPOINTS, TRACKPOINTS_ID, TRACKS, TRACKS_ID, WAYPOINTS, WAYPOINTS_ID
+	}
+
+
+
     public static final String PROVIDER_NAME = "lab.acme.noviembre15";
     public static final Uri CONTENT_URI = Uri.parse("content://" + PROVIDER_NAME + "/facts");
     private static final int FACTS = 1;
@@ -49,21 +62,15 @@ public class Provider extends ContentProvider {
         uriMatcher.addURI(FactsContract.AUTHORITY, "facts", FACTS);
         uriMatcher.addURI(FactsContract.AUTHORITY, "facts/#", FACTS_ID);
     }
+    
+    //TODO - for study
+    // uriMatcher.addURI(MyTracksProviderUtils.AUTHORITY, TrackPointsColumns.TABLE_NAME,
+	//		UrlType.TRACKPOINTS.ordinal());
+    // uriMatcher.addURI(MyTracksProviderUtils.AUTHORITY, TracksColumns.TABLE_NAME + "/#",
+	//		UrlType.TRACKS_ID.ordinal());
+    
     // database stuff
     private SQLiteDatabase factsDB;
-    // CONTRACT
-    //private static final String DATABASE_NAME = "facts";
-    //private static final String DATABASE_TABLE = "myfacts";
-    //private static final int DATABASE_VERSION = 1;
-    //public static final String COLUMN_ID = "_ID";
-    //public static final String COLUMN_DATE = "date";
-    //public static final String COLUMN_TITLE = "title";
-    //public static final String COLUMN_CATEGORY = "category";
-    //public static final String COLUMN_CATEGORY_ID = "category_id";
-    //public static final String COLUMN_FACT = "fact";
-    //public static final String COLUMN_VALUE = "value";
-    //public static final String COLUMN_COORD_LAT = "coord_lat";
-    //public static final String COLUMN_COORD_LONG = "coord_long";
 
     // Create a table to hold facts.
     private static final String DATABASE_CREATE = "CREATE TABLE " +
