@@ -60,7 +60,7 @@ public final class FactsContract {
 	    
 	    
 		//TODO - for study  
-	    public static final String CREATE_TABLE = "CREATE TABLE " 
+	/*    public static final String CREATE_TABLE = "CREATE TABLE "
 	    					+ TABLE_NAME + " ("
 							+ _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
 							+ TRACKID + " INTEGER, "
@@ -97,7 +97,7 @@ public final class FactsContract {
 			FLOAT_TYPE_ID, // bearing
 			BLOB_TYPE_ID // sensor
 		};
-	    
+	    */
 	    	    
 	}
 }

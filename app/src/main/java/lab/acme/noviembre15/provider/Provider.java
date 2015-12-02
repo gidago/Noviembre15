@@ -45,7 +45,7 @@ public class Provider extends ContentProvider {
 	 *
   	 * @author Jimmy Shih
  	 */
-	@VisibleForTesting
+	//@VisibleForTesting
 	enum UrlType {
 		TRACKPOINTS, TRACKPOINTS_ID, TRACKS, TRACKS_ID, WAYPOINTS, WAYPOINTS_ID
 	}

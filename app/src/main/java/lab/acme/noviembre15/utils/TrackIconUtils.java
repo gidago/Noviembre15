@@ -1,4 +1,4 @@
-package lab.acme.noviembre15.common;
+package lab.acme.noviembre15.utils;
 
 
 import android.content.Context;
@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.drawable.Drawable;
 import android.util.Pair;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -58,12 +59,11 @@ public class TrackIconUtils {
             R.string.activity_type_off_trail_hiking, R.string.activity_type_speed_walking,
             R.string.activity_type_trail_hiking, R.string.activity_type_walking };
 
-    private static final LinkedHashMap<String, Pair<Integer, Integer>>
-            MAP = new LinkedHashMap<String, Pair<Integer, Integer>>();
+    private static final LinkedHashMap<String, Pair<Integer, Integer>> MAP = new LinkedHashMap<String, Pair<Integer, Integer>>();
 
     static {
         MAP.put(
-                RUN, new Pair<Integer, Integer>(R.string.activity_type_running, R.drawable.ic_track_run));
+                RUN, new Pair<Integer, Integer>(R.string.activity_type_running, R.drawable.ic_category_3));
         MAP.put(
                 WALK, new Pair<Integer, Integer>(R.string.activity_type_walking, R.drawable.ic_track_walk));
         MAP.put(
@@ -209,7 +209,7 @@ public class TrackIconUtils {
      *
      * @param menu the menu
      */
-  /*  public static void setMenuIconColor(Menu menu) {
+    public static void setMenuIconColor(Menu menu) {
         if (ApiAdapterFactory.getApiAdapter().revertMenuIconColor()) {
             int size = menu.size();
             for (int i = 0; i < size; i++) {
@@ -217,7 +217,7 @@ public class TrackIconUtils {
                 revertMenuIconColor(menuitem);
             }
         }
-    }*/
+    }
 
     /**
      * Sets the menu icon color.

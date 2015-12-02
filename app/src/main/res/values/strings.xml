@@ -449,5 +449,54 @@
         <item>Otros</item>
     </string-array>
 
+      <string name="share_track_share_url_title"
+          translation_description="The dialog title asking the user to select an application for sharing an URL.">
+    Share URL using:
+  </string>
 
+
+    <!-- Image -->
+  <string name="image_application"
+      translation_description="The accessibility description for a generic application icon.">
+    Application
+  </string>
+
+
+     <string name="description_weight_imperial"
+         translation_description="Label for weight in pounds.">
+    Weight (lb)
+  </string>
+  <string name="description_weight_metric"
+      translation_description="Label for weight in kilograms.">
+    Weight (kg)
+  </string>
+
+
+    <string name="track_edit_activity_type_hint"
+        translation_description="In the page to edit a track, the hint in the 'Activity type' text field
+      when it is empty.">
+    Activity type
+  </string>
+
+    <string name="generic_cancel"
+        translation_description="The text on a button to say cancel.">
+    Cancel
+  </string>
+<string name="generic_ok"
+    translation_description="The text on a button to say ok.">
+    OK
+  </string>
+
+      <string name="generic_progress_title"
+          translation_description="The title on a progress dialog asking the user to wait.">
+    Please wait&#8230;
+  </string>
+      <string name="generic_no"
+          translation_description="The text on a button to say no.">
+    No
+  </string>
+      <string name="generic_yes"
+          translation_description="The text on a button to say yes.">
+    Yes
+  </string>
 </resources>

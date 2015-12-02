@@ -4,159 +4,147 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-    <RelativeLayout
-        android:id="@+id/relative_layout_add_client"
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:paddingLeft="20dp"
-        android:paddingTop="5dp"
-        android:paddingRight="20dp"
-        android:paddingBottom="5dp">
+        android:layout_height="match_parent" >
         <RelativeLayout
-            android:id="@+id/relative_layout_attendant_image"
+            android:id="@+id/relative_layout_add_client"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_width="match_parent">
-
-            <ImageButton
-                android:id="@+id/pictureImageButton"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_marginBottom="12dp"
-                android:background="@color/gray"
-                android:layout_centerHorizontal="true"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_action_camera"
-                android:contentDescription="@string/description_attendant_image"/>
-            <ImageView
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:paddingLeft="20dp"
+            android:paddingTop="5dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="5dp">
+            <RelativeLayout
+                android:id="@+id/relative_layout_attendant_image"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_alignBottom="@id/pictureImageButton"
-                android:layout_alignRight="@id/pictureImageButton"
-                android:contentDescription="@string/description_attendant_image"
-                android:src="@drawable/ic_image_arrow"/>
-
-        </RelativeLayout>
-        <EditText
-            android:id="@+id/edit_text_date"
-            android:layout_below="@+id/relative_layout_attendant_image"
-            style="@style/AddAttendantForm"
-            android:hint="@string/hint_guest_name"
-            android:imeOptions="actionNext"
-        />
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/title_text_input_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/edit_text_date">
+                android:layout_width="match_parent">
+                <ImageButton
+                    android:id="@+id/pictureImageButton"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginBottom="12dp"
+                    android:background="@color/gray"
+                    android:layout_centerHorizontal="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_action_camera"
+                    android:contentDescription="@string/description_attendant_image"/>
+                <ImageView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_alignBottom="@id/pictureImageButton"
+                    android:layout_alignRight="@id/pictureImageButton"
+                    android:contentDescription="@string/description_attendant_image"
+                    android:src="@drawable/ic_image_arrow" />
+            </RelativeLayout>
             <EditText
-                android:id="@+id/edit_text_title"
+                android:id="@+id/edit_text_date"
+                android:layout_below="@+id/relative_layout_attendant_image"
                 style="@style/AddAttendantForm"
-                android:layout_below="@+id/edit_text_date"
-                android:hint="@string/hint_guest_email"
-                android:imeOptions="actionNext"
-                android:inputType="textCapSentences"
-            />
-        </android.support.design.widget.TextInputLayout>
-
-
-        <LinearLayout
-            android:id="@+id/tmp"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:layout_below="@+id/title_text_input_layout">
+                android:hint="@string/hint_guest_name"
+                android:imeOptions="actionNext" />
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/title_text_input_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edit_text_date">
+                <EditText
+                    android:id="@+id/edit_text_title"
+                    style="@style/AddAttendantForm"
+                    android:layout_below="@+id/edit_text_date"
+                    android:hint="@string/hint_guest_email"
+                    android:imeOptions="actionNext"
+                    android:inputType="textCapSentences" />
+            </android.support.design.widget.TextInputLayout>
+            <LinearLayout
+                android:id="@+id/tmp"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_below="@+id/title_text_input_layout">
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/category_text_input_layout"
+                    android:layout_width="238dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/edit_text_date">
+                    <!-- TODO test -->
+                    <EditText
+                        android:id="@+id/edit_text_category"
+                        style="@style/AddAttendantForm"
+                        android:layout_below="@+id/title_text_input_layout"
+                        android:hint="@string/hint_guest_phone"
+                        android:imeOptions="actionNext"
+                        android:inputType="textCapSentences"
+                        android:layout_width="225dp" />
+                </android.support.design.widget.TextInputLayout>
+                <Spinner
+                    android:id="@+id/track_edit_activity_type_icon"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:hint="Category"
+                    tools:text="John Doe" />
+            </LinearLayout>
 
             <!-- TODO test -->
-            <EditText
-                android:id="@+id/edit_text_category"
-                style="@style/AddAttendantForm"
-                android:layout_below="@+id/title_text_input_layout"
-                android:hint="@string/hint_guest_phone"
-                android:imeOptions="actionNext"
-                android:inputType="textCapSentences"
-                android:layout_width="225dp" />
-
-            <Spinner
-                android:id="@+id/track_edit_activity_type_icon"
-                android:layout_gravity="bottom"
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/username_text_input_layout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:hint="Category"
-                tools:text="John Doe"
-            />
-
-        </LinearLayout>
-
-        <!-- TODO test -->
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/username_text_input_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tmp">
-            <EditText
-                android:id="@+id/edit_text_fact"
-                style="@style/AddAttendantForm"
-                android:layout_width="wrap_content"
+                android:layout_below="@+id/tmp">
+                <EditText
+                    android:id="@+id/edit_text_fact"
+                    style="@style/AddAttendantForm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:hint="@string/hint_guest_street_address"
+                    android:layout_below="@+id/tmp"
+                    android:ems="20"
+                    android:imeOptions="actionNext"
+                    android:inputType="textMultiLine|textCapSentences" />
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/value_text_input_layout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:hint="@string/hint_guest_street_address"
-                android:layout_below="@+id/tmp"
-                android:ems="20"
-                android:imeOptions="actionNext"
-                android:inputType="textMultiLine|textCapSentences"
-            />
-		</android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/value_text_input_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/username_text_input_layout">
+                android:layout_below="@+id/username_text_input_layout">
+                <EditText
+                    android:id="@+id/edit_text_value"
+                    style="@style/AddAttendantForm"
+                    android:hint="@string/hint_guest_city"
+                    android:inputType="number"
+                    android:imeOptions="actionNext"
+                    android:layout_below="@+id/username_text_input_layout" />
+            </android.support.design.widget.TextInputLayout>
             <EditText
-                android:id="@+id/edit_text_value"
+                android:id="@+id/edit_text_latitude"
                 style="@style/AddAttendantForm"
-                android:hint="@string/hint_guest_city"
-                android:inputType="number"
-                android:imeOptions="actionNext"
-                android:layout_below="@+id/username_text_input_layout"
-            />
-        </android.support.design.widget.TextInputLayout>
+                android:layout_below="@+id/value_text_input_layout"
+                android:hint="@string/coord_lat"
+                android:inputType="numberDecimal"
+                android:imeOptions="actionNext" />
+            <EditText
+                android:id="@+id/edit_text_longitude"
+                style="@style/AddAttendantForm"
+                android:layout_below="@+id/edit_text_latitude"
+                android:hint="@string/hint_zip_code"
+                android:inputType="numberDecimal"
+                android:imeOptions="actionNext" />
 
-
-        <EditText
-            android:id="@+id/edit_text_latitude"
-            style="@style/AddAttendantForm"
-            android:layout_below="@+id/value_text_input_layout"
-            android:hint="@string/coord_lat"
-            android:inputType="numberDecimal"
-            android:imeOptions="actionNext" />
-        <EditText
-            android:id="@+id/edit_text_longitude"
-            style="@style/AddAttendantForm"
-            android:layout_below="@+id/edit_text_latitude"
-            android:hint="@string/hint_zip_code"
-            android:inputType="numberDecimal"
-            android:imeOptions="actionNext" />
-
-        <Button
-            android:id="@+id/save_button"
-            android:textColor="#ffffff"
-            android:layout_width="150dp"
-            android:background="@color/primary"
-            android:text="@string/save"
-            android:layout_centerInParent="true"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/edit_text_longitude"/>
-    </RelativeLayout>
-</ScrollView>
-
+            <Button
+                android:id="@+id/save_button"
+                android:textColor="#ffffff"
+                android:layout_width="150dp"
+                android:background="@color/primary"
+                android:text="@string/save"
+                android:layout_centerInParent="true"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edit_text_longitude"/>
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>
 
     <!--
