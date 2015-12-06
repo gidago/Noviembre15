@@ -32,8 +32,7 @@ import lab.acme.noviembre15.common.Common;
 import lab.acme.noviembre15.provider.FactsContract;
 import lab.acme.noviembre15.provider.Provider;
 
-//REFS:
-// http://valokafor.com/create-and-publish-your-first-android-app-part-2/
+
 
 
 public class MainActivity extends AppCompatActivity {

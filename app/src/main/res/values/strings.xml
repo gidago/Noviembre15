@@ -442,11 +442,10 @@
 
 <!-- TODO test -->   
     <string-array name="category_array">
-        <item>Hogar</item>
-        <item>Trabajo</item>
-        <item>Vacaciones</item>
-        <item>Viajes</item>
-        <item>Otros</item>
+      <item>Viajes</item>
+      <item>Hogar</item>
+      <item>Trabajo</item>
+      <item>Otros</item>
     </string-array>
 
       <string name="share_track_share_url_title"
@@ -499,4 +498,16 @@
           translation_description="The text on a button to say yes.">
     Yes
   </string>
+
+
+
+  <string name="category_type_1" translation_description="When entering an 'Activity type', in the auto-complete text box, the
+   completion suggestion for running.">Viajes</string>
+  <string name="category_type_2" translation_description="When entering an 'Activity type', in the auto-complete text box, the
+   completion suggestion for running.">Hogar</string>
+  <string name="category_type_3" translation_description="When entering an 'Activity type', in the auto-complete text box, the
+   completion suggestion for running.">Trabajo</string>
+  <string name="category_type_4" translation_description="When entering an 'Activity type', in the auto-complete text box, the
+   completion suggestion for running.">Otros</string>
+
 </resources>

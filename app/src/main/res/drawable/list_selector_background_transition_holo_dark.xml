@@ -11,11 +11,12 @@
      limitations under the License.
 -->
 
-<transition xmlns:android="http://schemas.android.com/apk/res/android">
-
+<transition
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/list_pressed_holo_dark"  />
+    <item android:drawable="@drawable/list_longpressed_holo"  />
 </transition>
 
 <!--
-    <item android:drawable="@drawable/list_pressed_holo_dark"  />
-    <item android:drawable="@drawable/list_longpressed_holo"  />
+
     -->

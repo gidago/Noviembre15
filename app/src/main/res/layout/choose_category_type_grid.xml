@@ -24,8 +24,18 @@ limitations under the License.
         android:numColumns="4"
         android:padding="4dp"
         android:stretchMode="spacingWidth"
-        android:verticalSpacing="4dp" />
-    <LinearLayout
+        android:verticalSpacing="4dp"
+        android:background="@color/material_grey_600"
+        tools:text="John Doe"/>
+
+</LinearLayout>
+
+<!--
+  style="@style/TextMedium"
+   style="@style/TextMedium"
+
+
+   <LinearLayout
         android:id="@+id/choose_activity_type_weight_container"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
@@ -53,9 +63,6 @@ limitations under the License.
             tools:text="John Doe"
             android:layout_height="wrap_content" />
     </LinearLayout>
-</LinearLayout>
 
-<!--
-  style="@style/TextMedium"
-   style="@style/TextMedium"
+
    -->

@@ -5,10 +5,10 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -18,14 +18,17 @@ import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Objects;
 
+import lab.acme.noviembre15.fragments.ChooseCategoryTypeDialogFragment;
 import lab.acme.noviembre15.models.FactItem;
 import lab.acme.noviembre15.provider.FactsContract;
 import lab.acme.noviembre15.provider.Provider;
-import lab.acme.noviembre15.utils.TrackIconUtils;
+import lab.acme.noviembre15.utils.CategoryIconUtils;
 
 
-public class AddFactActivity extends AppCompatActivity {
+
+public class AddFactActivity extends AppCompatActivity implements ChooseCategoryTypeDialogFragment.ChooseCategoryTypeCaller {
 
     private final String LOG_TAG = AddFactActivity.class.getSimpleName();
 
@@ -34,18 +37,22 @@ public class AddFactActivity extends AppCompatActivity {
     private Context mContext;
     private static Calendar dateTime = Calendar.getInstance();
     //TODO - en curso
-	private static final String ICON_VALUE_KEY = "icon_value_key";
-    private AutoCompleteTextView activityType;
+	//private static final String ICON_VALUE_KEY = "icon_value_key";
+    //private AutoCompleteTextView activityType;
 
     private Spinner activityTypeIcon;
-	private String iconValue;
+
+    private Spinner mCategoryTypeIcon;
+    private String iconValue;
+
+
 
 	/**
 	* Activity types.
 	*/
-	public enum ActivityType {
-	CYCLING, RUNNING, WALKING, INVALID
-	}
+//	public enum ActivityType {
+//	CYCLING, RUNNING, WALKING, INVALID
+//	}
 
 	 /**
 	* Gets the activity type.
@@ -53,7 +60,7 @@ public class AddFactActivity extends AppCompatActivity {
 	* @param context the context
 	* @param activityType the activity type
 	*/
-	public static ActivityType getActivityType(Context context, String activityType) {
+/*	public static ActivityType getActivityType(Context context, String activityType) {
 		if (activityType == null || activityType.equals("")) {
 			return ActivityType.INVALID;
 		}
@@ -65,7 +72,7 @@ public class AddFactActivity extends AppCompatActivity {
 			return ActivityType.CYCLING;
 		}
 		return ActivityType.INVALID;
-	}
+	}*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +83,8 @@ public class AddFactActivity extends AppCompatActivity {
     }
 
     private void initView() {
+
+        iconValue = "";
         mDate = (EditText) findViewById(R.id.edit_text_date);
         mTitle = (EditText)findViewById(R.id.edit_text_title);
         mCategory = (EditText) findViewById(R.id.edit_text_category);
@@ -101,7 +110,7 @@ public class AddFactActivity extends AppCompatActivity {
         });
 
         //TODO - en curso
-        Spinner spinner = (Spinner) findViewById(R.id.track_edit_activity_type_icon);
+       /* Spinner spinner = (Spinner) findViewById(R.id.track_edit_activity_type_icon);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.category_array, android.R.layout.simple_spinner_item);
@@ -111,58 +120,35 @@ public class AddFactActivity extends AppCompatActivity {
         spinner.setAdapter(adapter);
         //TODO - test it
         // Spinner item selection Listener 
-        spinner.setOnItemSelectedListener(new CustomOnItemSelectedListener());
+        spinner.setOnItemSelectedListener(new CustomOnItemSelectedListener());*/
 
-
-  /*         activityTypeIcon = (Spinner) findViewById(R.id.track_edit_activity_type_icon);
-       // activityTypeIcon.setAdapter(TrackIconUtils.getIconSpinnerAdapter(this, iconValue));
-        activityTypeIcon.setAdapter(TrackIconUtils.getIconSpinnerAdapter(this, "AIRPLANE"));
-     activityTypeIcon.setOnTouchListener(new View.OnTouchListener() {
+        mCategory = (EditText) findViewById(R.id.edit_text_category);
+        mCategoryTypeIcon = (Spinner) findViewById(R.id.spinner_category_type_icon);
+        mCategoryTypeIcon.setAdapter(CategoryIconUtils.getIconSpinnerAdapter(this, iconValue));
+        mCategoryTypeIcon.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
-                  //  ChooseActivityTypeDialogFragment.newInstance(activityType.getText().toString()).show(
-                    //        getSupportFragmentManager(),
-                      //      ChooseActivityTypeDialogFragment.CHOOSE_ACTIVITY_TYPE_DIALOG_TAG);
+                    ChooseCategoryTypeDialogFragment.newInstance(mCategory.getText().toString()).show(
+                            getSupportFragmentManager(),
+                            ChooseCategoryTypeDialogFragment.CHOOSE_CATEGORY_TYPE_DIALOG_TAG);
                 }
                 return true;
             }
         });
-        activityTypeIcon.setOnKeyListener(new View.OnKeyListener() {
+        mCategoryTypeIcon.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
-                    ChooseActivityTypeDialogFragment.newInstance(activityType.getText().toString()).show(
+                    ChooseCategoryTypeDialogFragment.newInstance(mCategory.getText().toString()).show(
                             getSupportFragmentManager(),
-                            ChooseActivityTypeDialogFragment.CHOOSE_ACTIVITY_TYPE_DIALOG_TAG);
+                            ChooseCategoryTypeDialogFragment.CHOOSE_CATEGORY_TYPE_DIALOG_TAG);
                 }
                 return true;
             }
-        });  */
-
-     /*   activityType = (AutoCompleteTextView) findViewById(R.id.track_edit_activity_type);
-
-      //  activityType.setText(track.getCategory());
-
-        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(
-                this, R.array.activity_types, android.R.layout.simple_dropdown_item_1line);
-
-        activityType.setAdapter(adapter1);
-
-        activityType.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                setActivityTypeIcon(TrackIconUtils.getIconValue(
-                        AddFactActivity.this, (String) activityType.getAdapter().getItem(position)));
-            }
-        });*/
-
+        });
     }
 
-     private void setActivityTypeIcon(String value) {
-        iconValue = value;
-        TrackIconUtils.setIconSpinner(activityTypeIcon, value);
-    }
 
     private boolean requiredFieldsCompleted() {
         //Check if required information are entered, here we are only checking for
@@ -209,7 +195,16 @@ public class AddFactActivity extends AppCompatActivity {
         // add a row (reg)
         ContentValues values = new ContentValues();
         values.put(FactsContract.FactsEntry.COLUMN_DATE, mDate.getText().toString()); //Get date from input form
-        values.put(FactsContract.FactsEntry.COLUMN_CATEGORY_ID, 1);
+
+        if (Objects.equals(mCategory.getText().toString(), "Viajes"))
+            values.put(FactsContract.FactsEntry.COLUMN_CATEGORY_ID, "1");
+        if (Objects.equals(mCategory.getText().toString(), "Hogar"))
+            values.put(FactsContract.FactsEntry.COLUMN_CATEGORY_ID, "2");
+        if (Objects.equals(mCategory.getText().toString(), "Trabajo"))
+            values.put(FactsContract.FactsEntry.COLUMN_CATEGORY_ID, "3");
+        if (Objects.equals(mCategory.getText().toString(), "Otros"))
+            values.put(FactsContract.FactsEntry.COLUMN_CATEGORY_ID, "4");
+
         values.put(FactsContract.FactsEntry.COLUMN_VALUE, mValue.getText().toString()); ///Get value from input form
         values.put(FactsContract.FactsEntry.COLUMN_COORD_LAT, mLat.getText().toString());
         values.put(FactsContract.FactsEntry.COLUMN_COORD_LONG, mLong.getText().toString());
@@ -252,10 +247,6 @@ public class AddFactActivity extends AppCompatActivity {
         public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
             // An item was selected. You can retrieve the selected item using
             // parent.getItemAtPosition(pos)
-            //  Toast.makeText(parent.getContext(),
-            //          "On Item Select : \n" + parent.getItemAtPosition(pos).toString(),
-            //          Toast.LENGTH_LONG).show();
-            //Log.e("  ....    " , parent.getItemAtPosition(pos).toString());
             mCategory.setText(parent.getItemAtPosition(pos).toString());
         }
 
@@ -266,4 +257,14 @@ public class AddFactActivity extends AppCompatActivity {
         }
     }
 
+    private void setmCategoryTypeIcon(String value) {
+        iconValue = value;
+        CategoryIconUtils.setIconSpinner(mCategoryTypeIcon, value);
+    }
+
+    @Override
+    public void onChooseCategoryTypeDone(String value) {
+        setmCategoryTypeIcon(value);
+        mCategory.setText(getString(CategoryIconUtils.getIconActivityType(value)));
+    }
 }

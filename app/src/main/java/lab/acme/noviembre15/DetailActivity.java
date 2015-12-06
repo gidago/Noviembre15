@@ -84,8 +84,10 @@ public class DetailActivity extends AppCompatActivity {
                 case 3:
                     Picasso.with(mContext).load(R.drawable.category_3).into(factCardImage);
                     break;
+
                 default:
                     Picasso.with(mContext).load(R.drawable.no_category).into(factCardImage);
+
             }
             Log.d(LOG_TAG, "** Provider title:   " + c.getString(c.getColumnIndex(FactsContract.FactsEntry.COLUMN_TITLE)) );
         }

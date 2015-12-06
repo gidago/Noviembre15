@@ -64,27 +64,32 @@
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_below="@+id/title_text_input_layout">
+
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/category_text_input_layout"
-                    android:layout_width="238dp"
+                    android:layout_width="207dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/edit_text_date">
-                    <!-- TODO test -->
                     <EditText
                         android:id="@+id/edit_text_category"
-                        style="@style/AddAttendantForm"
-                        android:layout_below="@+id/title_text_input_layout"
                         android:hint="@string/hint_guest_phone"
                         android:imeOptions="actionNext"
                         android:inputType="textCapSentences"
-                        android:layout_width="225dp" />
+                        android:layout_width="225dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="44dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentStart="true" />
                 </android.support.design.widget.TextInputLayout>
                 <Spinner
-                    android:id="@+id/track_edit_activity_type_icon"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/spinner_category_type_icon"
+                    android:layout_height="match_parent"
+                    android:layout_width="129dp"
                     android:hint="Category"
-                    tools:text="John Doe" />
+                    android:layout_alignTop="@+id/category_text_input_layout"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignBottom="@+id/category_text_input_layout"
+                    android:background="#d8dadd" />
             </LinearLayout>
 
             <!-- TODO test -->
