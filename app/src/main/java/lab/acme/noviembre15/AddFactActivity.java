@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -26,8 +25,6 @@ import lab.acme.noviembre15.provider.FactsContract;
 import lab.acme.noviembre15.provider.Provider;
 import lab.acme.noviembre15.utils.CategoryIconUtils;
 
-
-
 public class AddFactActivity extends AppCompatActivity implements ChooseCategoryTypeDialogFragment.ChooseCategoryTypeCaller {
 
     private final String LOG_TAG = AddFactActivity.class.getSimpleName();
@@ -36,43 +33,8 @@ public class AddFactActivity extends AppCompatActivity implements ChooseCategory
     Button mSaveButton;
     private Context mContext;
     private static Calendar dateTime = Calendar.getInstance();
-    //TODO - en curso
-	//private static final String ICON_VALUE_KEY = "icon_value_key";
-    //private AutoCompleteTextView activityType;
-
-    private Spinner activityTypeIcon;
-
     private Spinner mCategoryTypeIcon;
     private String iconValue;
-
-
-
-	/**
-	* Activity types.
-	*/
-//	public enum ActivityType {
-//	CYCLING, RUNNING, WALKING, INVALID
-//	}
-
-	 /**
-	* Gets the activity type.
-	*
-	* @param context the context
-	* @param activityType the activity type
-	*/
-/*	public static ActivityType getActivityType(Context context, String activityType) {
-		if (activityType == null || activityType.equals("")) {
-			return ActivityType.INVALID;
-		}
-		if (TrackIconUtils.getIconValue(context, activityType).equals(TrackIconUtils.WALK)) {
-			return ActivityType.WALKING;
-		} else if (TrackIconUtils.getIconValue(context, activityType).equals(TrackIconUtils.RUN)) {
-			return ActivityType.RUNNING;
-		} else if (TrackIconUtils.getIconValue(context, activityType).equals(TrackIconUtils.BIKE)) {
-			return ActivityType.CYCLING;
-		}
-		return ActivityType.INVALID;
-	}*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,19 +70,6 @@ public class AddFactActivity extends AppCompatActivity implements ChooseCategory
                 }
             }
         });
-
-        //TODO - en curso
-       /* Spinner spinner = (Spinner) findViewById(R.id.track_edit_activity_type_icon);
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.category_array, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        spinner.setAdapter(adapter);
-        //TODO - test it
-        // Spinner item selection Listener 
-        spinner.setOnItemSelectedListener(new CustomOnItemSelectedListener());*/
 
         mCategory = (EditText) findViewById(R.id.edit_text_category);
         mCategoryTypeIcon = (Spinner) findViewById(R.id.spinner_category_type_icon);
@@ -238,23 +187,6 @@ public class AddFactActivity extends AppCompatActivity implements ChooseCategory
             }
         }, dateTime.get(Calendar.YEAR), dateTime.get(Calendar.MONTH),
                 dateTime.get(Calendar.DAY_OF_MONTH)).show();
-    }
-
-    /**
-     *  Set category from spinner
-     */
-    class CustomOnItemSelectedListener implements AdapterView.OnItemSelectedListener {
-        public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-            // An item was selected. You can retrieve the selected item using
-            // parent.getItemAtPosition(pos)
-            mCategory.setText(parent.getItemAtPosition(pos).toString());
-        }
-
-        @Override
-        public void onNothingSelected(AdapterView<?> arg0) {
-            // TODO Auto-generated method stub
-            // Another interface callback
-        }
     }
 
     private void setmCategoryTypeIcon(String value) {

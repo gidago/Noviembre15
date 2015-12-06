@@ -39,19 +39,6 @@ public class Provider extends ContentProvider {
 
 	static final String TAG = "Provider";
 
-	//TODO - for study
-	/**
-	 * Types of url.
-	 *
-  	 * @author Jimmy Shih
- 	 */
-	//@VisibleForTesting
-	enum UrlType {
-		TRACKPOINTS, TRACKPOINTS_ID, TRACKS, TRACKS_ID, WAYPOINTS, WAYPOINTS_ID
-	}
-
-
-
     public static final String PROVIDER_NAME = "lab.acme.noviembre15";
     public static final Uri CONTENT_URI = Uri.parse("content://" + PROVIDER_NAME + "/facts");
     private static final int FACTS = 1;
@@ -62,12 +49,6 @@ public class Provider extends ContentProvider {
         uriMatcher.addURI(FactsContract.AUTHORITY, "facts", FACTS);
         uriMatcher.addURI(FactsContract.AUTHORITY, "facts/#", FACTS_ID);
     }
-    
-    //TODO - for study
-    // uriMatcher.addURI(MyTracksProviderUtils.AUTHORITY, TrackPointsColumns.TABLE_NAME,
-	//		UrlType.TRACKPOINTS.ordinal());
-    // uriMatcher.addURI(MyTracksProviderUtils.AUTHORITY, TracksColumns.TABLE_NAME + "/#",
-	//		UrlType.TRACKS_ID.ordinal());
     
     // database stuff
     private SQLiteDatabase factsDB;

@@ -81,9 +81,7 @@ public class ChooseCategoryTypeDialogFragment extends DialogFragment {
         }
         Options options = new Options();
         options.inJustDecodeBounds = true;
-        //BitmapFactory.decodeResource(activity.getResources(), R.drawable.ic_track_generic, options);
         BitmapFactory.decodeResource(activity.getResources(), R.drawable.ic_track_generic, options);
-////        BitmapFactory.setColorFilter(0xFF303F9F, PorterDuff.Mode.MULTIPLY)
         int padding = 32;
         int width = options.outWidth + 2 * padding;
         int height = options.outHeight + 2 * padding;

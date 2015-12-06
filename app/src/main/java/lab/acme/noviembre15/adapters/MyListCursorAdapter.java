@@ -74,7 +74,6 @@ public class MyListCursorAdapter extends CursorRecyclerViewAdapter<MyListCursorA
 
             default:
                 Picasso.with(mContext).load(R.drawable.no_category).into(viewHolder.factCardImage);
-
         }
     }
 }

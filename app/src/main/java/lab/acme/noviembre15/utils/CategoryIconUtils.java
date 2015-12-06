@@ -4,11 +4,8 @@ package lab.acme.noviembre15.utils;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.ColorMatrixColorFilter;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.util.Pair;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -32,6 +29,7 @@ public class CategoryIconUtils {
     public static final String HOGAR = "HOGAR";
     public static final String TRABAJO = "TRABAJO";
     public static final String OTRO = "OTRO";
+    public static final String AFICION = "AFICION";
 
 
     private static final int[] VIAJE_LIST = new int[] { R.string.category_type_1,
@@ -110,24 +108,6 @@ public class CategoryIconUtils {
        if (inList(context, activityType, HOGAR_LIST)) {
             return HOGAR;
         }
-/**         if (inList(context, activityType, BOAT_LIST)) {
-            return BOAT;
-        }
-        if (inList(context, activityType, DRIVE_LIST)) {
-            return OTRO;
-        }
-        if (inList(context, activityType, RUN_LIST)) {
-            return VIAJE;
-        }
-        if (inList(context, activityType, SKI_LIST)) {
-            return SKI;
-        }
-        if (inList(context, activityType, SNOW_BOARDING_LIST)) {
-            return SNOW_BOARDING;
-        }
-        if (inList(context, activityType, WALK_LIST)) {
-            return HOGAR;
-        }*/
         return "";
     }
 
@@ -175,39 +155,4 @@ public class CategoryIconUtils {
         return false;
     }
 
-    /**
-     * Sets the menu icon color.
-     *
-     * @param menu the menu
-     */
- /**   public static void setMenuIconColor(Menu menu) {
-        if (ApiAdapterFactory.getApiAdapter().revertMenuIconColor()) {
-            int size = menu.size();
-            for (int i = 0; i < size; i++) {
-                MenuItem menuitem = menu.getItem(i);
-                revertMenuIconColor(menuitem);
-            }
-        }
-    }*/
-
-    /**
-     * Sets the menu icon color.
-     *
-     * @param menuitem the menu item
-     */
-   /* public static void setMenuIconColor(MenuItem menuitem) {
-        if (ApiAdapterFactory.getApiAdapter().revertMenuIconColor()) {
-            revertMenuIconColor(menuitem);
-        }
-    }*/
-
-    /**
-     * Reverts the menu icon color.
-     *
-     * @param menuitem the menu item
-     */
-    private static void revertMenuIconColor(MenuItem menuitem) {
-        Drawable drawable = menuitem.getIcon();
-        drawable.setColorFilter(new ColorMatrixColorFilter(REVERT_COLOR_MATRIX));
-    }
 }
