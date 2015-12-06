@@ -4,16 +4,17 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/facts_main_card_view"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
-    card_view:cardCornerRadius="4dp"
+    android:layout_height="100dp"
+    card_view:cardCornerRadius="8dp"
     card_view:cardElevation="4dp"
     card_view:cardUseCompatPadding="true"
-    android:background="@android:color/darker_gray">
+    android:background="@color/transparent">
 
 
 <RelativeLayout
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="#d9e0f9">
 
     <!--ImageView
         android:id="@+id/image_view_fact_card"
@@ -52,7 +53,7 @@
     <View
         android:layout_width="wrap_content"
         android:layout_height="1dp"
-        android:background="#ffd5d5d5"
+        android:background="@color/colorPrimary"
         android:id="@+id/linea"
         android:layout_above="@+id/compartir"
         android:layout_toRightOf="@+id/image_view_fact_card">

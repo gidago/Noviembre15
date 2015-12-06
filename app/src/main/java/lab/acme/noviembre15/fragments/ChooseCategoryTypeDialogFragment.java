@@ -74,14 +74,16 @@ public class ChooseCategoryTypeDialogFragment extends DialogFragment {
     public static Dialog getDialog(
             final Activity activity, final String category, final ChooseCategoryTypeCaller caller) {
         View view = activity.getLayoutInflater().inflate(R.layout.choose_category_type_grid, null);
-        GridView gridView = (GridView) view.findViewById(R.id.choose_activity_type_grid_view);
+        GridView gridView = (GridView) view.findViewById(R.id.choose_category_type_grid_view);
         List<Integer> imageIds = new ArrayList<Integer>();
         for (String iconValue : CategoryIconUtils.getAllIconValues()) {
             imageIds.add(CategoryIconUtils.getIconDrawable(iconValue));
         }
         Options options = new Options();
         options.inJustDecodeBounds = true;
+        //BitmapFactory.decodeResource(activity.getResources(), R.drawable.ic_track_generic, options);
         BitmapFactory.decodeResource(activity.getResources(), R.drawable.ic_track_generic, options);
+////        BitmapFactory.setColorFilter(0xFF303F9F, PorterDuff.Mode.MULTIPLY)
         int padding = 32;
         int width = options.outWidth + 2 * padding;
         int height = options.outHeight + 2 * padding;
@@ -99,7 +101,7 @@ public class ChooseCategoryTypeDialogFragment extends DialogFragment {
                         caller.onChooseCategoryTypeDone(
                                 CategoryIconUtils.getAllIconValues().get(selected));
                     }
-                }).setTitle(R.string.track_edit_activity_type_hint).setView(view).create();
+                }).setTitle(R.string.track_edit_category_type_hint).setView(view).create();
         alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
             public void onShow(DialogInterface dialog) {

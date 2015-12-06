@@ -76,7 +76,7 @@ public class ChooseActivityTypeDialogFragment extends DialogFragment {
     public static Dialog getDialog(
             final Activity activity, final String category, final ChooseActivityTypeCaller caller) {
         View view = activity.getLayoutInflater().inflate(R.layout.choose_activity_type, null);
-        GridView gridView = (GridView) view.findViewById(R.id.choose_activity_type_grid_view);
+        GridView gridView = (GridView) view.findViewById(R.id.choose_category_type_grid_view);
        // final View weightContainer = view.findViewById(R.id.choose_activity_type_weight_container);
 
       //  TextView weightLabel = (TextView) view.findViewById(R.id.choose_activity_type_weight_label);
@@ -123,7 +123,7 @@ public class ChooseActivityTypeDialogFragment extends DialogFragment {
                         caller.onChooseActivityTypeDone(
                                 TrackIconUtils.getAllIconValues().get(selected), newWeight);
                     }
-                }).setTitle(R.string.track_edit_activity_type_hint).setView(view).create();
+                }).setTitle(R.string.track_edit_category_type_hint).setView(view).create();
         alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
             public void onShow(DialogInterface dialog) {

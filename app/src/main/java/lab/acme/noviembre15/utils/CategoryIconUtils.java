@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.ColorMatrixColorFilter;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.util.Pair;
 import android.view.MenuItem;
@@ -150,6 +151,8 @@ public class CategoryIconUtils {
                 Bitmap source = BitmapFactory.decodeResource(
                         context.getResources(), CategoryIconUtils.getIconDrawable(getItem(position).toString()));
                 imageView.setImageBitmap(source);
+                //// Default Spinner Image
+                imageView.setColorFilter(0xFF303F9F, PorterDuff.Mode.MULTIPLY);
                 imageView.setPadding(4, 4, -4, -4);
                 return imageView;
             }

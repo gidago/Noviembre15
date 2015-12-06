@@ -471,10 +471,10 @@
   </string>
 
 
-    <string name="track_edit_activity_type_hint"
+    <string name="track_edit_category_type_hint"
         translation_description="In the page to edit a track, the hint in the 'Activity type' text field
       when it is empty.">
-    Activity type
+    Categorizar
   </string>
 
     <string name="generic_cancel"

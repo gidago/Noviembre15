@@ -2,6 +2,7 @@ package lab.acme.noviembre15.fragments;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -70,8 +71,8 @@ public class ChooseCategoryTypeImageAdapter extends BaseAdapter {
             imageView.setBackgroundResource(R.drawable.list_selector_background_transition_holo_dark);
         } else {
             imageView.setBackgroundColor(Color.TRANSPARENT);
-            //imageView.setColorFilter(android.R.color.black);
-
+            // Images to select
+            imageView.setColorFilter(0xFF303F9F, PorterDuff.Mode.MULTIPLY);
         }
         imageView.setImageResource(imageIds.get(position));
         imageView.setMinimumHeight(height);
