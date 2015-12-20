@@ -1,16 +1,21 @@
 package lab.acme.noviembre15;
 
 import android.app.Activity;
+import android.app.SearchManager;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.CursorLoader;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -18,6 +23,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.CursorAdapter;
 import android.widget.Toast;
 
 import com.melnykov.fab.FloatingActionButton;
@@ -35,7 +41,7 @@ import lab.acme.noviembre15.provider.Provider;
 
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private final String LOG_TAG = MainActivity.class.getSimpleName();
 
@@ -43,17 +49,141 @@ public class MainActivity extends AppCompatActivity {
     private MyListCursorAdapter myListCursorAdapter;
     private Context mContext;
     private Activity activity;
-    
+
+    public static final String QUERY_KEY = "query";
+
+    //LOADER
+    private static final int FACTS_LOADER = 0;
+
+    private static final String[] FACTS_COLUMNS = {
+            // In this case the id needs to be fully qualified with a table name, since
+            // the content provider joins the location & weather tables in the background
+            // (both have an _id column)
+            // On the one hand, that's annoying.  On the other, you can search the weather table
+            // using the location set by the user, which is only in the Location table.
+            // So the convenience is worth it.
+            FactsContract.FactsEntry.COLUMN_ID,
+            FactsContract.FactsEntry.COLUMN_DATE,
+            FactsContract.FactsEntry.COLUMN_TITLE,
+            FactsContract.FactsEntry.COLUMN_CATEGORY,
+            FactsContract.FactsEntry.COLUMN_CATEGORY_ID,
+            FactsContract.FactsEntry.COLUMN_FACT,
+            FactsContract.FactsEntry.COLUMN_VALUE,
+            FactsContract.FactsEntry.COLUMN_COORD_LAT,
+            FactsContract.FactsEntry.COLUMN_COORD_LONG
+    };
+
+    // These indices are tied to FORECAST_COLUMNS.  If FORECAST_COLUMNS changes, these
+    // must change.
+    static final int COL_FACTS_ID = 0;
+    static final int COL_FACTS_DATE = 1;
+    static final int COL_FACTS_TITLE = 2;
+    static final int COL_FACTS_CATEGORY = 3;
+    static final int COL_FACTS_CATEGORY_ID = 4;
+    static final int COL_FACTS_FACT = 5;
+    static final int COL_FACTS_VALUE = 6;
+    static final int COL_FACTS_COORD_LAT = 7;
+    static final int COL_FACTS_COORD_LONG = 8;
+
+
+
+    //TODO-search
+    // Menu items
+    private MenuItem searchMenuItem;
+
+    /**
+     * Instantiate and return a new Loader for the given ID.
+     *
+     * @param id   The ID whose loader is to be created.
+     * @param args Any arguments supplied by the caller.
+     * @return Return a new Loader instance that is ready to start loading.
+     */
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        return null;
+    }
+
+    /**
+     * Called when a previously created loader has finished its load.  Note
+     * that normally an application is <em>not</em> allowed to commit fragment
+     * transactions while in this call, since it can happen after an
+     * activity's state is saved.  See {@link FragmentManager#beginTransaction()
+     * FragmentManager.openTransaction()} for further discussion on this.
+     * <p/>
+     * <p>This function is guaranteed to be called prior to the release of
+     * the last data that was supplied for this Loader.  At this point
+     * you should remove all use of the old data (since it will be released
+     * soon), but should not do your own release of the data since its Loader
+     * owns it and will take care of that.  The Loader will take care of
+     * management of its data so you don't have to.  In particular:
+     * <p/>
+     * <ul>
+     * <li> <p>The Loader will monitor for changes to the data, and report
+     * them to you through new calls here.  You should not monitor the
+     * data yourself.  For example, if the data is a {@link Cursor}
+     * and you place it in a {@link CursorAdapter}, use
+     * the {@link CursorAdapter#CursorAdapter(Context,
+     * Cursor, int)} constructor <em>without</em> passing
+     * in either {@link CursorAdapter#FLAG_AUTO_REQUERY}
+     * or {@link CursorAdapter#FLAG_REGISTER_CONTENT_OBSERVER}
+     * (that is, use 0 for the flags argument).  This prevents the CursorAdapter
+     * from doing its own observing of the Cursor, which is not needed since
+     * when a change happens you will get a new Cursor throw another call
+     * here.
+     * <li> The Loader will release the data once it knows the application
+     * is no longer using it.  For example, if the data is
+     * a {@link Cursor} from a {@link CursorLoader},
+     * you should not call close() on it yourself.  If the Cursor is being placed in a
+     * {@link CursorAdapter}, you should use the
+     * {@link CursorAdapter#swapCursor(Cursor)}
+     * method so that the old Cursor is not closed.
+     * </ul>
+     *
+     * @param loader The Loader that has finished.
+     * @param data   The data generated by the Loader.
+     */
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+
+    }
+
+    /**
+     * Called when a previously created loader is being reset, and thus
+     * making its data unavailable.  The application should at this point
+     * remove any references it has to the Loader's data.
+     *
+     * @param loader The Loader that is being reset.
+     */
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+
+    }
+
+
+    /**
+     * A callback interface that all activities containing this fragment must
+     * implement. This mechanism allows activities to be notified of item
+     * selections.
+     */
+    public interface Callback {
+        /**
+         * DetailFragmentCallback for when an item has been selected.
+         */
+        void onItemSelected(Uri dateUri);
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
         activity = MainActivity.this;
         mContext = MainActivity.this;
-
+        setTitle("Memory");
         setContentView(R.layout.activity_main);
 
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
+
 
         RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.facts_main_recycler_view);
         mRecyclerView.setHasFixedSize(true);
@@ -106,6 +236,42 @@ public class MainActivity extends AppCompatActivity {
             public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
             }
         });
+
+        if (getIntent() != null) {
+            handleIntent(getIntent());
+        }
+
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        handleIntent(intent);
+    }
+
+    /**
+     * Assuming this activity was started with a new intent, process the incoming information and
+     * react accordingly.
+     * @param intent
+     */
+    private void handleIntent(Intent intent) {
+        Log.e("SEARCHVIEWMAIN", "handleIntent");
+        // Special processing of the incoming intent only occurs if the if the action specified
+        // by the intent is ACTION_SEARCH.
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            // SearchManager.QUERY is the key that a SearchManager will use to send a query string
+            // to an Activity.
+            String query = intent.getStringExtra(SearchManager.QUERY);
+
+            // We need to create a bundle containing the query string to send along to the
+            // LoaderManager, which will be handling querying the database and returning results.
+            Bundle bundle = new Bundle();
+            bundle.putString(QUERY_KEY, query);
+
+          /** ContactablesLoaderCallbacks loaderCallbacks = new ContactablesLoaderCallbacks(this);
+
+            // Start the loader with the new query, and an object that will handle all callbacks.
+            getLoaderManager().restartLoader(CONTACT_QUERY_LOADER, bundle, loaderCallbacks);*/
+        }
     }
 
     /**
@@ -155,9 +321,45 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
+
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        Log.e(LOG_TAG, "----------- onCreateOptionsMenu --------------------------xxxxxxxxx-------------------");
+        // Get the SearchView and set the searchable configuration
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+
+        SearchView searchView =
+                (SearchView) menu.findItem(R.id.action_search).getActionView();
+
+
+        Log.e(LOG_TAG,  searchView.toString());
+            searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+            searchView.setIconifiedByDefault(true); // Do not iconify the widget; expand it by default
         return true;
+
+
+
+        /**
+
+         https://github.com/danbrough/Android-SearchView-Demo/blob/master/src/danbroid/searchview/MainActivity.java
+         searchMenuItem = menu.add(android.R.string.search_go);
+
+
+
+
+         searchItem = menu.add(android.R.string.search_go);
+
+         searchItem.setIcon(R.drawable.ic_search_white_36dp);
+         MenuItemCompat.setActionView(searchItem, searchView);
+         MenuItemCompat.setShowAsAction(searchItem,
+         MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
+         menu.add(0, R.id.menu_about, 0, R.string.lbl_about);
+         return super.onCreateOptionsMenu(menu);
+
+        */
+
     }
 
     @Override

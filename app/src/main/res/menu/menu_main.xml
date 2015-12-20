@@ -1,8 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
 <menu
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:appcompat="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
+
 
     <item
         android:id="@+id/action_app_icon"
@@ -37,6 +40,18 @@
         android:id="@+id/lab"
         android:title="LAB"
         android:icon="@drawable/ic_pis"
-        app:showAsAction="ifRoom"/>
-
+        android:orderInCategory="500"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_search"
+        android:title=" buscar "
+        appcompat:actionViewClass="android.support.v7.widget.SearchView"
+        appcompat:showAsAction="always" />
 </menu>
+
+    <!--
+        app:showAsAction="always"
+
+        android:actionViewClass="android.support.v7.widget.SearchView"
+    android:icon="@android:drawable/ic_menu_search"
+        -->

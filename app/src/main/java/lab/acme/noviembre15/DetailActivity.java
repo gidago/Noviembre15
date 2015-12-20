@@ -54,6 +54,7 @@ public class DetailActivity extends AppCompatActivity {
         TextView mDate = (TextView) findViewById(R.id.detail_date_textview);
         TextView mFact = (TextView) findViewById(R.id.detail_fact_textview);
         TextView mCategory = (TextView) findViewById(R.id.detail_category_textview);
+        TextView mLblEuro = (TextView) findViewById(R.id.detail_label_euro);
         TextView mValue = (TextView) findViewById(R.id.detail_value_textview);
         TextView mCoord_lat = (TextView) findViewById(R.id.detail_lat_textview);
         TextView mCoord_long = (TextView) findViewById(R.id.detail_long_textview);
@@ -71,9 +72,13 @@ public class DetailActivity extends AppCompatActivity {
             mFact.setText(c.getString(c.getColumnIndex(FactsContract.FactsEntry.COLUMN_FACT)));
             //mFact.setText("" + mVId);
             mCategory.setText(c.getString(c.getColumnIndex(FactsContract.FactsEntry.COLUMN_CATEGORY)));
+            if (c.getInt(c.getColumnIndex(FactsContract.FactsEntry.COLUMN_VALUE)) > 0)
+                mLblEuro.setText("€");
             mValue.setText(c.getString(c.getColumnIndex(FactsContract.FactsEntry.COLUMN_VALUE)));
+
             mCoord_lat.setText(c.getString(c.getColumnIndex(FactsContract.FactsEntry.COLUMN_COORD_LAT)));
             mCoord_long.setText(c.getString(c.getColumnIndex(FactsContract.FactsEntry.COLUMN_COORD_LONG)));
+
             switch (c.getInt(c.getColumnIndex(FactsContract.FactsEntry.COLUMN_CATEGORY_ID))) {
                 case 1:
                     Picasso.with(mContext).load(R.drawable.category_1).into(factCardImage);
