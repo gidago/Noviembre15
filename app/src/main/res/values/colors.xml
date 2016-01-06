@@ -4,6 +4,10 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
+    <color name="colorBlueFacts">#3f50ae</color>
+    <color name="colorBackFacts">#d9e0f9</color>
+
+
     <color name="white">#FFFFFF</color>
     <color name="bgcolor">#ff001f3e</color>
     <color name="orange1">#ff9900</color>

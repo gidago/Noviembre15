@@ -29,8 +29,8 @@ public class CategoryIconUtils {
     public static final String HOGAR = "HOGAR";
     public static final String TRABAJO = "TRABAJO";
     public static final String OTRO = "OTRO";
+    public static final String COMPRAS = "COMPRAS";
     public static final String AFICION = "AFICION";
-
 
     private static final int[] VIAJE_LIST = new int[] { R.string.category_type_1,
             R.string.category_type_2, R.string.category_type_3};
@@ -44,7 +44,9 @@ public class CategoryIconUtils {
         MAP.put(VIAJE, new Pair<Integer, Integer>(R.string.category_type_1, R.drawable.ic_category_1));
         MAP.put(HOGAR, new Pair<Integer, Integer>(R.string.category_type_2, R.drawable.ic_category_2));
         MAP.put(TRABAJO, new Pair<Integer, Integer>(R.string.category_type_3, R.drawable.ic_category_3));
-        MAP.put(OTRO,new Pair<Integer, Integer>(R.string.category_type_4, R.drawable.ic_no_category));
+        MAP.put(COMPRAS, new Pair<Integer, Integer>(R.string.category_type_4, R.drawable.ic_category_4));
+        MAP.put(AFICION, new Pair<Integer, Integer>(R.string.category_type_5, R.drawable.ic_category_5));
+        MAP.put(OTRO,new Pair<Integer, Integer>(R.string.category_type_6, R.drawable.ic_no_category));
     }
 
     private static final float[] REVERT_COLOR_MATRIX = { -1.0f, 0, 0, 0, 255, // red

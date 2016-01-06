@@ -109,6 +109,7 @@ public class Provider extends ContentProvider {
       public String getType(Uri uri) {
           String ret = getContext().getContentResolver().getType(CONTENT_URI);
           Log.e(TAG, "==============> Get URI type:   " + ret);
+
           switch (uriMatcher.match(uri)) {
               // get all facts
               case FACTS:
@@ -213,17 +214,25 @@ public class Provider extends ContentProvider {
     @Override
     public Cursor query(Uri uri, String[] projection, String selection,
                       String[] selectionArgs, String sortOrder) {
+        // Here's the switch statement that, given a URI, will determine what kind of request it is,
+        // and query the database accordingly.
+        Log.e(TAG, " 1 =======>   Query with URI:  "
+                + uri.toString()
+                + "\n 2- projection:  " + projection
+                + "\n 3- selection:  " + selection
+                + "\n 4- selectionArgs:  " + selectionArgs
+                + "\n 5- sortOrder:  " + sortOrder);
 
-        Log.e(TAG, "==============>   Query with URI:  " + uri.toString());
-
+        /**
+         switch (sUriMatcher.match(uri)) {
+         // "weather/ * / *"
+                case WEATHER_WITH_LOCATION_AND_DATE:
+         * */
         SQLiteQueryBuilder sqlBuilder = new SQLiteQueryBuilder();
-
         sqlBuilder.setTables(FactsContract.FactsEntry.DATABASE_TABLE);
-
         if (uriMatcher.match(uri) == FACTS_ID)
             // if getting a particular row
             sqlBuilder.appendWhere(FactsContract.FactsEntry.COLUMN_ID + " = " + uri.getPathSegments().get(1));
-
         if (sortOrder == null || sortOrder == "")
             sortOrder = FactsContract.FactsEntry.COLUMN_DATE;
 
@@ -234,4 +243,31 @@ public class Provider extends ContentProvider {
         cursor.setNotificationUri(getContext().getContentResolver(), uri);
         return cursor;
     }
+
+    /***
+     public Cursor searchDB(String query) {
+
+     return db.query(true,
+     DB_TABLE,
+     new String[] { KEY_ROWID, KEY_YEAR, KEY_MAKE,
+     KEY_MODEL },
+     KEY_YEAR + " LIKE" + "'%" + query + "%'
+     OR " + KEY_MAKE + " LIKE" + "'%" + query + "%'
+     OR " + KEY_MODEL + " LIKE" + "'%" + query + "%'",
+     null, null, null, null, null);
+     }
+
+
+     Cursor contactsContractContacts = resolver.query(
+        ContactsContract.Contacts.CONTENT_URI,
+        projection,
+        ContactsContract.Contacts.DISPLAY_NAME + " like ?",
+        new String[]{"%" + filterStr + "%"},
+        ContactsContract.Contacts.DISPLAY_NAME + " ASC");
+
+
+
+     */
+
+
 }

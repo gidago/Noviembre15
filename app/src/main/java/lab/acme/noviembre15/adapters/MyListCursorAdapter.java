@@ -2,6 +2,7 @@ package lab.acme.noviembre15.adapters;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,12 +15,10 @@ import com.squareup.picasso.Picasso;
 import lab.acme.noviembre15.R;
 import lab.acme.noviembre15.provider.FactsContract;
 
-
-
-
 public class MyListCursorAdapter extends CursorRecyclerViewAdapter<MyListCursorAdapter.ViewHolder> {
 
     private final String LOG_TAG = MyListCursorAdapter.class.getSimpleName();
+
     private Context mContext;
     private Cursor mCursor;
 
@@ -32,7 +31,9 @@ public class MyListCursorAdapter extends CursorRecyclerViewAdapter<MyListCursorA
     /**
      * Cache of the children views for a fact list item.
      */
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder  {
+
+        public CardView mCardView;
 
         private final ImageView factCardImage;
         private final TextView  factDate;
@@ -41,11 +42,15 @@ public class MyListCursorAdapter extends CursorRecyclerViewAdapter<MyListCursorA
 
         public ViewHolder(View itemView) {
             super(itemView);
+            //TODO - para obtener posicion
+            mCardView = (CardView) itemView.findViewById(R.id.facts_main_card_view);
+
             factCardImage = (ImageView) itemView.findViewById(R.id.image_view_fact_card);
             factDate = (TextView)itemView.findViewById(R.id.text_card_view_fact_date);
             factTitle = (TextView)itemView.findViewById(R.id.text_card_view_fact_title);
             factID = (TextView)itemView.findViewById(R.id.textView_DBID);
         }
+
     }
 
     @Override
@@ -56,7 +61,16 @@ public class MyListCursorAdapter extends CursorRecyclerViewAdapter<MyListCursorA
     }
 
     @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
     public void onBindViewHolder(ViewHolder viewHolder, Cursor cursor) {
+
+        //TODO - para obtener posicion
+        // viewHolder.mCardView.setTag(position);
+
         mCursor = cursor;
         viewHolder.factDate.setText(mCursor.getString(mCursor.getColumnIndex(FactsContract.FactsEntry.COLUMN_DATE)));
         viewHolder.factTitle.setText(mCursor.getString(mCursor.getColumnIndex(FactsContract.FactsEntry.COLUMN_TITLE)));
@@ -71,9 +85,16 @@ public class MyListCursorAdapter extends CursorRecyclerViewAdapter<MyListCursorA
             case 3:
                 Picasso.with(mContext).load(R.drawable.category_3).into(viewHolder.factCardImage);
                 break;
-
+            case 4:
+                Picasso.with(mContext).load(R.drawable.category_4).into(viewHolder.factCardImage);
+                break;
+            case 5:
+                Picasso.with(mContext).load(R.drawable.category_5).into(viewHolder.factCardImage);
+                break;
             default:
                 Picasso.with(mContext).load(R.drawable.no_category).into(viewHolder.factCardImage);
         }
     }
+
+
 }

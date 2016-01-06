@@ -31,6 +31,23 @@ public class lectures {
  // https://gist.github.com/skyfishjy/443b7448f59be978bc59#file-cursorrecyclerviewadapter-java
  // http://www.sgoliver.net/blog/controles-de-seleccion-v-recyclerview/
  // http://prontoandroid.com/create-and-publish-your-first-android-app-part-2/
+
+ // http://www.ocpsoft.org/prettytime/
 */
 
 }
+//
+// OLD CODE
+//
+/**
+ * 	Cursor with complete DB
+ */
+/**private Cursor cursorFacts(){
+ Uri allTitles = Uri.parse("content://lab.acme.noviembre15/facts");
+ //Cursor cursor = managedQuery(allTitles, null, null, null, "_id asc");
+ // TODO - Validar
+ Cursor cursor = managedQuery(allTitles, null, null, null, FactsContract.FactsEntry.DEFAULT_SORT_ORDER);
+ //Cursor cursor = managedQuery(allTitles, null, null, null, null);
+ //Log.e(LOG_TAG, "==================>>>>>>>>>>> Registros del cursor: " + cursor.getCount());
+ return cursor;
+ }*/

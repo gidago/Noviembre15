@@ -16,39 +16,54 @@
 package lab.acme.noviembre15;
 
 import android.content.Context;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import lab.acme.noviembre15.provider.FactsContract;
+import org.ocpsoft.prettytime.PrettyTime;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class DetailActivity extends AppCompatActivity {
 	
     private final String LOG_TAG = DetailActivity.class.getSimpleName();    
-    //private Activity activity;
+
     private Context mContext;
-    protected int mVId;
+    protected int detailId;
+    protected String detailDate;
+    protected String detailTitle;
+    protected String detailFact;
+    protected int detailCategoryID;
+    protected String detailCategory;
+    protected String detailValue;
+    protected String detailLat;
+    protected String detailLong;
 
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
-    	super.onCreate(savedInstanceState);        
-        //activity = DetailActivity.this;
+    	super.onCreate(savedInstanceState);
         setTitle("Detalles");
         setContentView(R.layout.activity_detail);
         if(savedInstanceState != null) {
-            this.mVId = savedInstanceState.getInt("ID");
+            detailId = savedInstanceState.getInt("ID");
         }
         else if(savedInstanceState == null) {
-            Bundle extras = getIntent().getExtras();
-            this.mVId = extras.getInt("ID");
+                Bundle extras =     getIntent().getExtras();
+                detailId =          extras.getInt("ID");
+                detailDate =        extras.getString("COL_FACTS_DATE");
+                detailTitle =       extras.getString("COL_FACTS_TITLE");
+                detailFact =        extras.getString("COL_FACTS_FACT");
+                detailCategoryID =  extras.getInt("COL_FACTS_CATEGORY_ID");
+                detailCategory  =   extras.getString("COL_FACTS_CATEGORY");
+                detailValue =       extras.getString("COL_FACTS_VALUE");
+                detailLat =         extras.getString("COL_FACTS_COORD_LAT");
+                detailLong =        extras.getString("COL_FACTS_COORD_LONG");
         }
-        Log.e(LOG_TAG, "******** mVId:   " + mVId);
         TextView mID = (TextView) findViewById(R.id.detail_ID_textview);
         TextView mTitle = (TextView) findViewById(R.id.detail_title_textview);
         TextView mDate = (TextView) findViewById(R.id.detail_date_textview);
@@ -59,28 +74,21 @@ public class DetailActivity extends AppCompatActivity {
         TextView mCoord_lat = (TextView) findViewById(R.id.detail_lat_textview);
         TextView mCoord_long = (TextView) findViewById(R.id.detail_long_textview);
         ImageView factCardImage = (ImageView) findViewById(R.id.detail_icon);
-        // test
-        Uri oneTitle = Uri.parse("content://lab.acme.noviembre15/facts/" + (mVId + 1) );
-		//
-        Log.e(LOG_TAG, "******** URI:   " + oneTitle.toString());
-        //Uri oneTitle = Uri.parse("content://lab.acme.noviembre15/facts/1");
-        Cursor c = managedQuery(oneTitle, null, null, null, null);
-		if (c.moveToFirst()) {
-        	mID.setText("ID: " + c.getString(c.getColumnIndex(FactsContract.FactsEntry.COLUMN_ID)));
-            mTitle.setText(c.getString(c.getColumnIndex(FactsContract.FactsEntry.COLUMN_TITLE)));
-            mDate.setText(c.getString(c.getColumnIndex(FactsContract.FactsEntry.COLUMN_DATE)));
-            mFact.setText(c.getString(c.getColumnIndex(FactsContract.FactsEntry.COLUMN_FACT)));
-            //mFact.setText("" + mVId);
-            mCategory.setText(c.getString(c.getColumnIndex(FactsContract.FactsEntry.COLUMN_CATEGORY)));
-            if (c.getInt(c.getColumnIndex(FactsContract.FactsEntry.COLUMN_VALUE)) > 0)
-                mLblEuro.setText("€");
-            mValue.setText(c.getString(c.getColumnIndex(FactsContract.FactsEntry.COLUMN_VALUE)));
+        TextView  mTimeAgo = (TextView) findViewById(R.id.timeAgo);
 
-            mCoord_lat.setText(c.getString(c.getColumnIndex(FactsContract.FactsEntry.COLUMN_COORD_LAT)));
-            mCoord_long.setText(c.getString(c.getColumnIndex(FactsContract.FactsEntry.COLUMN_COORD_LONG)));
-
-            switch (c.getInt(c.getColumnIndex(FactsContract.FactsEntry.COLUMN_CATEGORY_ID))) {
-                case 1:
+        mID.setText(" "+ (detailId + 1));
+        mTitle.setText(detailTitle);
+        mDate.setText(detailDate);
+        mFact.setText(detailFact);
+        mCategory.setText(detailCategory);
+        if ( detailValue.compareTo("0") > 0 ) {
+            mLblEuro.setText("€");
+            mValue.setText(detailValue);
+        }
+        mCoord_lat.setText(detailLat);
+        mCoord_long.setText(detailLong);
+        switch (detailCategoryID) {
+              case 1:
                     Picasso.with(mContext).load(R.drawable.category_1).into(factCardImage);
                     break;
                 case 2:
@@ -89,12 +97,35 @@ public class DetailActivity extends AppCompatActivity {
                 case 3:
                     Picasso.with(mContext).load(R.drawable.category_3).into(factCardImage);
                     break;
-
+                case 4:
+                    Picasso.with(mContext).load(R.drawable.category_4).into(factCardImage);
+                    break;
+                case 5:
+                    Picasso.with(mContext).load(R.drawable.category_5).into(factCardImage);
+                    break;
                 default:
                     Picasso.with(mContext).load(R.drawable.no_category).into(factCardImage);
-
-            }
-            Log.d(LOG_TAG, "** Provider title:   " + c.getString(c.getColumnIndex(FactsContract.FactsEntry.COLUMN_TITLE)) );
         }
+        try {
+            long longTimeAgo    = timeStringToMillis(detailDate);
+            PrettyTime prettyTime = new PrettyTime();
+            mTimeAgo.setText(prettyTime.format(new Date(longTimeAgo)));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static long timeStringToMillis(String timeString) {
+        long timeInMilliseconds = 0l;
+        final String pattern = "dd/MM/yyyy";
+        SimpleDateFormat format = new SimpleDateFormat(pattern);
+        try {
+            Date mDate = format.parse(timeString);
+            timeInMilliseconds = mDate.getTime();
+        } catch (ParseException e) {
+            //CrashUtils.trackException("Unable to parse last downloaded date",e);
+            e.printStackTrace();
+        }
+        return timeInMilliseconds;
     }
 }

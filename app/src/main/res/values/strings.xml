@@ -508,6 +508,10 @@
   <string name="category_type_3" translation_description="When entering an 'Activity type', in the auto-complete text box, the
    completion suggestion for running.">Trabajo</string>
   <string name="category_type_4" translation_description="When entering an 'Activity type', in the auto-complete text box, the
-   completion suggestion for running.">Otros</string>
+   completion suggestion for running.">Compras</string>
+    <string name="category_type_5" translation_description="When entering an 'Activity type', in the auto-complete text box, the
+    completion suggestion for running.">Afición</string>
+    <string name="category_type_6" translation_description="When entering an 'Activity type', in the auto-complete text box, the
+    completion suggestion for running.">Otros</string>
 
 </resources>

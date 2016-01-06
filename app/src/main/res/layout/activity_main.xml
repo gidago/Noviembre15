@@ -28,6 +28,7 @@
     <include layout="@layout/content_main" />
 
 
+
     <com.melnykov.fab.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
@@ -40,5 +41,6 @@
         fab:fab_colorNormal="@color/primary"
         fab:fab_colorPressed="@color/red"
         fab:fab_colorRipple="@color/ripple" />
+
 
 </android.support.design.widget.CoordinatorLayout>

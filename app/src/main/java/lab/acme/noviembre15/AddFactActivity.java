@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -145,14 +146,21 @@ public class AddFactActivity extends AppCompatActivity implements ChooseCategory
         ContentValues values = new ContentValues();
         values.put(FactsContract.FactsEntry.COLUMN_DATE, mDate.getText().toString()); //Get date from input form
 
+        Log.e(LOG_TAG, " 1 =======>   saveFact():  "
+                + "\n  -> DATE:  " + mDate.getText().toString());
+
         if (Objects.equals(mCategory.getText().toString(), "Viajes"))
             values.put(FactsContract.FactsEntry.COLUMN_CATEGORY_ID, "1");
         if (Objects.equals(mCategory.getText().toString(), "Hogar"))
             values.put(FactsContract.FactsEntry.COLUMN_CATEGORY_ID, "2");
         if (Objects.equals(mCategory.getText().toString(), "Trabajo"))
             values.put(FactsContract.FactsEntry.COLUMN_CATEGORY_ID, "3");
-        if (Objects.equals(mCategory.getText().toString(), "Otros"))
+        if (Objects.equals(mCategory.getText().toString(), "Compras"))
             values.put(FactsContract.FactsEntry.COLUMN_CATEGORY_ID, "4");
+        if (Objects.equals(mCategory.getText().toString(), "Afición"))
+            values.put(FactsContract.FactsEntry.COLUMN_CATEGORY_ID, "5");
+        if (Objects.equals(mCategory.getText().toString(), "Otros"))
+            values.put(FactsContract.FactsEntry.COLUMN_CATEGORY_ID, "6");
 
         values.put(FactsContract.FactsEntry.COLUMN_VALUE, mValue.getText().toString()); ///Get value from input form
         values.put(FactsContract.FactsEntry.COLUMN_COORD_LAT, mLat.getText().toString());
